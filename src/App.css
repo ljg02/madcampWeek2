@@ -40,20 +40,6 @@ body {
   font-weight: bold;
 }
 
-/* .search-bar {
-  flex: 1;
-  padding: 5px 10px;
-  border: 1px solid #ddd;
-  border-radius: 20px;
-}
-
-.search-button {
-  padding: 5px 10px;
-  background-color: #f0f0f0;
-  border: none;
-  cursor: pointer;
-} */
-
 .header__right .icon {
   font-size: 28px;
   margin: 0 10px;
@@ -97,38 +83,8 @@ body {
 }
 
 .main-content {
-  padding: 20px;
+  flex:1;
+  padding: 0;
   display: flex;
   flex-wrap: wrap;
-}
-
-.class-card {
-  width: 320px;
-  margin: 10px;
-  cursor: pointer;
-}
-
-.thumbnail {
-  width: 100%;
-}
-
-.class-info {
-  display: flex;
-  margin-top: 10px;
-}
-
-.channel-icon {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  margin-right: 10px;
-}
-
-.video-text h4 {
-  margin: 0;
-}
-
-.video-text p {
-  margin: 5px 0;
-  color: #606060;
 }
