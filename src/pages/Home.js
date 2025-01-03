@@ -7,7 +7,7 @@ function Home() {
   const navigate = useNavigate(); // useNavigate 훅 사용
 
   useEffect(() => {
-      axios.get('http://localhost:5000/users')
+      axios.get('http://localhost:5000/testUsers')
       .then((response) => {
           setUsers(response.data);
       })
