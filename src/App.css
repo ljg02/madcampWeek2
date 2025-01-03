@@ -1,38 +1,134 @@
-.App {
-  text-align: center;
+/* App.css */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.app {
   display: flex;
   flex-direction: column;
+}
+
+.header {
+  display: flex;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  justify-content: space-between;
+  /*세로 padding, 가로 padding*/
+  padding: 40px 100px;
+  background-color: #fff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.header__left .icon {
+  font-size: 28px;
+  margin: 0 10px;
+  cursor: pointer;
+  margin-bottom: -60px;
+}
+
+.header__center {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  padding: 0px 100p;
+  justify-content: center; /* 텍스트를 가운데 정렬 */
+  text-align: center; /* 텍스트 가운데 정렬 */
+}
+
+.header__center span {
+  font-size: 58px;
+  font-weight: bold;
+}
+
+/* .search-bar {
+  flex: 1;
+  padding: 5px 10px;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+}
+
+.search-button {
+  padding: 5px 10px;
+  background-color: #f0f0f0;
+  border: none;
+  cursor: pointer;
+} */
+
+.header__right .icon {
+  font-size: 28px;
+  margin: 0 10px;
+  cursor: pointer;
+  margin-bottom: -60px;
+}
+
+.mainBody {
+  display: flex;
+  flex: 1;
+}
+
+.sidebar {
+  width: 0;
+  height: 100vh;
+  background-color: #333;
+  overflow-x: hidden;
+  position: fixed;
+  transition: 0.3s;
+  padding-top: 60px;
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.sidebar.open {
+  width: 200px; /* 사이드바 열렸을 때의 너비 */
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar ul li {
+  padding: 10px 15px;
+}
+
+.sidebar ul li a {
+  color: white;
+  text-decoration: none;
+  display: block;
+}
+
+.main-content {
+  padding: 20px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.class-card {
+  width: 320px;
+  margin: 10px;
+  cursor: pointer;
+}
+
+.thumbnail {
+  width: 100%;
+}
+
+.class-info {
+  display: flex;
+  margin-top: 10px;
+}
+
+.channel-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.video-text h4 {
+  margin: 0;
+}
+
+.video-text p {
+  margin: 5px 0;
+  color: #606060;
 }
