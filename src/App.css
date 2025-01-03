@@ -13,26 +13,38 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px 20px;
-  background-color: #f8f8f8;
+  /*세로 padding, 가로 padding*/
+  padding: 40px 100px;
+  background-color: #fff;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
-.header__left .logo {
-  height: 25px;
+.header__left .icon {
+  font-size: 28px;
+  margin: 0 10px;
+  cursor: pointer;
+  margin-bottom: -60px;
 }
 
 .header__center {
   display: flex;
   align-items: center;
   flex: 1;
+  padding: 0px 100p;
+  justify-content: center; /* 텍스트를 가운데 정렬 */
+  text-align: center; /* 텍스트 가운데 정렬 */
 }
 
-.search-bar {
+.header__center span {
+  font-size: 58px;
+  font-weight: bold;
+}
+
+/* .search-bar {
   flex: 1;
   padding: 5px 10px;
   border: 1px solid #ddd;
-  border-radius: 2px;
+  border-radius: 20px;
 }
 
 .search-button {
@@ -40,18 +52,33 @@ body {
   background-color: #f0f0f0;
   border: none;
   cursor: pointer;
-}
+} */
 
 .header__right .icon {
+  font-size: 28px;
   margin: 0 10px;
   cursor: pointer;
+  margin-bottom: -60px;
+}
+
+.mainBody {
+  display: flex;
+  flex: 1;
 }
 
 .sidebar {
-  width: 200px;
-  background-color: #f1f1f1;
-  padding: 15px;
+  width: 0;
   height: 100vh;
+  background-color: #333;
+  overflow-x: hidden;
+  position: fixed;
+  transition: 0.3s;
+  padding-top: 60px;
+  color: white;
+}
+
+.sidebar.open {
+  width: 200px; /* 사이드바 열렸을 때의 너비 */
 }
 
 .sidebar ul {
@@ -59,9 +86,14 @@ body {
   padding: 0;
 }
 
-.sidebar li {
-  padding: 10px 0;
-  cursor: pointer;
+.sidebar ul li {
+  padding: 10px 15px;
+}
+
+.sidebar ul li a {
+  color: white;
+  text-decoration: none;
+  display: block;
 }
 
 .main-content {
@@ -70,7 +102,7 @@ body {
   flex-wrap: wrap;
 }
 
-.video-card {
+.class-card {
   width: 320px;
   margin: 10px;
   cursor: pointer;
@@ -80,7 +112,7 @@ body {
   width: 100%;
 }
 
-.video-info {
+.class-info {
   display: flex;
   margin-top: 10px;
 }

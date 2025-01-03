@@ -1,66 +1,73 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from 'axios';
 import "./App.css";
-import { FaSearch, FaBars, FaUserCircle, FaVideo, FaBell } from "react-icons/fa";
+import { FaSearch, FaBars, FaUserCircle, FaBell } from "react-icons/fa";
+import { MdSettings } from "react-icons/md"
+
+import Player from './page/player';
 
 const App = () => {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false); // 사이드바 상태 관리
+  const [users, setUsers] = useState([]);
+
+  useEffect(() => {
+    axios.get('http://localhost:5000/users')
+      .then((response) => {
+        setUsers(response.data);
+      })
+      .catch((error) => {
+        console.error('데이터 요청 실패:', error);
+      });
+  }, []);
+
+  // 사이드바 열기/닫기 함수
+  const toggleSidebar = () => {
+    setIsSidebarOpen(prevState => !prevState);
+  };
+
   return (
     <div className="app">
       {/* Header */}
       <header className="header">
         <div className="header__left">
-          <FaBars className="icon" />
-          <img
-            src="https://www.youtube.com/img/desktop/yt_1200.png"
-            alt="YouTube Logo"
-            className="logo"
-          />
+          <FaBars className="icon" onClick={toggleSidebar} />
         </div>
         <div className="header__center">
-          <input type="text" placeholder="Search" className="search-bar" />
+          <span>Title</span>
+          {/* <input type="text" placeholder="Search" className="search-bar" />
           <button className="search-button">
             <FaSearch />
-          </button>
+          </button> */}
         </div>
         <div className="header__right">
-          <FaVideo className="icon" />
+          <MdSettings className="icon" />
           <FaBell className="icon" />
-          <FaUserCircle className="icon" />
         </div>
       </header>
 
-      {/* Sidebar */}
-      <div className="sidebar">
-        <ul>
-          <li>Home</li>
-          <li>Trending</li>
-          <li>Subscriptions</li>
-          <li>Library</li>
-          <li>History</li>
-        </ul>
-      </div>
-
-      {/* Main Content */}
-      <div className="main-content">
-        <div className="video-card">
-          <img
-            src="https://via.placeholder.com/320x180"
-            alt="Thumbnail"
-            className="thumbnail"
-          />
-          <div className="video-info">
-            <img
-              src="https://via.placeholder.com/36"
-              alt="Channel Icon"
-              className="channel-icon"
-            />
-            <div className="video-text">
-              <h4>Video Title</h4>
-              <p>Channel Name</p>
-              <p>1M views • 1 day ago</p>
-            </div>
-          </div>
+      <div className="mainBody">
+        {/* Sidebar */}
+        <div className={`sidebar ${isSidebarOpen ? 'open' : ''}`}>
+          <ul>
+            <li><a href="/home">Home</a></li>
+            <li><a href="/trending">Trending</a></li>
+            <li><a href="/subscriptions">Subscriptions</a></li>
+            <li>Library</li>
+            <li>History</li>
+          </ul>
         </div>
-        {/* Add more video cards here */}
+
+        {/* Main Content */}
+        <div className="main-content">
+          {/* <h>Course Title</h> */}
+          <ul>
+            {users.map((user) => (
+              <li key={user.id}>
+                {user.name} / {user.age}
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </div>
   );
