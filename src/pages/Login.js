@@ -33,7 +33,7 @@ const Login = () => {
         // JWT를 Local Storage에 저장
         localStorage.setItem('token', response.data.token);
         // 홈 페이지로 이동
-        navigate('/');
+        //navigate('/');
       } else {
         setMessage('로그인에 실패했습니다. 이메일이나 비밀번호를 확인해주세요.');
       }
@@ -82,6 +82,8 @@ const Login = () => {
 
   const toggleForm = () => {
     setIsRegistering(!isRegistering);
+    setEmail('');
+    setPassword('');
     setMessage('');
   };
 
@@ -149,7 +151,7 @@ const Login = () => {
         </form>
         {message && <p className="message">{message}</p>}
         <button onClick={toggleForm} className="toggle-button">
-          {isRegistering ? '로그인으로 전환' : '새로 회원가입'}
+          {isRegistering ? '로그인으로 돌아가기' : '회원가입'}
         </button>
       </div>
     </div>

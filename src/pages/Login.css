@@ -15,7 +15,7 @@
 /* 로그인 컨테이너 */
 .login-container {
   width: 400px;
-  height: 400px;
+  height: 500px;
   padding: 30px 40px;
   background-color: rgba(255, 255, 255, 0.95); /* 반투명 흰색 배경 */
   border-radius: 12px;
