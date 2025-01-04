@@ -1,7 +1,6 @@
 import React from "react";
-import { FaBars } from "react-icons/fa";
 import "./FigmaHeader.css";
-//import verticalBorder from "./vertical-border.svg";
+import { FaBars } from "react-icons/fa";
 
 export const Header = ({ toggleSidebar }) => {
   return (
@@ -18,45 +17,37 @@ export const Header = ({ toggleSidebar }) => {
         </div>
 
         <div className="div">로그인</div>
-
-        {/* <img
-          className="vertical-border"
-          alt="Vertical border"
-          src={verticalBorder}
-        /> */}
-
-        <FaBars className="sideBarButton" onClick={toggleSidebar} />
-
-        <div className="item-link-2">선생님</div>
-
-        <div className="item-link-3">STUDYMATE</div>
-
-        <div className="item-link-4">모의고사</div>
-
-        <div className="item-link-5">입시정보</div>
-
-        <div className="item-link-6">BOOKSTORE</div>
-
-        <div className="item-link-wrapper">
-          <div className="item-link-7">
-            <div className="background">
-              <div className="text-wrapper-2">1/6(월) 마감</div>
-            </div>
-
-            <div className="text-wrapper-3">2026 ~~패스</div>
-          </div>
-        </div>
-
-        <div className="image-background" />
-
-        <div className="rectangle" />
-
-        <div className="rectangle-2" />
-
-        <div className="ellipse" />
-
-        <div className="ellipse-2" />
       </div>
+
+      {/* <img
+        className="vertical-border"
+        alt="Vertical border"
+        src={verticalBorder}
+      /> */}
+
+      <div className="button">
+        <FaBars className="icon" onClick={toggleSidebar} />
+      </div>
+
+      <div className="item-link-2">Lectures</div>
+
+      <div className="item-link-3">Schedule</div>
+
+      <div className="item-link-4">Notes</div>
+
+      <div className="item-link-5">Grades</div>
+
+      <div className="rectangle" />
+
+      <div className="overlap">
+        {/* <img
+          className="material-symbols"
+          alt="Material symbols"
+          src={materialSymbolsHomeRounded}
+        /> */}
+      </div>
+
+      {/* <img className="image" alt="Image" src={image2} /> */}
     </div>
   );
 };

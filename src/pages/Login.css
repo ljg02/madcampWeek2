@@ -2,7 +2,6 @@
 .background {
   flex:1;
   width: 100vh;
-  height: 100vh;
   margin: 0;
   font-family: 'Roboto', sans-serif; /* 구글 폰트 적용 */
   background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%); /* 그라데이션 배경 */
