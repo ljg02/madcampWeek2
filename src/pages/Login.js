@@ -1,9 +1,11 @@
 // src/components/Login.js
-import React, { useState } from 'react';
+import React, { useState, useContext, useEffect, useRef } from 'react';
 import axios from 'axios';
 import './Login.css'; // 스타일링 파일 import
-import { useNavigate } from 'react-router-dom'; // 페이지 전환을 위한 훅
+import { useNavigate, useLocation } from 'react-router-dom'; // 페이지 전환을 위한 훅
 import { FaEnvelope, FaLock, FaEye, FaEyeSlash } from 'react-icons/fa'; // 아이콘 import
+import { AuthContext } from '../components/AuthContext'; // AuthContext import
+import { toast } from 'react-toastify'; // toast import
 
 const Login = () => {
   const [isRegistering, setIsRegistering] = useState(false);
@@ -13,6 +15,26 @@ const Login = () => {
   const [message, setMessage] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate(); // 페이지 전환을 위한 navigate 함수
+  const location = useLocation();
+
+  const { auth, login } = useContext(AuthContext); // AuthContext에서 login 함수 사용
+
+  const hasShownMessage = useRef(false); // 메시지 중복 출력 방지를 위한 ref
+
+  // 인증 상태에 따라 홈 페이지로 리다이렉트
+  useEffect(() => {
+    if (auth.isAuthenticated) {
+      navigate('/');
+    }
+  }, [auth, navigate]);
+
+  // 리다이렉트 시 전달된 메시지 처리
+  useEffect(() => {
+    if (location.state && location.state.message && !hasShownMessage.current) {
+      toast.info(location.state.message); // 알림 배너로 메시지 표시
+      hasShownMessage.current = true; //메시지가 한번 표시되었음을 기록
+    }
+  }, [location.state]);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -29,11 +51,12 @@ const Login = () => {
       });
 
       if (response.data.success) {
-        setMessage('로그인 성공!');
-        // JWT를 Local Storage에 저장
-        localStorage.setItem('token', response.data.token);
+        //setMessage('로그인 성공!');
+        // JWT를 Local Storage에 저장하고 AuthContext 업데이트
+        login(response.data.token, response.data.user); // user 정보가 있다면 전달
+        toast.success('로그인 성공!');
         // 홈 페이지로 이동
-        //navigate('/');
+        navigate('/');
       } else {
         setMessage(response.data.message);
       }

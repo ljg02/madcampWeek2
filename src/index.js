@@ -3,11 +3,23 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { AuthProvider } from './components/AuthContext'; // AuthContext import
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'; // 스타일링 파일 import
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <AuthProvider>
+      <App />
+      <ToastContainer 
+        position="top-center" // 위치를 top-center로 설정
+        autoClose={3000} // 자동으로 닫히는 시간 (밀리초)
+        hideProgressBar={false} // 진행 막대 숨김 여부
+        newestOnTop={false} // 새 Toast가 기존 Toast 위에 표시되지 않도록 설정
+        draggable
+      />
+    </AuthProvider>
   </React.StrictMode>
 );
 
