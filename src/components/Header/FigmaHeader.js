@@ -1,7 +1,7 @@
 import React from "react";
 import "./FigmaHeader.css";
 import { FaBars } from "react-icons/fa";
-import logo from "./studyMateLogo.png"
+import logo from "./studyMateLogo.png";
 
 export const Header = ({ toggleSidebar }) => {
   return (
@@ -13,11 +13,8 @@ export const Header = ({ toggleSidebar }) => {
           <span className="span">D-314</span>
         </p>
 
-        <div className="list">
-          <div className="item-link">회원가입</div>
-        </div>
-
-        <div className="div">로그인</div>
+        <p className="div">로그인</p>
+        <p className="item-link">회원가입</p>
       </div>
 
       {/* <img
