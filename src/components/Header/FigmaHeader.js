@@ -1,6 +1,7 @@
 import React from "react";
 import "./FigmaHeader.css";
 import { FaBars } from "react-icons/fa";
+import logo from "./studyMateLogo.png"
 
 export const Header = ({ toggleSidebar }) => {
   return (
@@ -47,7 +48,7 @@ export const Header = ({ toggleSidebar }) => {
         /> */}
       </div>
 
-      {/* <img className="image" alt="Image" src={image2} /> */}
+      <img className="logo" alt="Logo" src={logo} />
     </div>
   );
 };
