@@ -9,12 +9,10 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import 'react-toastify/dist/ReactToastify.css'; // 스타일링 파일 import
 
-const clientId = '864439888506-4h05nuembu2jrpv4g43f519cu9ajsnaa.apps.googleusercontent.com'; 
-
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <GoogleOAuthProvider clientId={clientId}>
+    <GoogleOAuthProvider clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}>
       <Router>
         <AuthProvider>
           <App />

@@ -10,6 +10,10 @@ const { OAuth2Client } = require('google-auth-library'); // Google Auth 라이�
 const app = express();
 app.use(bodyParser.json());
 app.use(cors());
+app.use((req, res, next) => {
+  res.setHeader("Cross-Origin-Opener-Policy", "same-origin-allow-popups");
+  next();
+});
 
 // MySQL 데이터베이스 연결
 const db = mysql.createConnection({

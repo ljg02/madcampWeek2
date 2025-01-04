@@ -1,65 +1,23 @@
-/* App.css */
 body {
+  height: 100vh;
+  width: 1920px;
   margin: 0;
   font-family: Arial, sans-serif;
 }
 
 .app {
+  height: 100vh;
   display: flex;
   flex-direction: column;
-}
-
-.header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 10vh;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  /*세로 padding, 가로 padding*/
-  padding: 0 20px;
-  background-color: #fff;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  z-index: 2000;
-}
-
-.header__left .icon {
-  font-size: 28px;
-  margin: 0 10px;
-  cursor: pointer;
-  margin-left: 100px;
-}
-
-.header__center {
-  display: flex;
-  align-items: center;
-  flex: 1;
-  padding: 0px 100p;
-  justify-content: center; /* 텍스트를 가운데 정렬 */
-  text-align: center; /* 텍스트 가운데 정렬 */
-}
-
-.header__center span {
-  font-size: 58px;
-  font-weight: bold;
-}
-
-.header__right .icon {
-  font-size: 28px;
-  margin: 0 10px;
-  cursor: pointer;
 }
 
 .mainBody {
   display: flex;
   flex: 1;
-  padding-top: 10vh;
 }
 
 .main-content {
-  flex:1;
+  flex: 1;
   padding: 0;
   display: flex;
   flex-wrap: wrap;

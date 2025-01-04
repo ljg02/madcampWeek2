@@ -1,0 +1,209 @@
+.header {
+    background-color: #ffffff;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    border-color: #a3a3a3;
+    height: 160px;
+    position: relative;
+    width: 1920px;
+  }
+  
+  .header .overlap-group {
+    height: 61px;
+    left: 1173px;
+    position: absolute;
+    top: 39px;
+    width: 257px;
+  }
+  
+  .header .d {
+    color: transparent;
+    font-family: "Noto Sans KR-Light", Helvetica;
+    font-size: 16px;
+    font-weight: 400;
+    height: 40px;
+    left: 0;
+    letter-spacing: 0;
+    line-height: 40px;
+    position: absolute;
+    top: 1px;
+    width: 86px;
+  }
+  
+  .header .text-wrapper {
+    color: #2b2b2b;
+    font-weight: 300;
+  }
+  
+  .header .span {
+    color: #ff7200;
+    font-family: "Noto Sans KR-Bold", Helvetica;
+    font-weight: 700;
+  }
+  
+  .header .list {
+    height: 28px;
+    left: 59px;
+    position: absolute;
+    top: 33px;
+    width: 198px;
+  }
+  
+  .header .item-link {
+    color: #2b2b2b;
+    font-family: "Noto Sans KR-DemiLight", Helvetica;
+    font-size: 16px;
+    font-weight: 300;
+    height: 40px;
+    left: 122px;
+    letter-spacing: 0;
+    line-height: 40px;
+    position: absolute;
+    text-align: center;
+    top: -33px;
+    width: 63px;
+  }
+  
+  .header .div {
+    color: #2b2b2b;
+    font-family: "Noto Sans KR-DemiLight", Helvetica;
+    font-size: 16px;
+    font-weight: 300;
+    height: 40px;
+    left: 108px;
+    letter-spacing: 0;
+    line-height: 40px;
+    position: absolute;
+    text-align: center;
+    top: 0;
+    width: 55px;
+  }
+  
+  .header .vertical-border {
+    height: 24px;
+    left: 1456px;
+    position: absolute;
+    top: 112px;
+    width: 40px;
+  }
+  
+  .header .button {
+    height: 32px;
+    left: 410px;
+    position: absolute;
+    cursor: pointer;
+    top: 107px;
+    width: 32px;
+  }
+  
+  .header .vector {
+    height: 19px;
+    left: 4px;
+    position: absolute;
+    top: 8px;
+    width: 24px;
+  }
+  
+  .header .item-link-2 {
+    color: #2b2b2b;
+    font-family: "Noto Sans KR-Medium", Helvetica;
+    font-size: 16px;
+    font-weight: 500;
+    height: 20px;
+    left: 461px;
+    letter-spacing: 0;
+    line-height: 18px;
+    position: absolute;
+    text-align: center;
+    top: 112px;
+    white-space: nowrap;
+    width: 69px;
+  }
+  
+  .header .item-link-3 {
+    color: #2b2b2b;
+    font-family: "Noto Sans KR-Medium", Helvetica;
+    font-size: 16px;
+    font-weight: 500;
+    height: 20px;
+    left: 542px;
+    letter-spacing: 0;
+    line-height: 18px;
+    position: absolute;
+    text-align: center;
+    top: 113px;
+    white-space: nowrap;
+    width: 87px;
+  }
+  
+  .header .item-link-4 {
+    color: #2b2b2b;
+    font-family: "Noto Sans KR-Medium", Helvetica;
+    font-size: 16px;
+    font-weight: 500;
+    height: 20px;
+    left: 641px;
+    letter-spacing: 0;
+    line-height: 18px;
+    position: absolute;
+    text-align: center;
+    top: 112px;
+    white-space: nowrap;
+    width: 59px;
+  }
+  
+  .header .item-link-5 {
+    color: #2b2b2b;
+    font-family: "Noto Sans KR-Medium", Helvetica;
+    font-size: 16px;
+    font-weight: 500;
+    height: 20px;
+    left: 719px;
+    letter-spacing: 0;
+    line-height: 18px;
+    position: absolute;
+    text-align: center;
+    top: 112px;
+    white-space: nowrap;
+    width: 63px;
+  }
+  
+  .header .rectangle {
+    border: 1px solid;
+    border-color: #a3a3a3;
+    border-radius: 50px;
+    height: 40px;
+    left: 1149px;
+    position: absolute;
+    top: 104px;
+    width: 302px;
+  }
+  
+  .header .overlap {
+    border: 1px solid;
+    border-color: #757575;
+    border-radius: 30px;
+    height: 60px;
+    left: 1445px;
+    position: absolute;
+    top: 30px;
+    width: 60px;
+  }
+  
+  .header .material-symbols {
+    height: 50px;
+    left: 4px;
+    position: absolute;
+    top: 4px;
+    width: 50px;
+  }
+  
+  .header .image {
+    height: 67px;
+    left: 408px;
+    object-fit: cover;
+    position: absolute;
+    top: 27px;
+    width: 372px;
+  }
+  

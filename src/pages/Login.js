@@ -49,7 +49,7 @@ const Login = () => {
     }
 
     try {
-      const response = await axios.post('http://localhost:5001/api/auth/login', {
+      const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/auth/login`, {
         email,
         password,
       });
@@ -87,7 +87,7 @@ const Login = () => {
     }
 
     try {
-      const response = await axios.post('http://localhost:5001/api/auth/register', {
+      const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/auth/register`, {
         email,
         name,
         password,
@@ -134,7 +134,7 @@ const Login = () => {
       console.log(decoded);
 
       // 백엔드로 토큰 전송하여 인증
-      const response = await axios.post('http://localhost:5001/api/auth/google-login', {
+      const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/auth/google-login`, {
         token: credential,
       });
 
@@ -259,6 +259,7 @@ const Login = () => {
           <GoogleLogin
             onSuccess={handleGoogleLoginSuccess}
             onError={handleGoogleLoginError}
+            width='400px'
           />
         </div>
       </div>
