@@ -259,6 +259,7 @@ const Login = () => {
           <GoogleLogin
             onSuccess={handleGoogleLoginSuccess}
             onError={handleGoogleLoginError}
+            width='400px'
           />
         </div>
       </div>
