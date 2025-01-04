@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const mysql = require('mysql2');
 const cors = require('cors');
 require('dotenv').config();
+const { OAuth2Client } = require('google-auth-library'); // Google Auth 라이브러리 import
 
 const app = express();
 app.use(bodyParser.json());
@@ -30,6 +31,10 @@ db.connect((err) => {
 // 환경 변수
 const JWT_SECRET = process.env.JWT_SECRET || 'default_secret_key';
 const PORT = process.env.PORT || 5001;
+const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
+
+// Google OAuth 클라이언트 초기화
+const client = new OAuth2Client(GOOGLE_CLIENT_ID);
 
 // 테스트 API
 app.get('/api/test', (req, res) => {
@@ -56,10 +61,10 @@ app.get('/testUsers', (req, res) => {
 
 // 회원가입 엔드포인트
 app.post('/api/auth/register', async (req, res) => {
-  const { email, password } = req.body;
+  const { email, name, password } = req.body;
 
-  if (!email || !password) {
-    return res.status(400).json({ success: false, message: '이메일과 비밀번호를 입력하세요.' });
+  if (!email || !name || !password) {
+    return res.status(400).json({ success: false, message: '이메일, 이름, 비밀번호를 모두 입력하세요.' });
   }
 
   try {
@@ -86,8 +91,8 @@ app.post('/api/auth/register', async (req, res) => {
         //디버깅 코드 추가
         //console.log(`register attempt for email: ${email}`);
         //console.log('Query Results:', results);
-        const insertQuery = 'INSERT INTO users (email, password) VALUES (?, ?)';
-        db.query(insertQuery, [email, hashedPassword], (err, results) => {
+        const insertQuery = 'INSERT INTO users (email, password, name, googleId) VALUES (?, ?, ?, ?)';
+        db.query(insertQuery, [email, hashedPassword, name, 'NULL'], (err, results) => {
         if (err) {
             console.error('데이터베이스 삽입 오류:', err);
             return res.status(500).json({ success: false, message: '서버 오류.' });
@@ -124,6 +129,10 @@ app.post('/api/auth/login', (req, res) => {
 
     const user = results[0];
 
+    if (user.googleId !== 'NULL') {
+      return res.status(400).json({ success: false, message: '이 이메일은 소셜 계정으로 등록되었습니다. 구글 로그인을 이용해주세요.' });
+    }
+
     // 비밀번호 검증
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
@@ -134,6 +143,90 @@ app.post('/api/auth/login', (req, res) => {
     const token = jwt.sign({ id: user.id, email: user.email }, JWT_SECRET, { expiresIn: '1h' });
     res.status(200).json({ success: true, message: '로그인 성공!', token });
   });
+});
+
+// Google 로그인 엔드포인트
+app.post('/api/auth/google-login', async (req, res) => {
+  const { token } = req.body;
+
+  if (!token) {
+    return res.status(400).json({ success: false, message: '인증 토큰이 필요합니다.' });
+  }
+
+  try {
+    // Google 토큰 검증
+    const ticket = await client.verifyIdToken({
+      idToken: token,
+      audience: GOOGLE_CLIENT_ID,
+    });
+
+    const payload = ticket.getPayload();
+    const { email, name, sub } = payload; // sub: Google의 고유 사용자 ID
+
+    if (!email) {
+      return res.status(400).json({ success: false, message: '이메일을 가져올 수 없습니다.' });
+    }
+
+    // 데이터베이스에서 사용자 조회
+    const query = 'SELECT * FROM users WHERE email = ?';
+    db.query(query, [email], async (err, results) => {
+      if (err) {
+        console.error('데이터베이스 오류:', err);
+        return res.status(500).json({ success: false, message: '서버 오류.' });
+      }
+
+      let user = results[0];
+
+      if (!user) {
+        // 사용자가 없으면 새로 생성
+        const insertQuery = 'INSERT INTO users (email, name, googleId) VALUES (?, ?, ?)';
+        db.query(insertQuery, [email, name, sub], (err, results) => {
+          if (err) {
+            console.error('사용자 생성 오류:', err);
+            return res.status(500).json({ success: false, message: '서버 오류.' });
+          }
+
+          // 새로 생성된 사용자 정보 조회
+          const newUserId = results.insertId;
+          const newUser = { id: newUserId, email, name, googleId: sub };
+
+          // JWT 생성
+          const jwtToken = jwt.sign({ id: newUser.id, email: newUser.email }, JWT_SECRET, { expiresIn: '1h' });
+          res.status(201).json({
+            success: true,
+            message: '구글 로그인 성공!',
+            token: jwtToken,
+            user: {
+              id: newUser.id,
+              email: newUser.email,
+              name: newUser.name,
+            },
+          });
+        });
+      } else {
+        // 기존 사용자라면, 구글로 등록된 계정인지 확인
+        if (user.googleId === 'NULL') {
+          return res.status(400).json({ success: false, message: '이 이메일은 소셜 계정이 아닙니다. 이메일/비밀번호 로그인을 이용해주세요.' });
+        }
+
+        // JWT 생성
+        const jwtToken = jwt.sign({ id: user.id, email: user.email }, JWT_SECRET, { expiresIn: '1h' });
+        res.status(200).json({
+          success: true,
+          message: '구글 로그인 성공!',
+          token: jwtToken,
+          user: {
+            id: user.id,
+            email: user.email,
+            name: user.name,
+          },
+        });
+      }
+    });
+  } catch (error) {
+    console.error('Google 로그인 에러:', error);
+    res.status(401).json({ success: false, message: '유효하지 않은 구글 토큰입니다.' });
+  }
 });
 
 // 서버 실행

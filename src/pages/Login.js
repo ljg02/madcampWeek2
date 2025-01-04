@@ -4,12 +4,16 @@ import axios from 'axios';
 import './Login.css'; // 스타일링 파일 import
 import { useNavigate, useLocation } from 'react-router-dom'; // 페이지 전환을 위한 훅
 import { FaEnvelope, FaLock, FaEye, FaEyeSlash } from 'react-icons/fa'; // 아이콘 import
+import { MdDriveFileRenameOutline } from "react-icons/md";
 import { AuthContext } from '../components/AuthContext'; // AuthContext import
 import { toast } from 'react-toastify'; // toast import
+import { GoogleLogin } from '@react-oauth/google';
+import { jwtDecode } from 'jwt-decode'; // 토큰 디코딩을 위한 라이브러리
 
 const Login = () => {
   const [isRegistering, setIsRegistering] = useState(false);
   const [email, setEmail] = useState('');
+  const [name, setName] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [message, setMessage] = useState('');
@@ -51,7 +55,6 @@ const Login = () => {
       });
 
       if (response.data.success) {
-        //setMessage('로그인 성공!');
         // JWT를 Local Storage에 저장하고 AuthContext 업데이트
         login(response.data.token, response.data.user); // user 정보가 있다면 전달
         // 홈 페이지로 이동
@@ -73,7 +76,7 @@ const Login = () => {
   const handleRegister = async (e) => {
     e.preventDefault();
 
-    if (!email || !password || !confirmPassword) {
+    if (!email || !name || !password || !confirmPassword) {
       setMessage('모든 필드를 입력해주세요.');
       return;
     }
@@ -86,13 +89,15 @@ const Login = () => {
     try {
       const response = await axios.post('http://localhost:5001/api/auth/register', {
         email,
+        name,
         password,
       });
 
       if (response.data.success) {
-        setMessage('회원가입 성공! 로그인 페이지로 전환됩니다.');
+        toast.success('회원가입 성공! 로그인 페이지로 전환됩니다.');
         setIsRegistering(false);
         setEmail('');
+        setName('');
         setPassword('');
         setConfirmPassword('');
         setTimeout(() => {
@@ -115,9 +120,40 @@ const Login = () => {
   const toggleForm = () => {
     setIsRegistering(!isRegistering);
     setEmail('');
+    setName('');
     setPassword('');
     setConfirmPassword('');
     setMessage('');
+  };
+
+  // Google 로그인 성공 핸들러
+  const handleGoogleLoginSuccess = async (credentialResponse) => {
+    try {
+      const { credential } = credentialResponse; // Google에서 받은 JWT 토큰
+      const decoded = jwtDecode(credential); // 토큰 디코딩 
+      console.log(decoded);
+
+      // 백엔드로 토큰 전송하여 인증
+      const response = await axios.post('http://localhost:5001/api/auth/google-login', {
+        token: credential,
+      });
+
+      if (response.data.success) {
+        login(response.data.token, response.data.user);
+        navigate('/');
+      } else {
+        setMessage(response.data.message);
+      }
+    } catch (error) {
+      console.error('Google 로그인 에러:', error);
+      setMessage('Google 로그인 중 오류가 발생했습니다.');
+    }
+  };
+
+  // Google 로그인 실패 핸들러
+  const handleGoogleLoginError = () => {
+    console.error('Google 로그인 실패');
+    setMessage('Google 로그인이 실패했습니다.');
   };
 
   return (
@@ -142,6 +178,23 @@ const Login = () => {
               />
             </div>
           </div>
+          {/* 이름 입력 칸 */}
+          {isRegistering && (
+            <div className="form-group">
+              <label htmlFor="name">이름:</label>
+              <div className="input-with-icon">
+                <MdDriveFileRenameOutline className="icon" />
+                <input
+                  type="name"
+                  id="confirmPassword"
+                  placeholder="이름을 입력하세요"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  required
+                />
+              </div>
+            </div>
+          )}
           <div className="form-group">
             <label htmlFor="password">비밀번호:</label>
             <div className="input-with-icon">
@@ -186,6 +239,13 @@ const Login = () => {
         <button onClick={toggleForm} className="toggle-button">
           {isRegistering ? '로그인으로 돌아가기' : '회원가입'}
         </button>
+        <div className="google-login">
+          <p>구글 계정으로 로그인:</p>
+          <GoogleLogin
+            onSuccess={handleGoogleLoginSuccess}
+            onError={handleGoogleLoginError}
+          />
+        </div>
       </div>
     </div>
   );
