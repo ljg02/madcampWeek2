@@ -138,6 +138,11 @@ const Login = () => {
         token: credential,
       });
 
+      setEmail('');
+      setName('');
+      setPassword('');
+      setConfirmPassword('');
+      setMessage('');
       if (response.data.success) {
         login(response.data.token, response.data.user);
         navigate('/');
@@ -147,6 +152,11 @@ const Login = () => {
     } catch (error) {
       console.error('Google 로그인 에러:', error);
       setMessage('Google 로그인 중 오류가 발생했습니다.');
+      setEmail('');
+      setName('');
+      setPassword('');
+      setConfirmPassword('');
+      setMessage('');
     }
   };
 
@@ -154,6 +164,11 @@ const Login = () => {
   const handleGoogleLoginError = () => {
     console.error('Google 로그인 실패');
     setMessage('Google 로그인이 실패했습니다.');
+    setEmail('');
+    setName('');
+    setPassword('');
+    setConfirmPassword('');
+    setMessage('');
   };
 
   return (
