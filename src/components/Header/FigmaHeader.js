@@ -1,9 +1,23 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./FigmaHeader.css";
+import { useNavigate } from "react-router-dom";
 import { FaBars } from "react-icons/fa";
+import { AuthContext } from "../AuthContext"; // AuthContext import
 import logo from "./studyMateLogo.png";
 
 export const Header = ({ toggleSidebar }) => {
+  const { auth, logout } = useContext(AuthContext); // AuthContext 사용
+  const navigate = useNavigate();
+
+  const handleLoginClick = async () => {
+      navigate('/login');
+  };
+
+  const handleLogoutClick = async () => {
+      await logout();
+      navigate('/');
+  };
+
   return (
     <div className="header">
       <div className="overlap-group">
@@ -13,7 +27,11 @@ export const Header = ({ toggleSidebar }) => {
           <span className="span">D-314</span>
         </p>
 
-        <p className="div">로그인</p>
+        {auth.isAuthenticated ? (
+          <p className="div" onClick={handleLogoutClick}>로그아웃</p>
+        ) : (
+            <p className="div" onClick={handleLoginClick}>로그인</p>
+        )}
         <p className="item-link">회원가입</p>
       </div>
 

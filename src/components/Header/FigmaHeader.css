@@ -68,8 +68,8 @@
     letter-spacing: 0;
     line-height: 40px;
     text-align: center;
-    width: 55px;
     margin-left: 20px;
+    cursor: pointer;
   }
   
   .header .vertical-border {
