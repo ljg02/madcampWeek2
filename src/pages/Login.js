@@ -23,7 +23,7 @@ const Login = () => {
     }
 
     try {
-      const response = await axios.post('http://localhost:5000/api/auth/login', {
+      const response = await axios.post('http://localhost:5001/api/auth/login', {
         email,
         password,
       });
@@ -35,11 +35,16 @@ const Login = () => {
         // 홈 페이지로 이동
         //navigate('/');
       } else {
-        setMessage('로그인에 실패했습니다. 이메일이나 비밀번호를 확인해주세요.');
+        setMessage(response.data.message);
       }
     } catch (error) {
       console.error('로그인 에러:', error);
-      setMessage('서버 오류가 발생했습니다.');
+      // 백엔드가 오류 응답을 보냈는지 확인
+      if (error.response && error.response.data && error.response.data.message) {
+        setMessage(error.response.data.message);
+      } else {
+        setMessage('서버 오류가 발생했습니다.');
+      }
     }
   };
 
@@ -57,7 +62,7 @@ const Login = () => {
     }
 
     try {
-      const response = await axios.post('http://localhost:5000/api/auth/register', {
+      const response = await axios.post('http://localhost:5001/api/auth/register', {
         email,
         password,
       });
@@ -72,11 +77,16 @@ const Login = () => {
           navigate('/login');
         }, 2000);
       } else {
-        setMessage('회원가입에 실패했습니다.');
+        setMessage(response.data.message);
       }
     } catch (error) {
       console.error('회원가입 에러:', error);
-      setMessage('서버 오류가 발생했습니다.');
+      // 백엔드가 오류 응답을 보냈는지 확인
+      if (error.response && error.response.data && error.response.data.message) {
+        setMessage(error.response.data.message);
+      } else {
+        setMessage('서버 오류가 발생했습니다.');
+      }
     }
   };
 
@@ -84,12 +94,13 @@ const Login = () => {
     setIsRegistering(!isRegistering);
     setEmail('');
     setPassword('');
+    setConfirmPassword('');
     setMessage('');
   };
 
   return (
     <div className="background">
-      <div className="login-container">
+      <div className={`login-container ${isRegistering ? 'extend' : ''}`}>
         <h2>{isRegistering ? '회원가입' : '로그인'}</h2>
         <form
           onSubmit={isRegistering ? handleRegister : handleLogin}

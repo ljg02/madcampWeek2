@@ -29,7 +29,7 @@ db.connect((err) => {
 
 // 환경 변수
 const JWT_SECRET = process.env.JWT_SECRET || 'default_secret_key';
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5001;
 
 // 테스트 API
 app.get('/api/test', (req, res) => {
@@ -63,17 +63,38 @@ app.post('/api/auth/register', async (req, res) => {
   }
 
   try {
-    // 비밀번호 암호화
-    const hashedPassword = await bcrypt.hash(password, 10);
+    // 1. 데이터베이스에서 email 중복 확인
+    const checkQuery = 'SELECT * FROM users WHERE email = ?';
+    db.query(checkQuery, [email], async (err, results) => {
+        //디버깅 코드 추가
+        //console.log(`check for email: ${email}`);
+        //console.log('Query Results:', results);
 
-    // 데이터베이스에 사용자 추가
-    const query = 'INSERT INTO users (email, password) VALUES (?, ?)';
-    db.query(query, [email, hashedPassword], (err, results) => {
-      if (err) {
-        console.error(err);
-        return res.status(500).json({ success: false, message: '데이터베이스 오류.' });
-      }
-      res.status(201).json({ success: true, message: '회원가입 성공!' });
+        if (err) {
+        //console.error('데이터베이스 오류:', err);
+        return res.status(500).json({ success: false, message: '서버 오류.' });
+        }
+
+        if (results.length > 0) {
+        return res.status(400).json({ success: false, message: '이미 사용 중인 이메일입니다.' });
+        }
+
+        // 2. 비밀번호 암호화
+        const hashedPassword = await bcrypt.hash(password, 10);
+
+        // 3. 새로운 사용자 삽입
+        //디버깅 코드 추가
+        //console.log(`register attempt for email: ${email}`);
+        //console.log('Query Results:', results);
+        const insertQuery = 'INSERT INTO users (email, password) VALUES (?, ?)';
+        db.query(insertQuery, [email, hashedPassword], (err, results) => {
+        if (err) {
+            console.error('데이터베이스 삽입 오류:', err);
+            return res.status(500).json({ success: false, message: '서버 오류.' });
+        }
+
+        res.status(201).json({ success: true, message: '회원가입 성공!' });
+        });
     });
   } catch (error) {
     console.error('회원가입 에러:', error);

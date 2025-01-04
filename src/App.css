@@ -10,20 +10,26 @@ body {
 }
 
 .header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 10vh;
   display: flex;
   align-items: center;
   justify-content: space-between;
   /*세로 padding, 가로 padding*/
-  padding: 40px 100px;
+  padding: 0 20px;
   background-color: #fff;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  z-index: 2000;
 }
 
 .header__left .icon {
   font-size: 28px;
   margin: 0 10px;
   cursor: pointer;
-  margin-bottom: -60px;
+  margin-left: 100px;
 }
 
 .header__center {
@@ -44,42 +50,12 @@ body {
   font-size: 28px;
   margin: 0 10px;
   cursor: pointer;
-  margin-bottom: -60px;
 }
 
 .mainBody {
   display: flex;
   flex: 1;
-}
-
-.sidebar {
-  width: 0;
-  height: 100vh;
-  background-color: #333;
-  overflow-x: hidden;
-  position: fixed;
-  transition: 0.3s;
-  padding-top: 60px;
-  color: white;
-}
-
-.sidebar.open {
-  width: 200px; /* 사이드바 열렸을 때의 너비 */
-}
-
-.sidebar ul {
-  list-style: none;
-  padding: 0;
-}
-
-.sidebar ul li {
-  padding: 10px 15px;
-}
-
-.sidebar ul li a {
-  color: white;
-  text-decoration: none;
-  display: block;
+  padding-top: 10vh;
 }
 
 .main-content {

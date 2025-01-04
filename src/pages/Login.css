@@ -24,6 +24,10 @@
   margin: 0 auto; /* 수평 중앙 배치 */
 }
 
+.login-container.extend {
+  height: 600px;  /* 세로길이 확장 */
+}
+
 /* 제목 스타일 */
 .login-container h2 {
   margin-bottom: 25px;
