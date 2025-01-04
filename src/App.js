@@ -18,6 +18,7 @@ const App = () => {
   // 사이드바 열기/닫기 함수
   const toggleSidebar = () => {
     setIsSidebarOpen(prevState => !prevState);
+    console.log("bar click");
   };
 
   return (
