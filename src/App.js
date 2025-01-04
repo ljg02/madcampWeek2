@@ -3,7 +3,7 @@ import React, { useState, useContext } from "react";
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import "./App.css";
 import { FaBars, FaUserCircle, FaBell } from "react-icons/fa";
-import { MdSettings } from "react-icons/md";
+import { MdSettings, MdLogout } from "react-icons/md";
 
 // 컴포넌트 import
 import Sidebar from './components/Sidebar';
@@ -37,6 +37,7 @@ const App = () => {
             {auth.isAuthenticated ? (
               <>
                 <span> 로그인 상태 </span>
+                <MdLogout className="icon" onClick={logout}/>
                 <MdSettings className="icon" />
                 <FaBell className="icon" />
                 <FaUserCircle className="icon"/>

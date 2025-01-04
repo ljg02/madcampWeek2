@@ -54,7 +54,6 @@ const Login = () => {
         //setMessage('로그인 성공!');
         // JWT를 Local Storage에 저장하고 AuthContext 업데이트
         login(response.data.token, response.data.user); // user 정보가 있다면 전달
-        toast.success('로그인 성공!');
         // 홈 페이지로 이동
         navigate('/');
       } else {

@@ -1,5 +1,6 @@
 // src/components/AuthContext.js
 import React, { createContext, useState, useEffect } from 'react';
+import { toast } from 'react-toastify'; // toast import
 
 // AuthContext 생성
 export const AuthContext = createContext();
@@ -27,13 +28,13 @@ export const AuthProvider = ({ children }) => {
 
   // 로그인 함수
   const login = (token, user) => {
-    console.log('token : ', token);
     localStorage.setItem('token', token);
     setAuth({
       token,
       isAuthenticated: true,
       user, // 사용자 정보 설정
     });
+    toast.success('로그인 성공!');
   };
 
   // 로그아웃 함수
@@ -44,6 +45,7 @@ export const AuthProvider = ({ children }) => {
       isAuthenticated: false,
       user: null,
     });
+    toast.success('로그아웃 성공!');
   };
 
   return (
