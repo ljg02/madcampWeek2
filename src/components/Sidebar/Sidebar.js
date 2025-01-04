@@ -19,6 +19,9 @@ const Sidebar = ({ isSidebarOpen, toggleSidebar }) => {
           <li className={location.pathname === '/videoPlayer' ? 'active' : ''}>
             <Link to="/videoPlayer" onClick={toggleSidebar}>VideoPlayer</Link>
           </li>
+          <li className={location.pathname === '/calendar' ? 'active' : ''}>
+            <Link to="/calendar" onClick={toggleSidebar}>Calendar</Link>
+          </li>
         </ul>
       </div>
     </div>

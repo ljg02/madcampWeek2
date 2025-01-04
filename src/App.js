@@ -1,68 +1,29 @@
 // src/App.js
-import React, { useState, useContext } from "react";
-import { Routes, Route, useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import { Routes, Route } from 'react-router-dom';
 import "./App.css";
-import { FaBars, FaUserCircle, FaBell } from "react-icons/fa";
-import { MdSettings, MdLogin, MdLogout } from "react-icons/md";
 
 // 컴포넌트 import
 import Sidebar from './components/Sidebar';
+import Header from './components/Header'; // Header 컴포넌트 import
 import Home from './pages/Home';
 import VideoPlayer from './pages/VideoPlayer';
 import Login from './pages/Login';
-import { AuthContext } from './components/AuthContext'; // AuthContext import
+import Calendar from './pages/Calendar';
 import PrivateRoute from './components/PrivateRoute'; // PrivateRoute 컴포넌트 생성 필요
 
 const App = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false); // 사이드바 상태 관리
-  const { auth, logout } = useContext(AuthContext); // AuthContext 사용
-  const navigate = useNavigate();
-
 
   // 사이드바 열기/닫기 함수
   const toggleSidebar = () => {
     setIsSidebarOpen(prevState => !prevState);
   };
 
-  const handleLoginClick = async () => {
-    navigate('/login');
-  };
-
-  const handleLogoutClick = async () => {
-    await logout();
-    navigate('/');
-  };
-
   return (
     <div className="app">
       {/* Header */}
-      <header className="header">
-        <div className="header__left">
-          <FaBars className="icon" onClick={toggleSidebar} />
-        </div>
-        <div className="header__center">
-          <span>Title</span>
-        </div>
-        <div className="header__right">
-          {auth.isAuthenticated ? (
-            <>
-              <span> 로그인 상태 </span>
-              <MdLogout className="icon" onClick={handleLogoutClick} />
-              <MdSettings className="icon" />
-              <FaBell className="icon" />
-              <FaUserCircle className="icon" />
-            </>
-          ) : (
-            <>
-              <span> 비로그인 상태 </span>
-              <MdLogin className="icon" onClick={handleLoginClick} />
-              <MdSettings className="icon" />
-              <FaBell className="icon" />
-              <FaUserCircle className="icon" />
-            </>
-          )}
-        </div>
-      </header>
+      <Header toggleSidebar={toggleSidebar} />
 
       <div className="mainBody">
         {/* Sidebar */}
@@ -81,6 +42,7 @@ const App = () => {
                 </PrivateRoute>
               }
             />
+            <Route path="/calendar" element={<Calendar />} />
             {/* 추가적인 라우트 */}
           </Routes>
         </div>
