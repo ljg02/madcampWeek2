@@ -1,7 +1,7 @@
 /* src/components/Login.css */
 .background {
   flex:1;
-  width: 100vh;
+  min-height: 100vh;
   margin: 0;
   font-family: 'Roboto', sans-serif; /* 구글 폰트 적용 */
   background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%); /* 그라데이션 배경 */
@@ -20,11 +20,11 @@
   border-radius: 12px;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
   text-align: center;
-  margin: 0 auto; /* 수평 중앙 배치 */
+  margin: 20px auto; /* 수평 중앙 배치 */
 }
 
 .login-container.extend {
-  height: 700px;  /* 세로길이 확장 */
+  height: 750px;  /* 세로길이 확장 */
 }
 
 /* 제목 스타일 */

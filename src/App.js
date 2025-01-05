@@ -6,11 +6,13 @@ import "./App.css";
 // 컴포넌트 import
 import Sidebar from './components/Sidebar';
 import Header from './components/Header'; // Header 컴포넌트 import
+import Footer from "./components/Footer";
 import Home from './pages/Home';
 import VideoPlayer from './pages/VideoPlayer';
 import Login from './pages/Login';
 import Calendar from './pages/Calendar';
 import PrivateRoute from './components/PrivateRoute'; // PrivateRoute 컴포넌트 생성 필요
+import Mypage from './pages/Mypage';
 
 const App = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false); // 사이드바 상태 관리
@@ -29,6 +31,10 @@ const App = () => {
       <div className="mainBody">
         {/* Sidebar */}
         <Sidebar isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
+        <div
+          className={`overlay ${isSidebarOpen ? "open" : ""}`}
+          onClick={toggleSidebar}
+        ></div>
 
         {/* Main Content */}
         <div className="main-content">
@@ -44,10 +50,12 @@ const App = () => {
               }
             />
             <Route path="/calendar" element={<Calendar />} />
+            <Route path="/mypage" element={<Mypage />} />
             {/* 추가적인 라우트 */}
           </Routes>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

@@ -1,9 +1,23 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./FigmaHeader.css";
+import { useNavigate } from "react-router-dom";
 import { FaBars } from "react-icons/fa";
-import logo from "./studyMateLogo.png"
+import { AuthContext } from "../AuthContext"; // AuthContext import
+import logo from "./studyMateLogo.png";
 
 export const Header = ({ toggleSidebar }) => {
+  const { auth, logout } = useContext(AuthContext); // AuthContext 사용
+  const navigate = useNavigate();
+
+  const handleLoginClick = async () => {
+      navigate('/login');
+  };
+
+  const handleLogoutClick = async () => {
+      await logout();
+      navigate('/');
+  };
+
   return (
     <div className="header">
       <div className="overlap-group">
@@ -13,11 +27,12 @@ export const Header = ({ toggleSidebar }) => {
           <span className="span">D-314</span>
         </p>
 
-        <div className="list">
-          <div className="item-link">회원가입</div>
-        </div>
-
-        <div className="div">로그인</div>
+        {auth.isAuthenticated ? (
+          <p className="div" onClick={handleLogoutClick}>로그아웃</p>
+        ) : (
+            <p className="div" onClick={handleLoginClick}>로그인</p>
+        )}
+        <p className="item-link">회원가입</p>
       </div>
 
       {/* <img
@@ -26,8 +41,8 @@ export const Header = ({ toggleSidebar }) => {
         src={verticalBorder}
       /> */}
 
-      <div className="button">
-        <FaBars className="icon" onClick={toggleSidebar} />
+      <div className="button" onClick={toggleSidebar} >
+        <FaBars className="icon" />
       </div>
 
       <div className="item-link-2">Lectures</div>

@@ -9,11 +9,12 @@
   }
   
   .header .overlap-group {
+    display: flex;
     height: 61px;
-    left: 1173px;
+    left: 1150px;
     position: absolute;
     top: 39px;
-    width: 257px;
+    width: 280px;
   }
   
   .header .d {
@@ -22,11 +23,8 @@
     font-size: 16px;
     font-weight: 400;
     height: 40px;
-    left: 0;
     letter-spacing: 0;
     line-height: 40px;
-    position: absolute;
-    top: 1px;
     width: 86px;
   }
   
@@ -55,13 +53,10 @@
     font-size: 16px;
     font-weight: 300;
     height: 40px;
-    left: 122px;
     letter-spacing: 0;
     line-height: 40px;
-    position: absolute;
     text-align: center;
-    top: -33px;
-    width: 63px;
+    margin-left: 20px;
   }
   
   .header .div {
@@ -70,13 +65,11 @@
     font-size: 16px;
     font-weight: 300;
     height: 40px;
-    left: 108px;
     letter-spacing: 0;
     line-height: 40px;
-    position: absolute;
     text-align: center;
-    top: 0;
-    width: 55px;
+    margin-left: 20px;
+    cursor: pointer;
   }
   
   .header .vertical-border {
@@ -91,6 +84,8 @@
     height: 32px;
     left: 410px;
     position: absolute;
+    align-content: center;
+    justify-items: center;
     cursor: pointer;
     top: 107px;
     width: 32px;
