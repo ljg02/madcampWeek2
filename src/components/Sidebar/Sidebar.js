@@ -22,6 +22,18 @@ const Sidebar = ({ isSidebarOpen, toggleSidebar }) => {
           <li className={location.pathname === '/calendar' ? 'active' : ''}>
             <Link to="/calendar" onClick={toggleSidebar}>Calendar</Link>
           </li>
+          <li className={location.pathname === '/lecture-all-frame' ? 'active' : ''}>
+            <Link to="/lecture" onClick={toggleSidebar}>Lecture</Link>
+          </li>
+          <li className={location.pathname === '/mypage' ? 'active' : ''}>
+            <Link to="/mypage" onClick={toggleSidebar}>Mypage</Link>
+            </li>
+          <li className={location.pathname === '/mypage-lecture' ? 'active' : ''}>
+            <Link to="/mypage-lecture" onClick={toggleSidebar}>MypageLecture</Link>
+          </li>
+          <li className={location.pathname === '/mypage-schedule' ? 'active' : ''}>
+            <Link to="/mypage-schedule" onClick={toggleSidebar}>MypageSchedule</Link>
+          </li>
         </ul>
       </div>
     </div>
