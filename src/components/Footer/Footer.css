@@ -1,0 +1,418 @@
+.footer {
+    position: relative;
+    width: 1920px;
+  }
+  
+  .footer .background-border {
+    background-color: #f2f2f2;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    border-color: #e5e5e5;
+    border-top-style: solid;
+    border-top-width: 1px;
+    height: 57px;
+    width: 1920px;
+  }
+  
+  .footer .strong {
+    color: #2b2b2b;
+    font-family: "Noto Sans KR-Bold", Helvetica;
+    font-size: 14px;
+    font-weight: 700;
+    height: 55px;
+    left: 410px;
+    letter-spacing: 0;
+    line-height: 55px;
+    position: absolute;
+    top: 0;
+    white-space: nowrap;
+    width: 107px;
+  }
+  
+  .footer .container {
+    height: 55px;
+    left: 541px;
+    position: absolute;
+    top: 1px;
+    width: 600px;
+  }
+  
+  .footer .list {
+    height: 55px;
+    position: relative;
+    top: -110px;
+  }
+  
+  .footer .group {
+    height: 55px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 600px;
+  }
+  
+  .footer .text-wrapper {
+    color: #000000;
+    font-family: "Noto Sans KR-Bold", Helvetica;
+    font-size: 14px;
+    font-weight: 700;
+    height: 55px;
+    left: 0;
+    letter-spacing: 0;
+    line-height: 55px;
+    position: absolute;
+    top: -1px;
+    white-space: nowrap;
+    width: 9px;
+  }
+  
+  .footer .icon {
+    height: 14px;
+    left: 316px;
+    position: absolute;
+    top: 20px;
+    width: 14px;
+  }
+  
+  .footer .div {
+    height: 55px;
+    left: 0;
+    position: absolute;
+    top: 55px;
+    width: 600px;
+  }
+  
+  .footer .img {
+    height: 14px;
+    left: 208px;
+    position: absolute;
+    top: 20px;
+    width: 14px;
+  }
+  
+  .footer .group-2 {
+    height: 55px;
+    left: 0;
+    position: absolute;
+    top: 110px;
+    width: 600px;
+  }
+  
+  .footer .link {
+    height: 55px;
+    left: 13px;
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    width: 257px;
+  }
+  
+  .footer .text-wrapper-2 {
+    color: #2b2b2b;
+    font-family: "Noto Sans KR-DemiLight", Helvetica;
+    font-size: 12px;
+    font-weight: 300;
+    height: 15px;
+    letter-spacing: 0;
+    line-height: 55px;
+    white-space: nowrap;
+    width: 258px;
+  }
+  
+  .footer .icon-2 {
+    height: 14px;
+    left: 276px;
+    position: absolute;
+    top: 20px;
+    width: 14px;
+  }
+  
+  .footer .group-3 {
+    height: 55px;
+    left: 0;
+    position: absolute;
+    top: 165px;
+    width: 600px;
+  }
+  
+  .footer .icon-3 {
+    height: 14px;
+    left: 318px;
+    position: absolute;
+    top: 20px;
+    width: 14px;
+  }
+  
+  .footer .group-4 {
+    height: 55px;
+    left: 0;
+    position: absolute;
+    top: 220px;
+    width: 600px;
+  }
+  
+  .footer .icon-4 {
+    height: 14px;
+    left: 338px;
+    position: absolute;
+    top: 20px;
+    width: 14px;
+  }
+  
+  .footer .group-5 {
+    height: 55px;
+    left: 0;
+    position: absolute;
+    top: 275px;
+    width: 600px;
+  }
+  
+  .footer .group-6 {
+    height: 55px;
+    left: 0;
+    position: absolute;
+    top: 330px;
+    width: 600px;
+  }
+  
+  .footer .vertical-border {
+    border-color: #cdcdcd;
+    border-left-style: solid;
+    border-left-width: 1px;
+    height: 25px;
+    left: 1222px;
+    position: absolute;
+    top: 16px;
+    width: 288px;
+  }
+  
+  .footer .list-2 {
+    height: 25px;
+    left: 36px;
+    position: relative;
+    width: 252px;
+  }
+  
+  .footer .item-link {
+    color: #2b2b2b;
+    font-family: "Noto Sans KR-Bold", Helvetica;
+    font-size: 12px;
+    font-weight: 700;
+    height: 15px;
+    left: 0;
+    letter-spacing: 0;
+    line-height: 25px;
+    position: absolute;
+    top: 4px;
+    white-space: nowrap;
+    width: 58px;
+  }
+  
+  .footer .item-link-2 {
+    color: #2b2b2b;
+    font-family: "Noto Sans KR-Bold", Helvetica;
+    font-size: 12px;
+    font-weight: 700;
+    height: 15px;
+    left: 93px;
+    letter-spacing: 0;
+    line-height: 25px;
+    position: absolute;
+    top: 4px;
+    white-space: nowrap;
+    width: 45px;
+  }
+  
+  .footer .item-link-3 {
+    color: #2b2b2b;
+    font-family: "Noto Sans KR-Bold", Helvetica;
+    font-size: 12px;
+    font-weight: 700;
+    height: 15px;
+    left: 172px;
+    letter-spacing: 0;
+    line-height: 25px;
+    position: absolute;
+    top: 4px;
+    white-space: nowrap;
+    width: 80px;
+  }
+  
+  .footer .list-3 {
+    height: 30px;
+    left: 410px;
+    position: absolute;
+    top: 109px;
+    width: 663px;
+  }
+  
+  .footer .div-wrapper {
+    height: 30px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 52px;
+  }
+  
+  .footer .text-wrapper-3 {
+    color: #000000;
+    font-family: "Noto Sans KR-Medium", Helvetica;
+    font-size: 14px;
+    font-weight: 500;
+    height: 18px;
+    left: 0;
+    letter-spacing: 0;
+    line-height: 30px;
+    position: absolute;
+    top: 5px;
+    white-space: nowrap;
+    width: 81px;
+  }
+  
+  .footer .item-link-4 {
+    height: 30px;
+    left: 115px;
+    position: absolute;
+    top: 0;
+    width: 103px;
+  }
+  
+  .footer .text-wrapper-4 {
+    color: #2581c4;
+    font-family: "Noto Sans KR-Medium", Helvetica;
+    font-size: 14px;
+    font-weight: 500;
+    height: 18px;
+    left: 0;
+    letter-spacing: 0;
+    line-height: 30px;
+    position: absolute;
+    top: 5px;
+    white-space: nowrap;
+    width: 103px;
+  }
+  
+  .footer .item-link-5 {
+    height: 30px;
+    left: 255px;
+    position: absolute;
+    top: 0;
+    width: 52px;
+  }
+  
+  .footer .text-wrapper-5 {
+    color: #000000;
+    font-family: "Noto Sans KR-Medium", Helvetica;
+    font-size: 14px;
+    font-weight: 500;
+    height: 18px;
+    left: 0;
+    letter-spacing: 0;
+    line-height: 30px;
+    position: absolute;
+    top: 5px;
+    white-space: nowrap;
+    width: 52px;
+  }
+  
+  .footer .item-link-wrapper {
+    height: 30px;
+    left: 344px;
+    position: absolute;
+    top: 0;
+    width: 52px;
+  }
+  
+  .footer .item-link-6 {
+    height: 30px;
+    position: relative;
+    width: 57px;
+  }
+  
+  .footer .item-link-7 {
+    height: 30px;
+    left: 433px;
+    position: absolute;
+    top: 0;
+    width: 77px;
+  }
+  
+  .footer .text-wrapper-6 {
+    color: #000000;
+    font-family: "Noto Sans KR-Medium", Helvetica;
+    font-size: 14px;
+    font-weight: 500;
+    height: 18px;
+    left: 0;
+    letter-spacing: 0;
+    line-height: 30px;
+    position: absolute;
+    top: 5px;
+    white-space: nowrap;
+    width: 78px;
+  }
+  
+  .footer .address {
+    height: 108px;
+    left: 410px;
+    position: absolute;
+    top: 159px;
+    width: 663px;
+  }
+  
+  .footer .element-IT-l {
+    color: #a3a3a3;
+    font-family: "Noto Sans KR-DemiLight", Helvetica;
+    font-size: 12px;
+    font-weight: 300;
+    height: 37px;
+    left: 0;
+    letter-spacing: 0;
+    line-height: 21.6px;
+    position: absolute;
+    top: 2px;
+    width: 465px;
+  }
+  
+  .footer .l-dgist-ac {
+    color: #a3a3a3;
+    font-family: "Noto Sans KR-DemiLight", Helvetica;
+    font-size: 12px;
+    font-weight: 300;
+    height: 37px;
+    left: 0;
+    letter-spacing: 0;
+    line-height: 21.6px;
+    position: absolute;
+    top: 53px;
+    width: 383px;
+  }
+  
+  .footer .list-4 {
+    height: 34px;
+    left: 1305px;
+    position: absolute;
+    top: 172px;
+    width: 205px;
+  }
+  
+  .footer .image {
+    height: 50px;
+    left: 1459px;
+    object-fit: cover;
+    position: absolute;
+    top: 89px;
+    width: 47px;
+  }
+  
+  /* .footer .link-2 {
+    background-image: url(./bt-go-top-png.png);
+    background-position: 50% 50%;
+    background-size: cover;
+    height: 40px;
+    left: 1563px;
+    position: absolute;
+    top: 221px;
+    width: 40px;
+  } */
+  
