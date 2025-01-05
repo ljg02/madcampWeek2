@@ -2,13 +2,12 @@
 
 .sidebar {
   width: 200px;
-  height: 100vh;
+  min-height: 100vh;
   background-color: #333;
   overflow-x: hidden;
   overflow-y: auto;
   position: absolute;
   transition: 0.3s;
-  padding-top: 60px;
   color: white;
   left: -200px;
   /* 초기에는 사이드바가 숨겨져 있음 */
@@ -19,6 +18,10 @@
 .sidebar.open {
   left: 0;
   /* 사이드바가 열리면 왼쪽으로 이동 */
+}
+
+.sidebar-content {
+  padding-top: 60px;
 }
 
 /* 활성화된 페이지 표시 */

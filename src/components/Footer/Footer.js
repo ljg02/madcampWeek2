@@ -75,7 +75,7 @@ export const Footer = () => {
           개발자 : 대구경북과학기술원 l&nbsp;&nbsp;김나혜 : 이메일 :
           knh2222@dgist.ac.kr
           <br />
-          개발자 : 한양대학교 | 이정규 : 이메일 :
+          개발자 : 한양대학교 | 이정규 : 이메일 : gyu021211@gmail.com
         </p>
       </div>
 
