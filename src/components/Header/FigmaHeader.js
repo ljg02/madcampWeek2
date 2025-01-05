@@ -9,6 +9,10 @@ export const Header = ({ toggleSidebar }) => {
   const { auth, logout } = useContext(AuthContext); // AuthContext 사용
   const navigate = useNavigate();
 
+  const handleLogoClick = async () => {
+    navigate('/');
+  };
+
   const handleLoginClick = async () => {
     navigate('/login', { state: { isRegistering: false } });
   };
@@ -20,6 +24,10 @@ export const Header = ({ toggleSidebar }) => {
 
   const handleRegisterClick = async () => {
     navigate('/login', { state: { isRegistering: true } }); // isRegistering 상태 전달
+  };
+
+  const handleProfileClick = async () => {
+    navigate('/mypage');
   };
 
   return (
@@ -59,7 +67,7 @@ export const Header = ({ toggleSidebar }) => {
 
       <div className="rectangle" />
 
-      <div className="overlap">
+      <div className="overlap" onClick={handleProfileClick} >
         {/* <img
           className="material-symbols"
           alt="Material symbols"
@@ -67,7 +75,7 @@ export const Header = ({ toggleSidebar }) => {
         /> */}
       </div>
 
-      <img className="logo" alt="Logo" src={logo} />
+      <img className="logo" alt="Logo" src={logo} onClick={handleLogoClick}/>
     </div>
   );
 };

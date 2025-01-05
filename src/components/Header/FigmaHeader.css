@@ -184,6 +184,7 @@
     position: absolute;
     top: 30px;
     width: 60px;
+    cursor: pointer;
   }
   
   .header .material-symbols {
@@ -201,4 +202,5 @@
     position: absolute;
     top: 27px;
     width: 372px;
+    cursor: pointer;
   }

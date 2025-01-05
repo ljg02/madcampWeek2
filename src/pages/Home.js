@@ -12,7 +12,7 @@ const Home = () => {
 
   useEffect(() => {
     // 신청 가능한 강좌 목록 요청
-    axios.get(`${process.env.REACT_APP_BACKEND_URL}/availableCourses`)
+    axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/availableCourses`)
       .then(response => setCourses(response.data))
       .catch(error => {
         console.error('강좌 데이터 요청 실패:', error);
