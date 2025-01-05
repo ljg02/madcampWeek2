@@ -10,6 +10,10 @@ import Home from './pages/Home';
 import VideoPlayer from './pages/VideoPlayer';
 import Login from './pages/Login';
 import Calendar from './pages/Calendar';
+import Lecture from './pages/Lecture';
+import Mypage from './pages/Mypage';
+import MypageLecture from './pages/MypageLecture';
+import MypageSchedule from './pages/MypageSchedule';
 import PrivateRoute from './components/PrivateRoute'; // PrivateRoute 컴포넌트 생성 필요
 
 const App = () => {
@@ -44,6 +48,10 @@ const App = () => {
               }
             />
             <Route path="/calendar" element={<Calendar />} />
+            <Route path="/mypage" element={<Mypage />} />
+            <Route path="/mypage-lecture" element={<MypageLecture />} />
+            <Route path="/mypage-schedule" element={<MypageSchedule />} />
+            <Route path="/lecture" element={<Lecture />} />
             {/* 추가적인 라우트 */}
           </Routes>
         </div>
