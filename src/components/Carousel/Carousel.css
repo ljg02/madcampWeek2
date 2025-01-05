@@ -1,0 +1,110 @@
+/* src/components/Carousel.css */
+
+.carousel-container {
+    margin-bottom: 50px;
+}
+
+.carousel-title {
+    font-size: 1.6rem;
+    color: #2e7d32;
+    margin-bottom: 15px;
+    padding-left: 10px;
+}
+
+.carousel-wrapper {
+    position: relative;
+    overflow: hidden;
+    padding-left: 50px; /* 좌측 버튼 공간 확보 */
+    padding-right: 50px; /* 우측 버튼 공간 확보 */
+    padding-top: 10px;
+}
+
+.carousel {
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
+    gap: 50px; /* 간격 축소 */
+    transition: transform 0.5s ease-in-out;
+    width: 100%;
+}
+
+.carousel-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(46, 125, 50, 0.7);
+    border: none;
+    color: #ffffff;
+    padding: 10px 15px;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 1;
+    transition: background-color 0.3s, opacity 0.3s;
+    opacity: 0.8; /* 버튼의 불투명도 조절 */
+}
+
+.carousel-button:hover {
+    background-color: rgba(46, 125, 50, 1);
+    opacity: 1;
+}
+
+.carousel-button.left {
+    left: 10px; /* wrapper 내부에 위치 */
+}
+
+.carousel-button.right {
+    right: 10px; /* wrapper 내부에 위치 */
+}
+
+@media (max-width: 1600px) {
+    .carousel-wrapper {
+        padding-left: 40px;
+        padding-right: 40px;
+    }
+
+    .carousel-button.left {
+        left: 10px;
+    }
+
+    .carousel-button.right {
+        right: 10px;
+    }
+}
+
+@media (max-width: 1200px) {
+    .carousel-wrapper {
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+
+    .carousel-button.left {
+        left: 10px;
+    }
+
+    .carousel-button.right {
+        right: 10px;
+    }
+}
+
+@media (max-width: 768px) {
+    .carousel-title {
+        font-size: 1.4rem;
+    }
+
+    .carousel-button {
+        padding: 6px 10px;
+    }
+
+    .carousel-wrapper {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .carousel-button.left {
+        left: 5px;
+    }
+
+    .carousel-button.right {
+        right: 5px;
+    }
+}
