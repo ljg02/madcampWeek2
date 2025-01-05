@@ -16,6 +16,7 @@ body {
   position: relative;
   min-height: 100vh;
   align-items: stretch;
+  padding-top: var(--header-height);
 }
 
 .overlay {
@@ -26,7 +27,7 @@ body {
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.3s ease;
-  z-index: 999; /* 사이드바보다 낮게 설정 */
+  z-index: 900; /* 사이드바보다 낮게 설정 */
 }
 
 .overlay.open {

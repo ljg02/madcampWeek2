@@ -237,3 +237,21 @@ app.post('/api/auth/google-login', async (req, res) => {
 app.listen(PORT, () => {
   console.log(`서버가 실행 중: http://localhost:${PORT}`);
 });
+
+{/* 강의 목록 조회 엔드포인트 */}
+app.get('/api/availableCourses', async (req, res) => {
+  try {
+    const checkQuery = 'SELECT * FROM courses';
+    db.query(checkQuery, (err, results) => {
+      if (err) {
+          console.error(err);
+          res.status(500).send('서버 오류');
+      } else {
+          res.json(results);
+      }
+  });
+  } catch (error) {
+    console.error('강좌 목록 조회 에러', error);
+    res.status(500).json({ success: false, message: '서버 오류.' });
+  }
+});

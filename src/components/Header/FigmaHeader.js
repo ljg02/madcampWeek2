@@ -9,8 +9,12 @@ export const Header = ({ toggleSidebar }) => {
   const { auth, logout } = useContext(AuthContext); // AuthContext 사용
   const navigate = useNavigate();
 
+  const handleLogoClick = async () => {
+    navigate('/');
+  };
+
   const handleLoginClick = async () => {
-      navigate('/login');
+    navigate('/login', { state: { isRegistering: false } });
   };
 
   const handleLogoutClick = async () => {
@@ -18,12 +22,19 @@ export const Header = ({ toggleSidebar }) => {
       navigate('/');
   };
 
+  const handleRegisterClick = async () => {
+    navigate('/login', { state: { isRegistering: true } }); // isRegistering 상태 전달
+  };
+
+  const handleProfileClick = async () => {
+    navigate('/mypage');
+  };
+
   return (
     <div className="header">
       <div className="overlap-group">
         <p className="d">
           <span className="text-wrapper">수능 </span>
-
           <span className="span">D-314</span>
         </p>
 
@@ -32,7 +43,11 @@ export const Header = ({ toggleSidebar }) => {
         ) : (
             <p className="div" onClick={handleLoginClick}>로그인</p>
         )}
-        <p className="item-link">회원가입</p>
+        {auth.isAuthenticated ? (
+          <p className="user-name" onClick={handleProfileClick}> user 님</p>
+        ) : (
+          <p className="item-link" onClick={handleRegisterClick}>회원가입</p>
+        )}
       </div>
 
       {/* <img
@@ -55,7 +70,7 @@ export const Header = ({ toggleSidebar }) => {
 
       <div className="rectangle" />
 
-      <div className="overlap">
+      <div className="overlap" onClick={handleProfileClick} >
         {/* <img
           className="material-symbols"
           alt="Material symbols"
@@ -63,7 +78,7 @@ export const Header = ({ toggleSidebar }) => {
         /> */}
       </div>
 
-      <img className="logo" alt="Logo" src={logo} />
+      <img className="logo" alt="Logo" src={logo} onClick={handleLogoClick}/>
     </div>
   );
 };
