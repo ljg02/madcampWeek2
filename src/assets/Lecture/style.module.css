@@ -1,0 +1,576 @@
+.lecture-all-frame {
+  height: 2162px;
+  overflow: hidden;
+  position: relative;
+  width: 1919px;
+}
+
+.lecture-all-frame .div {
+  height: 932px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1919px;
+}
+
+.lecture-all-frame .overlap {
+  height: 932px;
+  position: relative;
+}
+
+.lecture-all-frame .image {
+  height: 41px;
+  left: 769px;
+  object-fit: cover;
+  position: absolute;
+  top: 41px;
+  width: 381px;
+}
+
+.lecture-all-frame .teacher {
+  height: 230px;
+  left: 469px;
+  position: absolute;
+  top: 676px;
+  width: 978px;
+}
+
+.lecture-all-frame .overlap-group {
+  height: 160px;
+  left: 312px;
+  position: absolute;
+  top: 353px;
+  width: 234px;
+}
+
+.lecture-all-frame .teacher-profile {
+  border: 1px solid #000000;
+  border-radius: 84px / 80px;
+  height: 168px;
+  left: 66px;
+  opacity: 0.6;
+  position: absolute;
+  top: 0;
+  width: 168px;
+}
+
+.lecture-all-frame .subject {
+  background-color: #d9d9d9;
+  border-radius: 30px 30px 0px 30px;
+  height: 51px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 132px;
+}
+
+.lecture-all-frame .teacher-comment {
+  background-color: #d9d9d9;
+  height: 103px;
+  left: 312px;
+  position: absolute;
+  top: 60px;
+  width: 646px;
+}
+
+.lecture-all-frame .video {
+  background-color: #d9d9d9;
+  border-radius: 20px;
+  height: 548px;
+  left: 489px;
+  position: absolute;
+  top: 105px;
+  width: 939px;
+}
+
+.lecture-all-frame .commant-frame {
+  height: 648px;
+  left: 0;
+  position: absolute;
+  top: 932px;
+  width: 1919px;
+}
+
+.lecture-all-frame .view {
+  height: 71px;
+  left: 432px;
+  position: absolute;
+  top: 91px;
+  width: 1058px;
+}
+
+.lecture-all-frame .text-wrapper {
+  color: #000000;
+  font-family: "Inter-Regular", Helvetica;
+  font-size: 25px;
+  font-weight: 400;
+  height: 48px;
+  left: 12px;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  text-align: center;
+  top: 12px;
+  width: 177px;
+}
+
+.lecture-all-frame .line {
+  height: 1px;
+  left: 0;
+  position: absolute;
+  top: 71px;
+  width: 1056px;
+}
+
+.lecture-all-frame .img {
+  height: 1px;
+  left: 0;
+  position: absolute;
+  top: 71px;
+  width: 1056px;
+}
+
+.lecture-all-frame .positive {
+  height: 42px;
+  left: 254px;
+  position: absolute;
+  top: 12px;
+  width: 195px;
+}
+
+.lecture-all-frame .negative {
+  background-color: #42aeec;
+  border-radius: 30px 0px 0px 30px;
+  height: 42px;
+  left: 813px;
+  position: absolute;
+  top: 12px;
+  transform: rotate(180deg);
+  width: 195px;
+}
+
+.lecture-all-frame .group {
+  height: 344px;
+  left: 608px;
+  position: absolute;
+  top: 213px;
+  width: 983px;
+}
+
+.lecture-all-frame .rectangle {
+  border: 1px solid #000000;
+  height: 51px;
+  left: 804px;
+  position: absolute;
+  top: 4px;
+  width: 896px;
+}
+
+.lecture-all-frame .ellipse {
+  border: 1px solid #000000;
+  border-radius: 30px;
+  height: 60px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 60px;
+}
+
+.lecture-all-frame .ellipse-2 {
+  border: 1px solid #000000;
+  border-radius: 30px;
+  height: 60px;
+  left: 0;
+  position: absolute;
+  top: 94px;
+  width: 60px;
+}
+
+.lecture-all-frame .ellipse-3 {
+  border: 1px solid #000000;
+  border-radius: 30px;
+  height: 60px;
+  left: 0;
+  position: absolute;
+  top: 189px;
+  width: 60px;
+}
+
+.lecture-all-frame .ellipse-4 {
+  border: 1px solid #000000;
+  border-radius: 30px;
+  height: 60px;
+  left: 0;
+  position: absolute;
+  top: 284px;
+  width: 60px;
+}
+
+.lecture-all-frame .rectangle-2 {
+  border: 1px solid #000000;
+  height: 51px;
+  left: 87px;
+  position: absolute;
+  top: 99px;
+  width: 896px;
+}
+
+.lecture-all-frame .rectangle-3 {
+  border: 1px solid #000000;
+  height: 51px;
+  left: 87px;
+  position: absolute;
+  top: 194px;
+  width: 896px;
+}
+
+.lecture-all-frame .rectangle-4 {
+  border: 1px solid #000000;
+  height: 51px;
+  left: 87px;
+  position: absolute;
+  top: 288px;
+  width: 896px;
+}
+
+.lecture-all-frame .footer {
+  background-color: transparent;
+  border: 1px solid;
+  height: 489px;
+  left: -2px;
+  position: absolute;
+  top: 1677px;
+  width: 1920px;
+}
+
+.lecture-all-frame .background-border {
+  background-color: #f2f2f2;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  border-color: #e5e5e5;
+  border-top-style: solid;
+  border-top-width: 1px;
+  height: 57px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 1920px;
+}
+
+.lecture-all-frame .strong {
+  color: #2b2b2b;
+  font-family: "Noto Sans KR-Bold", Helvetica;
+  font-size: 14px;
+  font-weight: 700;
+  height: 55px;
+  left: 410px;
+  letter-spacing: 0;
+  line-height: 55px;
+  position: absolute;
+  top: 0;
+  white-space: nowrap;
+  width: 107px;
+}
+
+.lecture-all-frame .group-3 {
+    height: 55px;
+    left: 0;
+    position: absolute;
+    top: 55px;
+    width: 600px;
+}
+
+.lecture-all-frame .icon-2 {
+    height: 14px;
+    left: 208px;
+    position: absolute;
+    top: 20px;
+    width: 14px;
+}
+
+.lecture-all-frame .group-4 {
+    height: 55px;
+    left: 0;
+    position: absolute;
+    top: 110px;
+    width: 600px;
+}
+
+.lecture-all-frame .link {
+    height: 55px;
+    left: 13px;
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    width: 257px;
+}
+
+.lecture-all-frame .text-wrapper-3 {
+    color: #2b2b2b;
+    font-family: "Noto Sans KR-DemiLight", Helvetica;
+    font-size: 12px;
+    font-weight: 300;
+    height: 55px;
+    left: 0;
+    letter-spacing: 0;
+    line-height: 55px;
+    position: absolute;
+    top: 19px;
+    white-space: nowrap;
+    width: 258px;
+}
+
+.lecture-all-frame .icon-3 {
+    height: 14px;
+    left: 276px;
+    position: absolute;
+    top: 20px;
+    width: 14px;
+}
+
+.lecture-all-frame .group-5 {
+    height: 55px;
+    left: 0;
+    position: absolute;
+    top: 165px;
+    width: 600px;
+}
+
+.lecture-all-frame .icon-4 {
+    height: 14px;
+    left: 318px;
+    position: absolute;
+    top: 20px;
+    width: 14px;
+}
+
+.lecture-all-frame .group-6 {
+    height: 55px;
+    left: 0;
+    position: absolute;
+    top: 220px;
+    width: 600px;
+}
+
+.lecture-all-frame .icon-5 {
+    height: 14px;
+    left: 338px;
+    position: absolute;
+    top: 20px;
+    width: 14px;
+}
+
+.lecture-all-frame .group-7 {
+    height: 55px;
+    left: 0;
+    position: absolute;
+    top: 275px;
+    width: 600px;
+}
+
+.lecture-all-frame .group-8 {
+    height: 55px;
+    left: 0;
+    position: absolute;
+    top: 330px;
+    width: 600px;
+}
+
+.lecture-all-frame .vertical-border {
+    border-color: #cdcdcd;
+    border-left-style: solid;
+    border-left-width: 1px;
+    height: 252px;
+    left: 1222px;
+    position: absolute;
+    top: 16px;
+    width: 288px;
+}
+
+.lecture-all-frame .list-2 {
+    height: 25px;
+    left: 36px;
+    position: relative;
+    width: 252px;
+}
+
+.lecture-all-frame .item-link {
+    color: #2b2b2b;
+    font-family: "Noto Sans KR-Bold", Helvetica;
+    font-size: 12px;
+    font-weight: 700;
+    height: 15px;
+    left: 0;
+    letter-spacing: 0;
+    line-height: 25px;
+    position: absolute;
+    top: 4px;
+    white-space: nowrap;
+    width: 58px;
+}
+
+.lecture-all-frame .item-link-2 {
+    color: #2b2b2b;
+    font-family: "Noto Sans KR-Bold", Helvetica;
+    font-size: 12px;
+    font-weight: 700;
+    height: 15px;
+    left: 93px;
+    letter-spacing: 0;
+    line-height: 25px;
+    position: absolute;
+    top: 4px;
+    white-space: nowrap;
+    width: 45px;
+}
+
+.lecture-all-frame .item-link-3 {
+    color: #2b2b2b;
+    font-family: "Noto Sans KR-Bold", Helvetica;
+    font-size: 12px;
+    font-weight: 700;
+    height: 15px;
+    left: 172px;
+    letter-spacing: 0;
+    line-height: 25px;
+    position: absolute;
+    top: 4px;
+    white-space: nowrap;
+    width: 80px;
+}
+
+.lecture-all-frame .list-3 {
+    height: 30px;
+    left: 410px;
+    position: absolute;
+    top: 109px;
+    width: 663px;
+}
+
+.lecture-all-frame .div-wrapper {
+    height: 30px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 52px;
+}
+
+.lecture-all-frame .text-wrapper-4 {
+    color: #000000;
+    font-family: "Noto Sans KR-Medium", Helvetica;
+    font-size: 14px;
+    font-weight: 500;
+    height: 18px;
+    left: 0;
+    letter-spacing: 0;
+    line-height: 30px;
+    position: absolute;
+    top: 5px;
+    white-space: nowrap;
+    width: 81px;
+}
+
+.lecture-all-frame .item-link-4 {
+    height: 30px;
+    left: 115px;
+    position: absolute;
+    top: 0;
+    width: 103px;
+}
+
+.lecture-all-frame .text-wrapper-5 {
+    color: #2512c4;
+    font-family: "Noto Sans KR-Medium", Helvetica;
+    font-size: 14px;
+    font-weight: 500;
+    height: 18px;
+    left: 0;
+    letter-spacing: 0;
+    line-height: 30px;
+    position: absolute;
+    top: 5px;
+    white-space: nowrap;
+    width: 103px;
+}
+
+.lecture-all-frame .item-link-5 {
+    height: 30px;
+    left: 255px;
+    position: absolute;
+    top: 0;
+    width: 52px;
+}
+
+.lecture-all-frame .text-wrapper-6 {
+    color: #000000;
+    font-family: "Noto Sans KR-Medium", Helvetica;
+    font-size: 14px;
+    font-weight: 500;
+    height: 18px;
+    left: 0;
+    letter-spacing: 0;
+    line-height: 30px;
+    position: absolute;
+    top: 5px;
+    white-space: nowrap;
+    width: 52px;
+}
+
+.lecture-all-frame .item-link-wrapper {
+    height: 30px;
+    left: 344px;
+    position: absolute;
+    top: 0;
+    width: 52px;
+}
+
+.lecture-all-frame .item-link-6 {
+    height: 30px;
+    position: relative;
+    width: 57px;
+}
+
+.lecture-all-frame .item-link-7 {
+    height: 30px;
+    left: 433px;
+    position: absolute;
+    top: 0;
+    width: 77px;
+}
+
+.lecture-all-frame .text-wrapper-7 {
+    color: #000000;
+    font-family: "Noto Sans KR-Medium", Helvetica;
+    font-size: 14px;
+    font-weight: 500;
+    height: 18px;
+    left: 0;
+    letter-spacing: 0;
+    line-height: 30px;
+    position: absolute;
+    top: 5px;
+    white-space: nowrap;
+    width: 78px;
+}
+
+.lecture-all-frame .address {
+    height: 108px;
+    left: 410px;
+    position: absolute;
+    top: 159px;
+    width: 663px;
+}
+
+.lecture-all-frame .element-IT-L {
+    color: #a3a3a3;
+    font-family: "Noto Sans KR-DemiLight", Helvetica;
+    font-size: 12px;
+    font-weight: 300;
+    height: 37px;
+    left: 0;
+    letter-spacing: 0;
+    line-height: 21.6px;
+    position: absolute;
+    top: 159px;
+    width: 465px;
+}
