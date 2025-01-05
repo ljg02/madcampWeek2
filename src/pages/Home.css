@@ -1,0 +1,59 @@
+/* Home.css */
+
+.main-container {
+    padding-top: 50px;
+    padding-bottom:50px;
+    padding-left:100px;
+    padding-right:100px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+/* 모의고사 섹션 */
+.mock-exam-section {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.section-title {
+    font-size: 1.5rem;
+    color: #4CAF50;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.mock-exam-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.mock-exam-card {
+    background-color: #fff3e0;
+    border: 1px solid #ffe0b2;
+    border-radius: 10px;
+    padding: 15px;
+    width: 250px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+}
+
+.mock-exam-card:hover {
+    transform: scale(1.05);
+}
+
+.mock-exam-card h3 {
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+    color: #fb8c00;
+}
+
+.mock-exam-card p {
+    font-size: 1rem;
+    color: #555;
+}

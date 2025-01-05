@@ -1,22 +1,53 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./FigmaHeader.css";
+import { useNavigate } from "react-router-dom";
 import { FaBars } from "react-icons/fa";
+import { AuthContext } from "../AuthContext"; // AuthContext import
+import logo from "./studyMateLogo.png";
 
 export const Header = ({ toggleSidebar }) => {
+  const { auth, logout } = useContext(AuthContext); // AuthContext 사용
+  const navigate = useNavigate();
+
+  const handleLogoClick = async () => {
+    navigate('/');
+  };
+
+  const handleLoginClick = async () => {
+    navigate('/login', { state: { isRegistering: false } });
+  };
+
+  const handleLogoutClick = async () => {
+      await logout();
+      navigate('/');
+  };
+
+  const handleRegisterClick = async () => {
+    navigate('/login', { state: { isRegistering: true } }); // isRegistering 상태 전달
+  };
+
+  const handleProfileClick = async () => {
+    navigate('/mypage');
+  };
+
   return (
     <div className="header">
       <div className="overlap-group">
         <p className="d">
           <span className="text-wrapper">수능 </span>
-
           <span className="span">D-314</span>
         </p>
 
-        <div className="list">
-          <div className="item-link">회원가입</div>
-        </div>
-
-        <div className="div">로그인</div>
+        {auth.isAuthenticated ? (
+          <p className="div" onClick={handleLogoutClick}>로그아웃</p>
+        ) : (
+            <p className="div" onClick={handleLoginClick}>로그인</p>
+        )}
+        {auth.isAuthenticated ? (
+          <p className="user-name" onClick={handleProfileClick}> user 님</p>
+        ) : (
+          <p className="item-link" onClick={handleRegisterClick}>회원가입</p>
+        )}
       </div>
 
       {/* <img
@@ -25,8 +56,8 @@ export const Header = ({ toggleSidebar }) => {
         src={verticalBorder}
       /> */}
 
-      <div className="button">
-        <FaBars className="icon" onClick={toggleSidebar} />
+      <div className="button" onClick={toggleSidebar} >
+        <FaBars className="icon" />
       </div>
 
       <div className="item-link-2">Lectures</div>
@@ -39,7 +70,7 @@ export const Header = ({ toggleSidebar }) => {
 
       <div className="rectangle" />
 
-      <div className="overlap">
+      <div className="overlap" onClick={handleProfileClick} >
         {/* <img
           className="material-symbols"
           alt="Material symbols"
@@ -47,7 +78,7 @@ export const Header = ({ toggleSidebar }) => {
         /> */}
       </div>
 
-      {/* <img className="image" alt="Image" src={image2} /> */}
+      <img className="logo" alt="Logo" src={logo} onClick={handleLogoClick}/>
     </div>
   );
 };

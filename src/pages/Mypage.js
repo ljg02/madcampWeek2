@@ -1,54 +1,104 @@
-// pages/Mypage.jsx
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import "./Mypage.css";
 
-const Mypage = () => {
-    return (
-        <div className="container">
-            {/* Header Section */}
-            <div className="header">
-                <span>2026 대학수학능력시험</span>
-                <span className="countdown">2025/11/13 | 03월 05시간 58분 33초</span>
-            </div>
+function Mypage() {
+  const [users, setUsers] = useState([]);
+  const navigate = useNavigate(); // useNavigate 훅 사용
 
-            {/* Main Section */}
-            <div className="main-content">
-                {/* Today's Lecture Section */}
-                <div className="lecture-section">
-                    <h2>Today's Lecture</h2>
-                    <div className="lecture-cards">
-                        <div className="card"></div>
-                        <div className="card"></div>
-                        <div className="card"></div>
-                    </div>
-                    <button className="next-btn">{`>`}</button>
-                </div>
+  useEffect(() => {
+    axios.get(`${process.env.REACT_APP_BACKEND_URL}/testUsers`)
+      .then((response) => {
+        setUsers(response.data);
+      })
+      .catch((error) => {
+        console.error('데이터 요청 실패:', error);
+      });
+  }, []);
 
-                {/* Today's Time Table Section */}
-                <div className="timetable-section">
-                    <h3>Today's Time Table</h3>
-                    <div className="timetable-placeholder"></div>
-                </div>
-            </div>
+  const goToVideoPlayer = () => {
+    navigate('/videoPlayer'); // 프로그래밍 방식으로 이동
+  };
 
-            {/* Progress Section */}
-            <div className="progress-section">
-                <div className="progress-circle"></div>
-                <button className="progress-btn">강의 진행률</button>
-                <button className="progress-btn">공부 시간 분석</button>
-                <button className="progress-btn">-의 한 마디</button>
-                <p>하루 평균 ~시간 공부했습니다</p>
-                <p>잘 하고 있어! 조금 더 분발하자!</p>
-                <input type="range" className="progress-bar" />
-            </div>
+  return (
+    // <div>
+    //   <h1>Home Page</h1>
+    //   <button onClick={goToVideoPlayer}>Go to Video Player</button>
+    //   <ul>
+    //       {users.map((user) => (
+    //       <li key={user.id}>
+    //           {user.name} / {user.age}
+    //       </li>
+    //       ))}
+    //   </ul>
+    // </div>
+    <div className="mypage-container">
+      <div className="lecture-container">
+        {/* 오늘 강의 */}
+        <div className="lectures">
+          {/* <img className="vector" alt="Vector" src={vector} /> */}
 
-            {/* Footer Section */}
-            <div className="footer">
-                <p>고객센터 공지사항 | [보기]</p>
-                <p>© 2026 All Rights Reserved.</p>
-                <p>개인정보처리방침 | 이용약관 | 사이트맵 | 찾아오시는길</p>
-            </div>
+          <div className="today">
+            <div className="rectangle" />
+          </div>
+
+          <div className="rectangle-wrapper">
+            <div className="rectangle" />
+          </div>
+
+          <div className="div-wrapper">
+            <div className="rectangle" />
+          </div>
+
+          <div className="overlap-group">
+            <div className="div" />
+
+            <div className="text-wrapper">Today’s Lectures</div>
+          </div>
         </div>
-    );
-};
+        {/* 스케줄 제안 */}
+        <div className="schedule">
+          {/* <img className="image" alt="Image" src={image} /> */}
+
+          <div className="text1">
+            <div className="text-wrapper">강의 진행률</div>
+          </div>
+
+          <div className="text2">
+            <div className="text-wrapper">공부시간분석</div>
+          </div>
+
+          <div className="text3">
+            <div className="text-wrapper">한 마디</div>
+          </div>
+
+          <div className="line-wrapper">
+            {/* <img className="line" alt="Line" src={line1} /> */}
+          </div>
+
+          <div className="rectangle2">
+            <p className="text-wrapper-2">하루 평균 ~시간 공부했습니다</p>
+          </div>
+
+          <div className="rectangle3">
+            <p className="text-wrapper-2">잘 하고 있어 조금 더 분발하자 !</p>
+          </div>
+        </div>
+      </div>
+
+      <div className="time-table-container">
+        {/* 시간표 */}
+        <div className="time-table">
+          <div className="overlap-group">
+            <div className="text-wrapper">Today’s Time Table</div>
+          </div>
+
+          <div className="rectangle" />
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export default Mypage;

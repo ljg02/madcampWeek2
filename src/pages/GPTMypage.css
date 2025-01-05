@@ -1,0 +1,147 @@
+/* Home.css */
+
+/* Reset some basic styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #f5f5f5;
+    color: #333;
+}
+
+.home-container {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    padding: 20px;
+}
+
+/* Courses Section */
+.courses-section {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.courses-section h2 {
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+    color: #4CAF50;
+}
+
+.courses {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.course-card {
+    background-color: #e8f5e9;
+    border: 1px solid #c8e6c9;
+    border-radius: 10px;
+    padding: 15px;
+    width: 200px;
+    text-align: center;
+    transition: transform 0.2s;
+}
+
+.course-card:hover {
+    transform: scale(1.05);
+}
+
+.course-card h3 {
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+    color: #2e7d32;
+}
+
+.course-card p {
+    font-size: 1rem;
+    color: #555;
+}
+
+.video-button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.video-button:hover {
+    background-color: #45a049;
+}
+
+/* Timetable Section */
+.timetable-section {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.timetable-section h2 {
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+    color: #4CAF50;
+}
+
+.timetable {
+    background-color: #e3f2fd;
+    padding: 15px;
+    border-radius: 10px;
+    min-height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #1565c0;
+    font-size: 1.1rem;
+}
+
+/* Analytics Section */
+.analytics-section {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.analytics-card {
+    background-color: #fff3e0;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.analytics-card h3 {
+    margin-bottom: 15px;
+    font-size: 1.3rem;
+    color: #fb8c00;
+}
+
+.progress-bar {
+    background-color: #ffe0b2;
+    border-radius: 25px;
+    overflow: hidden;
+    height: 20px;
+    margin-bottom: 10px;
+}
+
+.progress {
+    background-color: #fb8c00;
+    height: 100%;
+    border-radius: 25px 0 0 25px;
+}
+
+.analytics-card p {
+    font-size: 1rem;
+    color: #555;
+}
