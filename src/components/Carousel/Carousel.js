@@ -7,33 +7,9 @@ import './Carousel.css';
 const Carousel = ({ items, type, title }) => {
     const carouselRef = useRef(null);
     const [currentSlide, setCurrentSlide] = useState(0);
-    const [itemsPerSlide, setItemsPerSlide] = useState(6); // 화면 너비에 따라 초기값 설정
+    const itemsPerSlide = 4; // 고정된 아이템 수
     const [clonedItems, setClonedItems] = useState([]);
     const [isTransitioning, setIsTransitioning] = useState(false);
-
-    // 화면 크기에 따라 itemsPerSlide 업데이트
-    useEffect(() => {
-        const updateItemsPerSlide = () => {
-            const width = window.innerWidth;
-            if (width < 600) {
-                setItemsPerSlide(1);
-            } else if (width < 900) {
-                setItemsPerSlide(2);
-            } else if (width < 1200) {
-                setItemsPerSlide(3);
-            } else if (width < 1600) {
-                setItemsPerSlide(4);
-            } else if (width < 2000) {
-                setItemsPerSlide(5);
-            } else {
-                setItemsPerSlide(6); // 1920px 이상에서는 6개 표시
-            }
-        };
-
-        updateItemsPerSlide();
-        window.addEventListener('resize', updateItemsPerSlide);
-        return () => window.removeEventListener('resize', updateItemsPerSlide);
-    }, []);
 
     // 클로닝된 아이템 설정
     useEffect(() => {
@@ -46,7 +22,7 @@ const Carousel = ({ items, type, title }) => {
         };
 
         cloneItems();
-    }, [items, itemsPerSlide]);
+    }, [items]);
 
     const totalSlides = items.length;
 
@@ -55,7 +31,7 @@ const Carousel = ({ items, type, title }) => {
         setIsTransitioning(true);
         setCurrentSlide(prev => prev - 1);
     }, [isTransitioning]);
-    
+
     const goToNextSlide = useCallback(() => {
         if (isTransitioning) return;
         setIsTransitioning(true);
@@ -97,7 +73,7 @@ const Carousel = ({ items, type, title }) => {
         const interval = setInterval(() => {
             goToNextSlide();
         }, 5000); // 5초마다 슬라이드 변경
-    
+
         return () => clearInterval(interval);
     }, [goToNextSlide]);
 

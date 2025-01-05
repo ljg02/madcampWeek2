@@ -1,7 +1,8 @@
 /* src/components/Carousel.css */
 
 .carousel-container {
-    margin-bottom: 50px;
+    width: 1720px; /* 고정된 화면 너비 */
+    margin: 0 auto 50px auto; /* 중앙 정렬 */
 }
 
 .carousel-title {
@@ -23,9 +24,9 @@
     display: grid;
     grid-auto-flow: column;
     grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
-    gap: 50px; /* 간격 축소 */
+    gap: 10px; /* 간격 조정 (10px로 축소) */
     transition: transform 0.5s ease-in-out;
-    width: 100%;
+    width: calc(100% + 100px); /* 버튼 공간을 포함한 너비 조정 */
 }
 
 .carousel-button {
@@ -56,55 +57,12 @@
     right: 10px; /* wrapper 내부에 위치 */
 }
 
-@media (max-width: 1600px) {
-    .carousel-wrapper {
-        padding-left: 40px;
-        padding-right: 40px;
-    }
+/* 반응형 관련 미디어 쿼리 제거 */
 
-    .carousel-button.left {
-        left: 10px;
-    }
-
-    .carousel-button.right {
-        right: 10px;
-    }
-}
-
-@media (max-width: 1200px) {
-    .carousel-wrapper {
-        padding-left: 30px;
-        padding-right: 30px;
-    }
-
-    .carousel-button.left {
-        left: 10px;
-    }
-
-    .carousel-button.right {
-        right: 10px;
-    }
-}
-
-@media (max-width: 768px) {
-    .carousel-title {
-        font-size: 1.4rem;
-    }
-
-    .carousel-button {
-        padding: 6px 10px;
-    }
-
-    .carousel-wrapper {
-        padding-left: 20px;
-        padding-right: 20px;
-    }
-
-    .carousel-button.left {
-        left: 5px;
-    }
-
-    .carousel-button.right {
-        right: 5px;
-    }
+/* 고정된 스타일을 위한 추가 조정 (필요시) */
+/* 예: 아이템 크기 조정 */
+.carousel-item {
+    /* 예시: 고정된 너비와 높이 설정 */
+    width: 350px; /* itemsPerSlide가 6이므로 */
+    /* 높이는 콘텐츠에 맞게 조정 */
 }
