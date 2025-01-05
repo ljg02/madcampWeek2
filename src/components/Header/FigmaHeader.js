@@ -35,7 +35,6 @@ export const Header = ({ toggleSidebar }) => {
       <div className="overlap-group">
         <p className="d">
           <span className="text-wrapper">수능 </span>
-
           <span className="span">D-314</span>
         </p>
 
@@ -44,7 +43,11 @@ export const Header = ({ toggleSidebar }) => {
         ) : (
             <p className="div" onClick={handleLoginClick}>로그인</p>
         )}
-        <p className="item-link" onClick={handleRegisterClick}>회원가입</p>
+        {auth.isAuthenticated ? (
+          <p className="user-name" onClick={handleProfileClick}> user 님</p>
+        ) : (
+          <p className="item-link" onClick={handleRegisterClick}>회원가입</p>
+        )}
       </div>
 
       {/* <img
