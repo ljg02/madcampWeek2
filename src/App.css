@@ -16,7 +16,7 @@ body {
   position: relative;
   min-height: 100vh;
   align-items: stretch;
-  padding-top: var(--header-height);
+  margin-top: 160px;
 }
 
 .overlay {

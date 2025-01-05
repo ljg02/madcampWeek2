@@ -12,7 +12,6 @@ import VideoPlayer from './pages/VideoPlayer';
 import Login from './pages/Login';
 import Calendar from './pages/Calendar';
 import Lecture from './pages/Lecture';
-import Mypage from './pages/Mypage';
 import MypageLecture from './pages/MypageLecture';
 import MypageSchedule from './pages/MypageSchedule';
 import PrivateRoute from './components/PrivateRoute'; // PrivateRoute 컴포넌트 생성 필요
