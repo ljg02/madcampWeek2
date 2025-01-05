@@ -41,8 +41,8 @@ export const Header = ({ toggleSidebar }) => {
         src={verticalBorder}
       /> */}
 
-      <div className="button">
-        <FaBars className="icon" onClick={toggleSidebar} />
+      <div className="button" onClick={toggleSidebar} >
+        <FaBars className="icon" />
       </div>
 
       <div className="item-link-2">Lectures</div>

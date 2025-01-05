@@ -15,6 +15,7 @@ body {
   flex: 1;
   position: relative;
   min-height: 100vh;
+  align-items: stretch;
 }
 
 .overlay {
@@ -35,7 +36,7 @@ body {
 
 .main-content {
   flex: 1;
-  padding: 0;
+  min-height:100vh;
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;

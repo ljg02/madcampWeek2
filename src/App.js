@@ -12,6 +12,7 @@ import VideoPlayer from './pages/VideoPlayer';
 import Login from './pages/Login';
 import Calendar from './pages/Calendar';
 import PrivateRoute from './components/PrivateRoute'; // PrivateRoute 컴포넌트 생성 필요
+import Mypage from './pages/Mypage';
 
 const App = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false); // 사이드바 상태 관리
@@ -49,6 +50,7 @@ const App = () => {
               }
             />
             <Route path="/calendar" element={<Calendar />} />
+            <Route path="/mypage" element={<Mypage />} />
             {/* 추가적인 라우트 */}
           </Routes>
         </div>
