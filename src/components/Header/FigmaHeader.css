@@ -4,8 +4,9 @@
     border-bottom-width: 1px;
     border-color: #a3a3a3;
     height: 160px;
-    position: relative;
+    position: fixed;
     width: 1920px;
+    z-index: 1000;
   }
   
   .header .overlap-group {
