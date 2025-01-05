@@ -14,6 +14,7 @@ import Calendar from './pages/Calendar';
 import Lecture from './pages/Lecture';
 import MypageLecture from './pages/MypageLecture';
 import MypageSchedule from './pages/MypageSchedule';
+import MypageNotes from './pages/MypageNotes';
 import PrivateRoute from './components/PrivateRoute'; // PrivateRoute 컴포넌트 생성 필요
 import Mypage from './pages/GPTMypage';
 
@@ -55,6 +56,7 @@ const App = () => {
             <Route path="/calendar" element={<Calendar />} />
             <Route path="/mypage-lecture" element={<MypageLecture />} />
             <Route path="/mypage-schedule" element={<MypageSchedule />} />
+            <Route path="/mypage-notes" element={<MypageNotes />} />
             <Route path="/lecture" element={<Lecture />} />
             <Route
               path="/mypage"

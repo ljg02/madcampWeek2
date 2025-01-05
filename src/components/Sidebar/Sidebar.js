@@ -34,6 +34,9 @@ const Sidebar = ({ isSidebarOpen, toggleSidebar }) => {
           <li className={location.pathname === '/mypage-schedule' ? 'active' : ''}>
             <Link to="/mypage-schedule" onClick={toggleSidebar}>MypageSchedule</Link>
           </li>
+          <li className={location.pathname === '/mypage-notes' ? 'active' : ''}>
+            <Link to="/mypage-notes" onClick={toggleSidebar}>MypageNotes</Link>
+          </li>
         </ul>
       </div>
     </div>
