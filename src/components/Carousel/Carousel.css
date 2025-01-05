@@ -15,7 +15,6 @@
 .carousel-wrapper {
     position: relative;
     overflow: hidden;
-    padding-left: 50px; /* 좌측 버튼 공간 확보 */
     padding-right: 50px; /* 우측 버튼 공간 확보 */
     padding-top: 10px;
 }
