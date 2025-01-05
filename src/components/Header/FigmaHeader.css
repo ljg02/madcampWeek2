@@ -57,6 +57,7 @@
     line-height: 40px;
     text-align: center;
     margin-left: 20px;
+    cursor: pointer;
   }
   
   .header .div {

@@ -10,12 +10,16 @@ export const Header = ({ toggleSidebar }) => {
   const navigate = useNavigate();
 
   const handleLoginClick = async () => {
-      navigate('/login');
+    navigate('/login', { state: { isRegistering: false } });
   };
 
   const handleLogoutClick = async () => {
       await logout();
       navigate('/');
+  };
+
+  const handleRegisterClick = async () => {
+    navigate('/login', { state: { isRegistering: true } }); // isRegistering 상태 전달
   };
 
   return (
@@ -32,7 +36,7 @@ export const Header = ({ toggleSidebar }) => {
         ) : (
             <p className="div" onClick={handleLoginClick}>로그인</p>
         )}
-        <p className="item-link">회원가입</p>
+        <p className="item-link" onClick={handleRegisterClick}>회원가입</p>
       </div>
 
       {/* <img
