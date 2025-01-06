@@ -12,6 +12,7 @@ const CourseDetail = () => {
   const [teacher, setTeacher] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const [isEnrolled, setIsEnrolled] = useState(false); // 강의 신청 상태
 
   const { auth } = useContext(AuthContext); // AuthContext에서 로그인 정보 확인
   const navigate = useNavigate(); // 페이지 이동을 위한 훅
@@ -32,24 +33,63 @@ const CourseDetail = () => {
       }
     };
 
+    // 강의 신청 여부 확인
+    const checkEnrollment = async () => {
+      if (auth.isAuthenticated && auth.user) {
+        try {
+          const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/enrolls/check`, {
+            params: {
+              userId: auth.user.id,
+              courseId: id,
+            },
+          });
+
+          if (response.data.success) {
+            setIsEnrolled(response.data.isEnrolled);
+          } else {
+            console.error('강의 신청 여부 확인 실패:', response.data.message);
+          }
+        } catch (err) {
+          console.error('강의 신청 여부 확인 에러:', err);
+        }
+      }
+    };
+
     fetchCourseDetail();
+    checkEnrollment();
   }, [id]);
 
   // 강의 신청 버튼 클릭 핸들러
   const handleEnroll = async () => {
-    if (auth.isAuthenticated) {
-      try {
-        // 강의 신청 API 요청 (예시: POST 요청)
-        const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/courses/${id}/enroll`, {}, {
-          headers: {
-            Authorization: `Bearer ${auth.token}`, // JWT 토큰 등 인증 정보 포함
-          },
-        });
-        toast.success('강의가 신청되었습니다.');
-        // 추가적인 동작 (예: 페이지 리디렉션 등)을 원하면 여기에 작성
-      } catch (err) {
-        console.error('강의 신청 실패:', err);
-        toast.error('강의 신청에 실패했습니다. 다시 시도해주세요.');
+    if (auth.isAuthenticated && auth.user) {
+      const userId = auth.user.id;
+      const courseId = id;
+      if (!isEnrolled) {
+        try {
+          // 강의 신청 API 요청 (예시: POST 요청)
+          const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/enrolls`, {
+            userId: userId, courseId: courseId,
+          });
+          toast.success('강의가 신청되었습니다.');
+          setIsEnrolled(true);
+        } catch (err) {
+          console.error('강의 신청 실패:', err);
+          toast.error('강의 신청에 실패했습니다. 다시 시도해주세요.');
+        }
+      }
+      else {
+        // 강의 취소
+        try {
+          const response = await axios.delete(`${process.env.REACT_APP_BACKEND_URL}/api/enrolls/cancel`, {
+            data: { userId, courseId },
+          });
+
+          toast.success('강의 신청이 취소되었습니다.');
+          setIsEnrolled(false); // 상태 업데이트
+        } catch (err) {
+          console.error('강의 취소 실패:', err);
+          toast.error('강의 취소에 실패했습니다. 다시 시도해주세요.');
+        }
       }
     } else {
       // 비로그인 상태일 경우 로그인 페이지로 이동
@@ -92,9 +132,9 @@ const CourseDetail = () => {
         </div>
       )}
 
-      {/* 강의 신청 버튼 추가 */}
-      <button className="enroll-button" onClick={handleEnroll}>
-        강의 신청
+      {/* 강의 신청/취소 버튼 추가 */}
+      <button className={`enroll-button ${isEnrolled ? 'cancel' : 'enroll'}`} onClick={handleEnroll}>
+        {isEnrolled ? '강의 취소' : '강의 신청'}
       </button>
 
       {/* 추가적인 세부 정보 표시 가능 */}

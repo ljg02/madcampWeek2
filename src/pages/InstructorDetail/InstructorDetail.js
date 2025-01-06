@@ -1,6 +1,6 @@
 // src/pages/InstructorDetail.js
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './InstructorDetail.css'; // 스타일링 파일 (필요 시 생성)
 
@@ -10,6 +10,11 @@ const InstructorDetail = () => {
   const [courses, setCourses] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const navigate = useNavigate();
+
+  const handleCourseCardClick = (courseId) => {
+    navigate(`/course/${courseId}`);
+  };
 
   useEffect(() => {
     const fetchInstructorDetail = async () => {

@@ -73,12 +73,13 @@
     align-items: center;
     justify-content: center;
     gap: 20px;
+    display: block; /* 블록 레벨 요소로 설정 */
 }
 
 .progress {
     height: 100%;
-    border-radius: 10px;
     background: #FACC15;
+    border-radius: 5px 0 0 5px; /* 왼쪽만 둥글게 */
 }
 
 .todayButton {
@@ -126,38 +127,157 @@
     width: 300px;
 }
 
-.teacherList {
+.enrolledLectures {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 30px;
+    margin-top: 10px;
+}
+
+.enrolledLectureCard {
+    display: flex;
+    width: 600px;
+    background-color: #fafafa;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+.teacherProfileImage {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-right: 20px;
+}
+
+.lectureInfo {
+    flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 20px;
-    width: 100%;
-    margin-top: 20px;
-
-}
-
-.teacherCard {
-    border: 1px solid #ddd;
-    padding: 15px;
-    border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    display: flex;
     justify-content: space-between;
+}
+
+.lectureInfo p {
+    margin: 5px 0;
+}
+
+.progressContainer {
+    display: flex;
     align-items: center;
-    margin-top: 15px;
-    margin-bottom: 10px;
-
+    margin: 10px 0;
 }
 
-.cancelButton {
-    padding: 10px 15px;
-    border: none;
-    border-radius: 8px;
-    background: #ff6b6b;
-    color: white;
-    cursor: pointer;
-    transition: background 0.3s ease;
+.enrolledLectureCard .progressContainer {
+    margin: 10px 0;
 }
 
-.cancelButton:hover {
-    background: #e63946;
+.enrolledLectureCard .progressBar {
+    flex: 1;
+    height: 10px;
+    background-color: #e0e0e0;
+    border-radius: 5px;
+    margin-right: 10px;
+    overflow: hidden;
+}
+
+.enrolledLectureCard .progress {
+    height: 100%;
+    background-color: #4CAF50;
+    border-radius: 5px 0 0 5px;
+}
+
+.noData {
+    text-align: center;
+    font-size: 1.5em;
+    color: #555555;
+    margin-top: 50px;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 1600px) {
+    .lectureCardContainer,
+    .enrolledLectures {
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    }
+}
+
+@media (max-width: 1200px) {
+    .mypageContainer {
+        padding: 20px 40px;
+    }
+
+    .sectionFrame {
+        padding: 20px;
+    }
+
+    .lectureCard,
+    .enrolledLectureCard {
+        padding: 15px;
+    }
+
+    .videoPlayer {
+        height: 180px;
+    }
+
+    .lectureCard h3,
+    .lectureInfo p {
+        font-size: 1.3em;
+    }
+
+    .progressContainer {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .progressBar {
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 5px;
+    }
+
+    .cancelButton {
+        width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .mypageContainer {
+        padding: 10px 20px;
+    }
+
+    .lectureCardContainer,
+    .enrolledLectures {
+        grid-template-columns: 1fr;
+    }
+
+    .videoPlayer {
+        height: 150px;
+    }
+
+    .lectureCard h3,
+    .lectureInfo p {
+        font-size: 1.2em;
+    }
+
+    .progressContainer {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .progressBar {
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 5px;
+    }
+
+    .cancelButton {
+        width: 100%;
+    }
+
+    .teacherProfileImage {
+        width: 80px;
+        height: 80px;
+    }
 }
