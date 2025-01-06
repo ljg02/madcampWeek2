@@ -7,6 +7,11 @@ import "./GPTMypage.css";
 function Mypage() {
   const [users, setUsers] = useState([]);
   const navigate = useNavigate();
+  const [lectures, setLectures] = useState([
+          { title: 'Lecture 1', video: 'lecture1.mp4', progress: 70, remaining: 3 },
+          { title: 'Lecture 2', video: 'lecture2.mp4', progress: 40, remaining: 5 },
+          { title: 'Lecture 3', video: 'lecture3.mp4', progress: 90, remaining: 1 }
+      ]);
 
   useEffect(() => {
     axios.get(`${process.env.REACT_APP_BACKEND_URL}/testUsers`)
@@ -30,12 +35,17 @@ function Mypage() {
           <h2>수강 중인 강의</h2>
           <div className="courses">
             <section className="all-section">
-              {users.map((user) => (
-              <div key={user.id} className="course-card">
-                  <h3>{user.name}</h3>
-                  <p>나이: {user.age}</p>
-              </div>
-              ))}
+                <div className="lectureCardContainer">
+                    {lectures.map((lecture, index) => (
+                        <div key={index} className="lectureCard">
+                            <video className="videoPlayer" controls>
+                                <source src={lecture.video} type="video/mp4" />
+                                Your browser does not support the video tag.
+                            </video>
+                            <h3>{lecture.title}</h3>
+                        </div>
+                    ))}
+                </div>
             </section>
               <button className="video-button" onClick={goToVideoPlayer}>비디오 플레이어로 이동</button>
           </div>
