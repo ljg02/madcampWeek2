@@ -12,7 +12,7 @@ const Home = () => {
 
   useEffect(() => {
     // 신청 가능한 강좌 목록 요청
-    axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/availableCourses`)
+    axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/courses`)
       .then(response => setCourses(response.data))
       .catch(error => {
         console.error('강좌 데이터 요청 실패:', error);
@@ -66,7 +66,7 @@ const Home = () => {
       });
 
     // 강사 목록 요청
-    axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/teachers`)
+    axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/instructors`)
       .then(response => setInstructors(response.data))
       .catch(error => {
         console.error('강사 데이터 요청 실패:', error);
@@ -76,25 +76,25 @@ const Home = () => {
             id: 1,
             name: '김철수',
             subject: '수학',
-            photo: 'https://via.placeholder.com/220x130.png?text=김철수',
+            image: 'https://via.placeholder.com/220x130.png?text=김철수',
           },
           {
             id: 2,
             name: '이영희',
             subject: '영어',
-            photo: 'https://via.placeholder.com/220x130.png?text=이영희',
+            image: 'https://via.placeholder.com/220x130.png?text=이영희',
           },
           {
             id: 3,
             name: '박지훈',
             subject: '프로그래밍',
-            photo: 'https://via.placeholder.com/220x130.png?text=박지훈',
+            image: 'https://via.placeholder.com/220x130.png?text=박지훈',
           },
           {
             id: 4,
             name: '최민지',
             subject: '웹 개발',
-            photo: 'https://via.placeholder.com/220x130.png?text=최민지',
+            image: 'https://via.placeholder.com/220x130.png?text=최민지',
           },
           // 추가적인 강사 데이터...
         ];
@@ -112,25 +112,25 @@ const Home = () => {
             id: 1,
             title: '프로그래밍 입문',
             author: '홍길동',
-            cover: 'https://via.placeholder.com/220x130.png?text=프로그래밍+입문',
+            image: 'https://via.placeholder.com/220x130.png?text=프로그래밍+입문',
           },
           {
             id: 2,
             title: '데이터베이스 설계',
             author: '이순신',
-            cover: 'https://via.placeholder.com/220x130.png?text=데이터베이스+설계',
+            image: 'https://via.placeholder.com/220x130.png?text=데이터베이스+설계',
           },
           {
             id: 3,
             title: '모던 웹 개발',
             author: '박지성',
-            cover: 'https://via.placeholder.com/220x130.png?text=모던+웹+개발',
+            image: 'https://via.placeholder.com/220x130.png?text=모던+웹+개발',
           },
           {
             id: 4,
             title: '안드로이드 앱 개발',
             author: '최민지',
-            cover: 'https://via.placeholder.com/220x130.png?text=안드로이드+앱+개발',
+            image: 'https://via.placeholder.com/220x130.png?text=안드로이드+앱+개발',
           },
           // 추가적인 교재 데이터...
         ];
@@ -181,7 +181,7 @@ const Home = () => {
       <Carousel
         items={instructors}
         type="instructor"
-        title="강사 목록"
+        title="선생님 목록"
       />
 
       {/* 교재 목록 */}

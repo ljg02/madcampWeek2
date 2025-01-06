@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import styles from './MypageSchedule.module.css';
 
 const MypageSchedule = () => {
@@ -9,6 +10,41 @@ const MypageSchedule = () => {
     const [isDragging, setIsDragging] = useState(false);
     const [editMode, setEditMode] = useState({});
     const [canFill, setCanFill] = useState(false);
+    const [diaryEntry, setDiaryEntry] = useState('');
+    const [diaryEditMode, setDiaryEditMode] = useState(false);
+    const [currentDateTime, setCurrentDateTime] = useState('');
+    const API_KEY = 'AIzaSyD1gf8gcigQnddRBoIxAN0dBK2mnn0Tbq0';
+
+    useEffect(() => {
+        const fetchTimeZone = async () => {
+            try {
+                const response = await axios.get(
+                    `https://maps.googleapis.com/maps/api/timezone/json?location=37.5665,126.9780&timestamp=${Math.floor(Date.now() / 1000)}&key=${API_KEY}`
+                );
+
+                if (response.data.status === 'OK') {
+                    const { rawOffset, dstOffset } = response.data;
+                    const totalOffset = rawOffset + dstOffset;
+                    const utcTime = new Date().getTime();
+                    const localTime = new Date(utcTime + totalOffset * 1000);
+                    setCurrentDateTime(localTime.toLocaleString('ko-KR'));
+
+                    setInterval(() => {
+                        const updatedTime = new Date().getTime();
+                        const updatedLocalTime = new Date(updatedTime + totalOffset * 1000);
+                        setCurrentDateTime(updatedLocalTime.toLocaleString('ko-KR'));
+                    }, 1000);
+                }
+            } catch (error) {
+                console.error('시간 정보를 가져오는 중 오류 발생:', error);
+            }
+        };
+
+        fetchTimeZone();
+    }, []);
+    
+    
+    
 
     const handleCellClick = (index) => {
         if (canFill && colorNotes[selectedColor]) {
@@ -69,9 +105,25 @@ const MypageSchedule = () => {
         }
     };
 
+    const handleDiaryChange = (event) => {
+        setDiaryEntry(event.target.value);
+    };
+
+
+    const toggleDiaryEditMode = () => {
+        setDiaryEditMode((prev) => !prev);
+    };
+
+    const handleDiarySave = () => {
+        setDiaryEditMode(false);
+    };
+
+
     return (
         <div className={styles.scheduleContainer}>
-            <h1>2024/01/01</h1>
+            <div className={styles.timeBox}>
+                <h1>{currentDateTime}</h1>
+            </div>
             <div className={styles.timeTableContainer}>
                 <div className={styles.tableGrid}
                      onMouseDown={() => setIsDragging(true)}
@@ -102,7 +154,7 @@ const MypageSchedule = () => {
                 <div className={styles.notesSection}>
                     <h2 className={styles.titleCenter}>Today's Time Table</h2>
                     <div className={styles.addStudyTimeSection}>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '10px'}}>
                             <input
                                 type="color"
                                 value={selectedColor}
@@ -117,10 +169,9 @@ const MypageSchedule = () => {
                                 placeholder="공부 내용을 입력하세요"
                             />
                             <button
-                                className={styles.addButton}
+                                className={styles.fillButton}
                                 onClick={handleAddStudyTime}
-                            >
-                                공부 시간 추가
+                            >공부 시간 추가
                             </button>
                         </div>
                     </div>
@@ -131,7 +182,7 @@ const MypageSchedule = () => {
                                 <input
                                     type="color"
                                     value={color}
-                                    style={{ width: '30px', height: '30px', border: 'none', padding: '0'}}
+                                    style={{ width: '35px', height: '35px', border: 'none', padding: '0'}}
                                     disabled={!editMode[color]}
                                     onChange={(e) => handleColorChange(e.target.value)}
                                 />
@@ -139,6 +190,7 @@ const MypageSchedule = () => {
                                     type="text"
                                     value={colorNotes[color]}
                                     disabled={!editMode[color]}
+                                    style={{ width: '15px', height: '15px', padding: '15px'}}
                                     onChange={(e) => handleNoteChange(color, e.target.value)}
                                 />
                                 <button onClick={() => setCanFill(!canFill)}>{canFill ? '완료' : '채우기'}</button>
@@ -150,6 +202,24 @@ const MypageSchedule = () => {
                                 <button className={styles.deleteButton} onClick={() => handleDeleteStudyTime(color)}>삭제</button>
                             </div>
                         ))}
+                    </div>
+                    <div className={styles.diarySection}>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%'}}>
+                            <h2>오늘의 감정 일기</h2>
+                            {diaryEditMode ? (
+                            <button className={styles.saveButton} onClick={handleDiarySave}>완료</button>
+                        ) : (
+                            <button className={styles.modifyButton} onClick={toggleDiaryEditMode}>수정</button>
+                        )}
+                        </div>
+                        <textarea
+                            value={diaryEntry}
+                            onChange={handleDiaryChange}
+                            placeholder="오늘의 감정을 적어보세요..."
+                            disabled={!diaryEditMode}
+                            style={{ width: '100%', height: '100px' }}
+                        />
+                        
                     </div>
                 </div>
             </div>
