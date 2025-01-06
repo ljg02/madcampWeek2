@@ -66,7 +66,7 @@ const Home = () => {
       });
 
     // 강사 목록 요청
-    axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/teachers`)
+    axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/instructors`)
       .then(response => setInstructors(response.data))
       .catch(error => {
         console.error('강사 데이터 요청 실패:', error);
@@ -181,7 +181,7 @@ const Home = () => {
       <Carousel
         items={instructors}
         type="instructor"
-        title="강사 목록"
+        title="선생님 목록"
       />
 
       {/* 교재 목록 */}

@@ -203,7 +203,7 @@ const Login = () => {
               <div className="input-with-icon">
                 <MdDriveFileRenameOutline className="icon" />
                 <input
-                  type="text"
+                  type="email"
                   id="name"
                   placeholder="이름을 입력하세요"
                   value={name}

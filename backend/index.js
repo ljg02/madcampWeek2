@@ -2,8 +2,8 @@ const express = require('express');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const bodyParser = require('body-parser');
-const mysql = require('mysql2');
 const cors = require('cors');
+const db = require('./db'); // 데이터베이스 연결을 위한 db.js 임포트
 require('dotenv').config();
 const { OAuth2Client } = require('google-auth-library'); // Google Auth 라이브러리 import
 
@@ -15,22 +15,11 @@ app.use((req, res, next) => {
   next();
 });
 
-// MySQL 데이터베이스 연결
-const db = mysql.createConnection({
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME,
-});
-
-db.connect((err) => {
-  if (err) {
-    console.error('MySQL 연결 실패:', err);
-    process.exit(1);
-  } else {
-    console.log('MySQL 연결 성공!');
-  }
-});
+//라우터 연결
+const coursesRouter = require('./routes/courses');
+const instructorsRouter = require('./routes/instructors');
+app.use('/api/courses', coursesRouter);
+app.use('/api/instructors', instructorsRouter);
 
 // 환경 변수
 const JWT_SECRET = process.env.JWT_SECRET || 'default_secret_key';
@@ -233,11 +222,6 @@ app.post('/api/auth/google-login', async (req, res) => {
   }
 });
 
-// 서버 실행
-app.listen(PORT, () => {
-  console.log(`서버가 실행 중: http://localhost:${PORT}`);
-});
-
 {/* 강의 목록 조회 엔드포인트 */}
 app.get('/api/availableCourses', async (req, res) => {
   try {
@@ -257,7 +241,7 @@ app.get('/api/availableCourses', async (req, res) => {
 });
 
 {/* 선생님 목록 조회 엔드포인트 */}
-app.get(`/api/teachers`, async (req, res) => {
+app.get(`/api/instructors`, async (req, res) => {
   try {
     const checkQuery = 'SELECT * FROM teachers';
     db.query(checkQuery, (err, results) => {
@@ -269,15 +253,15 @@ app.get(`/api/teachers`, async (req, res) => {
       }
   });
   } catch (error) {
-    console.error('강좌 목록 조회 에러', error);
+    console.error('선생님 목록 조회 에러', error);
     res.status(500).json({ success: false, message: '서버 오류.' });
   }
 });
 
 {/* 교재 목록 조회 엔드포인트 */}
-app.get(`/api/teachers`, async (req, res) => {
+app.get(`/api/textbooks`, async (req, res) => {
   try {
-    const checkQuery = 'SELECT * FROM teachers';
+    const checkQuery = 'SELECT * FROM textbooks';
     db.query(checkQuery, (err, results) => {
       if (err) {
           console.error(err);
@@ -287,7 +271,12 @@ app.get(`/api/teachers`, async (req, res) => {
       }
   });
   } catch (error) {
-    console.error('강좌 목록 조회 에러', error);
+    console.error('교재 목록 조회 에러', error);
     res.status(500).json({ success: false, message: '서버 오류.' });
   }
+});
+
+// 서버 실행
+app.listen(PORT, () => {
+  console.log(`서버가 실행 중: http://localhost:${PORT}`);
 });
