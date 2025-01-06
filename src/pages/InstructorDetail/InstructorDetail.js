@@ -54,13 +54,15 @@ const InstructorDetail = () => {
       {/* 중간 섹션: 강사가 담당하는 과목들 */}
       <div className="instructor-courses">
         <h2>강좌 목록</h2>
-        <div className="courses-grid">
+        <div className="courses-grid-introductor">
           {courses.map(course => (
-            <div key={course.id} className="course-card">
-              <img src={course.image} alt={course.title} className="course-image" />
-              <div className="course-content">
-                <h3 className="course-title">{course.title}</h3>
-                <p className="course-description">{course.description}</p>
+            <div key={course.id} className="course-card-introductor">
+              <div className="course-content-introductor">
+                <img src={course.image} alt={course.title} className="course-image-introductor" />
+                  <div className="course-content-detail-introductor">
+                    <h3 className="course-title-introductor">{course.title}</h3>
+                    <p className="course-description-introductor">{course.description}</p>
+                  </div>
               </div>
             </div>
           ))}

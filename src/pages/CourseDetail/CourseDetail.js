@@ -76,13 +76,14 @@ const CourseDetail = () => {
 
   return (
     <div className="course-detail-container">
-      <h1 className="course-title">{course.title}</h1>
-      <img src={course.image} alt={course.title} className="course-image" />
-      <p className="course-description">{course.description}</p>
-
+      <div className="course-book-content">
+          <h1 className="course-title-course">{course.title}</h1>
+          <img src={course.image} alt={course.title} className="course-image-coursedetail" />
+          <p className="course-description">{course.description}</p>
+      </div>
       {teacher && (
         <div className="teacher-info">
-          <h2>담당 선생님</h2>
+          {/* <h2>담당 선생님</h2> */}
           <img src={teacher.image} alt={teacher.name} className="teacher-image" />
           <div className="info-container">
             <p className="teacher-name">{teacher.name}</p>
