@@ -255,3 +255,39 @@ app.get('/api/availableCourses', async (req, res) => {
     res.status(500).json({ success: false, message: '서버 오류.' });
   }
 });
+
+{/* 선생님 목록 조회 엔드포인트 */}
+app.get(`/api/teachers`, async (req, res) => {
+  try {
+    const checkQuery = 'SELECT * FROM teachers';
+    db.query(checkQuery, (err, results) => {
+      if (err) {
+          console.error(err);
+          res.status(500).send('서버 오류');
+      } else {
+          res.json(results);
+      }
+  });
+  } catch (error) {
+    console.error('강좌 목록 조회 에러', error);
+    res.status(500).json({ success: false, message: '서버 오류.' });
+  }
+});
+
+{/* 교재 목록 조회 엔드포인트 */}
+app.get(`/api/teachers`, async (req, res) => {
+  try {
+    const checkQuery = 'SELECT * FROM teachers';
+    db.query(checkQuery, (err, results) => {
+      if (err) {
+          console.error(err);
+          res.status(500).send('서버 오류');
+      } else {
+          res.json(results);
+      }
+  });
+  } catch (error) {
+    console.error('강좌 목록 조회 에러', error);
+    res.status(500).json({ success: false, message: '서버 오류.' });
+  }
+});
