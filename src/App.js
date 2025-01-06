@@ -10,7 +10,6 @@ import Footer from "./components/Footer";
 import Home from './pages/Home';
 import VideoPlayer from './pages/VideoPlayer';
 import Login from './pages/Login';
-import Calendar from './pages/Calendar';
 import Lecture from './pages/Lecture';
 import MypageLecture from './pages/MypageLecture';
 import MypageSchedule from './pages/MypageSchedule';
@@ -57,7 +56,6 @@ const App = () => {
                 </PrivateRoute>
               }
             />
-            <Route path="/calendar" element={<Calendar />} />
             <Route path="/mypage-lecture" element={<MypageLecture />} />
             <Route path="/mypage-schedule" element={<MypageSchedule />} />
             <Route path="/mypage-notes" element={<MypageNotes />} />
