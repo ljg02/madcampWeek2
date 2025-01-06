@@ -1,25 +1,63 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { useParams } from 'react-router-dom';
+import axios from 'axios';
 import styles from "./MypageLecture.module.css";
+import { AuthContext } from '../components/AuthContext'; // AuthContext import
 
 const MypageLecture = () => {
+    const { id } = useParams(); // URL 파라미터에서 course ID 가져오기
     const [lectures, setLectures] = useState([
-        { title: 'Lecture 1', video: 'lecture1.mp4', progress: 70, remaining: 3 },
-        { title: 'Lecture 2', video: 'lecture2.mp4', progress: 40, remaining: 5 },
-        { title: 'Lecture 3', video: 'lecture3.mp4', progress: 90, remaining: 1 }
+        {course_id : 1, 
+         course_title : '영어1', 
+         course_image : 'https://via.placeholder.com/220x130.png?text=ENG',
+         progress : 30,
+         teacher_name : '이명학',
+         teacher_subject : '영어',
+         teacher_profile_image : 'https://via.placeholder.com/220x130.png?text=이명학'},
+         {course_id : 2, 
+            course_title : '수학1', 
+            course_image : 'https://via.placeholder.com/220x130.png?text=MATH',
+            progress : 80,
+            teacher_name : '현우진',
+            teacher_subject : '수학',
+            teacher_profile_image : 'https://via.placeholder.com/220x130.png?text=현우진'}
     ]);
     const [currentLecture, setCurrentLecture] = useState(0);
 
-    const [teachers, setTeachers] = useState([
-        { name: 'John Doe', subject: 'Math', lecture: 'Algebra Basics', profileImage: 'john_doe.jpg' },
-        { name: 'Jane Smith', subject: 'Science', lecture: 'Physics 101', profileImage: 'jane_smith.jpg' }
-    ]);
+    const exampleLectures = [{ title: 'Lecture 1', video: 'lecture1.mp4', progress: 70, remaining: 3 },
+        { title: 'Lecture 2', video: 'lecture2.mp4', progress: 40, remaining: 5 },
+        { title: 'Lecture 3', video: 'lecture3.mp4', progress: 90, remaining: 1 }];
 
-    const handleCancelEnrollment = (index) => {
-        const updatedTeachers = teachers.filter((_, i) => i !== index);
-        setTeachers(updatedTeachers);
+    useEffect(() => {
+        // 신청한 강좌 목록 요청
+        const fetchCourseDetail = async () => {
+            try {
+                const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/enrolls/user/${id}`);
+                setLectures(response.data);
+            } catch (err) {
+                console.error('신청 과목 정보 요청 실패:', err);
+            }
+        };
+
+        fetchCourseDetail();
+    }, [id]);
+
+    const handleCancelEnrollment = async (courseId) => {
+        try {
+            await axios.delete(`${process.env.REACT_APP_BACKEND_URL}/api/enrolls/cancel`, {
+                data: { userId: id, courseId },
+            });
+
+            // 강의 목록에서 취소된 강의 제거
+            setLectures(prevLectures => prevLectures.filter(lecture => lecture.course_id !== courseId));
+            alert('강의 신청이 취소되었습니다.');
+        } catch (err) {
+            console.error('강의 신청 취소 실패:', err);
+            alert('강의 신청을 취소하는 데 실패했습니다.');
+        }
     };
 
-    const remainingLectures = lectures.filter(lecture => lecture.remaining > 0).length;
+    //const remainingLectures = lectures.filter(lecture => lecture.remaining > 0).length;
 
     return (
         <div className={styles.mypageContainer}>
@@ -29,7 +67,7 @@ const MypageLecture = () => {
                 <h1>매일 한 걸음, 꾸준한 배움의 시작</h1>
                 <button className={styles.todayButton}>Today's Lectures</button>
                 <div className={styles.lectureCardContainer}>
-                    {lectures.map((lecture, index) => (
+                    {exampleLectures.map((lecture, index) => (
                         <div key={index} className={styles.lectureCard}>
                             <video className={styles.videoPlayer} controls>
                                 <source src={lecture.video} type="video/mp4" />
@@ -46,14 +84,14 @@ const MypageLecture = () => {
                         <div className={styles.statBox}>강의 진행률</div>
                         <div className={styles.progressBarContainer}>
                             <div className={styles.progressBar}>
-                                <div className={styles.progress} style={{ width: `${lectures[currentLecture].progress}%` }}></div>
+                                <div className={styles.progress} style={{ width: `${exampleLectures[currentLecture].progress}%` }}></div>
                             </div>
                         </div>
                     </div>
                     <div className={styles.progressRow}>
                         <div className={styles.statBox}>남은 강의</div>
                         <div className={styles.notificationBox}>
-                            오늘의 강의 {remainingLectures}개 중 {lectures[currentLecture].remaining}개 남았습니다.
+                            오늘의 강의 remaining개 중 {exampleLectures[currentLecture].remaining}개 남았습니다.
                         </div>
                     </div>
                 </div>
@@ -62,16 +100,30 @@ const MypageLecture = () => {
             {/* Enrolled Teachers Section with Bounding Box */}
             <div className={styles.sectionFrame}>
                 <h2>내가 수강신청한 강의</h2>
-                <div className={styles.teacherList}>
-                    {teachers.map((teacher, index) => (
-                        <div key={index} className={styles.teacherCard} style={{ border: '1px solid #ddd', padding: '10px', borderRadius: '10px' }}>
-                            <img src={teacher.profileImage} alt={teacher.name} className={styles.teacherProfileImage} />
-                            <p><strong>{teacher.name}</strong></p>
-                            <p>{teacher.subject} - {teacher.lecture}</p>
-                            <button className={styles.cancelButton} onClick={() => handleCancelEnrollment(index)}>수강 취소</button>
-                        </div>
-                    ))}
-                </div>
+                {lectures.length > 0 ? (
+                    <div className={styles.enrolledLectures}>
+                        {lectures.map((lecture) => (
+                            <div key={lecture.course_id} className={styles.enrolledLectureCard}>
+                                <img src={lecture.teacher_profile_image} alt={lecture.teacher_name} className={styles.teacherProfileImage} />
+                                <div className={styles.lectureInfo}>
+                                    <p><strong>{lecture.course_title}</strong></p>
+                                    <p>{lecture.teacher_subject} - {lecture.teacher_name}</p>
+                                    <div className={styles.progressContainer}>
+                                        <div className={styles.progressBar}>
+                                            <div className={styles.progress} style={{ width: `${lecture.progress}%` }}></div>
+                                        </div>
+                                        <span>{lecture.progress}% 완료</span>
+                                    </div>
+                                    <button className={styles.cancelButton} onClick={() => handleCancelEnrollment(lecture.course_id)}>
+                                        수강 취소
+                                    </button>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                ) : (
+                    <div className={styles.noData}>신청한 강의가 없습니다.</div>
+                )}
             </div>
         </div>
     );
