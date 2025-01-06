@@ -96,6 +96,27 @@
     font-size: 1.2rem;
     color: #7f8c8d;
   }
+
+  /* 강의 신청 버튼 스타일 */
+.enroll-button {
+  display: block;
+  width: 200px;
+  margin: 20px auto 50px auto;
+  padding: 15px 0;
+  font-size: 1.2em;
+  color: #ffffff;
+  background-color: #333333;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.enroll-button:hover {
+  background-color: #555555;
+  transform: translateY(-3px);
+}
+
   
   /* 로딩, 에러, 데이터 없음 상태 스타일 */
   .loading,
