@@ -66,7 +66,7 @@ const Home = () => {
       });
 
     // 강사 목록 요청
-    axios.get(`${process.env.REACT_APP_BACKEND_URL}/instructors`)
+    axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/teachers`)
       .then(response => setInstructors(response.data))
       .catch(error => {
         console.error('강사 데이터 요청 실패:', error);
