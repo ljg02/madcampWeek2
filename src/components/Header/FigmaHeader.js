@@ -56,7 +56,7 @@ export const Header = ({ toggleSidebar }) => {
             <p className="div" onClick={handleLoginClick}>로그인</p>
         )}
         {auth.isAuthenticated ? (
-          <p className="user-name" onClick={handleProfileClick}> user 님</p>
+          <p className="user-name" onClick={handleProfileClick}> {auth.user.name} 님</p>
         ) : (
           <p className="item-link" onClick={handleRegisterClick}>회원가입</p>
         )}

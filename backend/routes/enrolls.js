@@ -8,6 +8,7 @@ router.post('/', async (req, res) => {
     const { userId, courseId } = req.body;
 
     if (!userId || !courseId) {
+        console.log(userId);
         return res.status(400).json({ message: 'userId와 courseId가 필요합니다.' });
     }
 
@@ -29,6 +30,28 @@ router.post('/', async (req, res) => {
     } catch (err) {
         console.error('강의 신청 에러:', err);
         res.status(500).json({ message: '서버 오류가 발생했습니다.' });
+    }
+});
+
+// 사용자 강의 신청 여부 확인
+router.get('/check', async (req, res) => {
+    const { userId, courseId } = req.query;
+
+    if (!userId || !courseId) {
+        return res.status(400).json({ success: false, message: 'userId와 courseId가 필요합니다.' });
+    }
+
+    try {
+        const [rows] = await db.query('SELECT * FROM enrolls WHERE user_id = ? AND course_id = ?', [userId, courseId]);
+
+        if (rows.length > 0) {
+            return res.status(200).json({ success: true, isEnrolled: true });
+        } else {
+            return res.status(200).json({ success: true, isEnrolled: false });
+        }
+    } catch (error) {
+        console.error('강의 신청 여부 확인 에러:', error);
+        return res.status(500).json({ success: false, message: '서버 오류가 발생했습니다.' });
     }
 });
 

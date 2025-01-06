@@ -2,102 +2,102 @@
 
 /* 기본 레이아웃 설정 */
 .course-detail-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 40px 20px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: #333;
-  }
-  
-  /* 과목 제목 스타일 */
-  .course-title {
-    font-size: 2.5rem;
-    margin-bottom: 20px;
-    text-align: center;
-    color: #2c3e50;
-    transition: color 0.3s ease;
-  }
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+}
 
-  .course-title:hover {
-    color: #2980b9;
-  }
-  
-  /* 과목 이미지 스타일 */
-  .course-image {
-    width: 100%;
-    max-height: 400px;
-    object-fit: cover;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    margin-bottom: 30px;
-    transition: transform 0.3s ease;
-  }
+/* 과목 제목 스타일 */
+.course-title {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  text-align: center;
+  color: #2c3e50;
+  transition: color 0.3s ease;
+}
 
-  .course-image:hover {
-    transform: scale(1.05);
-  }
-  
-  /* 과목 설명 스타일 */
-  .course-description {
-    font-size: 1.2rem;
-    line-height: 1.6;
-    margin-bottom: 40px;
-    text-align: justify;
-  }
-  
-  /* 담당 선생님 정보 섹션 */
-  .teacher-info {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    background-color: #f9f9f9;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  }
-  
-  /* 선생님 정보 제목 */
-  .teacher-info h2 {
-    width: 100%;
-    font-size: 2rem;
-    margin-bottom: 20px;
-    color: #2c3e50;
-  }
-  
-  /* 선생님 사진 스타일 */
-  .teacher-image {
-    flex: 1 1 200px;
-    max-width: 200px;
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-    border-radius: 50%;
-    margin-right: 30px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  }
+.course-title:hover {
+  color: #2980b9;
+}
 
-  .info-container {
-    display:flex;
-    flex-direction: column;
-  }
-  
-  /* 선생님 이름 및 과목 정보 */
-  .teacher-details {
-    flex: 2 1 300px;
-  }
-  
-  .teacher-name {
-    font-size: 1.8rem;
-    margin-bottom: 10px;
-    color: #34495e;
-  }
-  
-  .teacher-subject {
-    font-size: 1.2rem;
-    color: #7f8c8d;
-  }
+/* 과목 이미지 스타일 */
+.course-image {
+  width: 100%;
+  max-height: 400px;
+  object-fit: cover;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
+  transition: transform 0.3s ease;
+}
 
-  /* 강의 신청 버튼 스타일 */
+.course-image:hover {
+  transform: scale(1.05);
+}
+
+/* 과목 설명 스타일 */
+.course-description {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  margin-bottom: 40px;
+  text-align: justify;
+}
+
+/* 담당 선생님 정보 섹션 */
+.teacher-info {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  background-color: #f9f9f9;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* 선생님 정보 제목 */
+.teacher-info h2 {
+  width: 100%;
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #2c3e50;
+}
+
+/* 선생님 사진 스타일 */
+.teacher-image {
+  flex: 1 1 200px;
+  max-width: 200px;
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-right: 30px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.info-container {
+  display: flex;
+  flex-direction: column;
+}
+
+/* 선생님 이름 및 과목 정보 */
+.teacher-details {
+  flex: 2 1 300px;
+}
+
+.teacher-name {
+  font-size: 1.8rem;
+  margin-bottom: 10px;
+  color: #34495e;
+}
+
+.teacher-subject {
+  font-size: 1.2rem;
+  color: #7f8c8d;
+}
+
+/* 강의 신청 버튼 스타일 */
 .enroll-button {
   display: block;
   width: 200px;
@@ -112,54 +112,70 @@
   transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-.enroll-button:hover {
-  background-color: #555555;
-  transform: translateY(-3px);
+.enroll-button.enroll {
+  background-color: #6a11cb;
+  color: white;
 }
 
-  
-  /* 로딩, 에러, 데이터 없음 상태 스타일 */
-  .loading,
-  .error,
-  .no-data {
+.enroll-button.enroll:hover {
+  background-color: #2575fc;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.enroll-button.cancel {
+  background-color: #ff4d4d;
+  color: white;
+}
+
+.enroll-button.cancel:hover {
+  background-color: #cc0000;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+
+/* 로딩, 에러, 데이터 없음 상태 스타일 */
+.loading,
+.error,
+.no-data {
+  text-align: center;
+  font-size: 1.5rem;
+  margin-top: 100px;
+  color: #7f8c8d;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+  .teacher-info {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .teacher-image {
+    margin-right: 0;
+    margin-bottom: 20px;
+  }
+
+  .teacher-details {
     text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .course-title {
+    font-size: 2rem;
+  }
+
+  .course-description {
+    font-size: 1rem;
+  }
+
+  .teacher-name {
     font-size: 1.5rem;
-    margin-top: 100px;
-    color: #7f8c8d;
   }
-  
-  /* 반응형 디자인 */
-  @media (max-width: 768px) {
-    .teacher-info {
-      flex-direction: column;
-      align-items: center;
-    }
-  
-    .teacher-image {
-      margin-right: 0;
-      margin-bottom: 20px;
-    }
-  
-    .teacher-details {
-      text-align: center;
-    }
+
+  .teacher-subject {
+    font-size: 1rem;
   }
-  
-  @media (max-width: 480px) {
-    .course-title {
-      font-size: 2rem;
-    }
-  
-    .course-description {
-      font-size: 1rem;
-    }
-  
-    .teacher-name {
-      font-size: 1.5rem;
-    }
-  
-    .teacher-subject {
-      font-size: 1rem;
-    }
-  }
-  
+}
