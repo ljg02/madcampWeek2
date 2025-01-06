@@ -29,15 +29,15 @@ body {
 }
 
 .courses-section h2 {
-    margin-bottom: 20px;
     font-size: 1.5rem;
     color: #4CAF50;
 }
 
 .courses {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
     gap: 20px;
+    align-items: flex-start;
 }
 
 .course-card {
@@ -65,8 +65,38 @@ body {
     color: #555;
 }
 
-.video-button {
+.lectureCardContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
     margin-top: 20px;
+    margin-bottom: 20px;
+
+}
+
+.lectureCard {
+    flex: 1 1 300px;
+    max-width: 300px;
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    box-sizing: border-box;
+    margin-bottom: 15px;
+
+}
+
+.videoPlayer {
+    width: 100%;
+    border-radius: 12px;
+    margin-bottom: 20px;
+}
+
+.video-button {
+    margin-top: 10px;
     padding: 10px 20px;
     background-color: #4CAF50;
     color: white;
@@ -74,6 +104,8 @@ body {
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s;
+    align-self: center;
+
 }
 
 .video-button:hover {
@@ -107,10 +139,37 @@ body {
 }
 
 /* Analytics Section */
-.analytics-section {
-    display: grid;
+.all-section {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 20px;
+    padding: 20px;
+    border-radius: 10px;
+    align-items: stretch;
+}
+
+
+.analytics-section1 {
+    display: flex;
+    flex-direction: column;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.analytics-section2 {
+    display: flex;
+    flex-direction: column;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
 }
 
 .analytics-card {
@@ -145,3 +204,4 @@ body {
     font-size: 1rem;
     color: #555;
 }
+
