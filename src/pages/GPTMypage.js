@@ -24,44 +24,49 @@ function Mypage() {
 
   return (
     <div className="home-container">
-      <section className="courses-section">
-      <h2>수강 중인 강의</h2>
-      <div className="courses">
-          {users.map((user) => (
-          <div key={user.id} className="course-card">
-              <h3>{user.name}</h3>
-              <p>나이: {user.age}</p>
+      <section className="all-section">
+        <section className="analytics-section1">
+          <section className="courses-section">
+          <h2>수강 중인 강의</h2>
+          <div className="courses">
+            <section className="all-section">
+              {users.map((user) => (
+              <div key={user.id} className="course-card">
+                  <h3>{user.name}</h3>
+                  <p>나이: {user.age}</p>
+              </div>
+              ))}
+            </section>
+              <button className="video-button" onClick={goToVideoPlayer}>비디오 플레이어로 이동</button>
           </div>
-          ))}
-          <button className="video-button" onClick={goToVideoPlayer}>비디오 플레이어로 이동</button>
-      </div>
-      </section>
-
-      <section className="timetable-section">
-      <h2>오늘의 시간표</h2>
-      <div className="timetable">
-          {/* 시간표 내용을 여기에 추가 */}
-          <p>시간표 내용이 여기에 표시됩니다.</p>
-      </div>
-      </section>
-
-      <section className="analytics-section">
-      <div className="analytics-card">
-          <h3>강의 진행률</h3>
-          <div className="progress-bar">
-          <div className="progress" style={{ width: '70%' }}></div>
+          </section>
+          <section className="analytics-section2">
+          <div className="analytics-card">
+              <h3>강의 진행률</h3>
+              <div className="progress-bar">
+              <div className="progress" style={{ width: '70%' }}></div>
+              </div>
+              <p>70% 완료</p>
           </div>
-          <p>70% 완료</p>
-      </div>
-      <div className="analytics-card">
-          <h3>공부 시간 분석</h3>
-          <p>하루 평균 3시간 공부했습니다.</p>
-      </div>
-      <div className="analytics-card">
-          <h3>피드백</h3>
-          <p>잘 하고 있어요! 조금 더 분발해봐요!</p>
-      </div>
-      </section>
+          <div className="analytics-card">
+              <h3>공부 시간 분석</h3>
+              <p>하루 평균 3시간 공부했습니다.</p>
+          </div>
+          <div className="analytics-card">
+              <h3>피드백</h3>
+              <p>잘 하고 있어요! 조금 더 분발해봐요!</p>
+          </div>
+          </section>
+        </section>
+
+        <section className="timetable-section">
+        <h2>오늘의 시간표 </h2>
+        <div className="timetable">
+            {/* 시간표 내용을 여기에 추가 */}
+            <p>시간표 내용이 여기에 표시됩니다.</p>
+        </div>
+        </section>
+        </section>
     </div>
   );
 }
