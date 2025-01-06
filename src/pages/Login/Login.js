@@ -5,7 +5,7 @@ import './Login.css'; // 스타일링 파일 import
 import { useNavigate, useLocation } from 'react-router-dom'; // 페이지 전환을 위한 훅
 import { FaEnvelope, FaLock, FaEye, FaEyeSlash } from 'react-icons/fa'; // 아이콘 import
 import { MdDriveFileRenameOutline } from "react-icons/md";
-import { AuthContext } from '../components/AuthContext'; // AuthContext import
+import { AuthContext } from '../../components/AuthContext'; // AuthContext import
 import { toast } from 'react-toastify'; // toast import
 import { GoogleLogin } from '@react-oauth/google';
 import { jwtDecode } from 'jwt-decode'; // 토큰 디코딩을 위한 라이브러리

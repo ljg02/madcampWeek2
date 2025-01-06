@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './Home.css';
-import Carousel from '../components/Carousel';
+import Carousel from '../../components/Carousel';
 
 const Home = () => {
   const [courses, setCourses] = useState([]);
