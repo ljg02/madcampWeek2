@@ -57,6 +57,8 @@ const Login = () => {
         password,
       });
 
+      console.log('로그인 응답:', response.data);
+
       if (response.data.success) {
         // JWT를 Local Storage에 저장하고 AuthContext 업데이트
         await login(response.data.token, response.data.user); // user 정보가 있다면 전달
@@ -203,7 +205,7 @@ const Login = () => {
               <div className="input-with-icon">
                 <MdDriveFileRenameOutline className="icon" />
                 <input
-                  type="email"
+                  type="text"
                   id="name"
                   placeholder="이름을 입력하세요"
                   value={name}

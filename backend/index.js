@@ -1,11 +1,8 @@
 const express = require('express');
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const db = require('./db'); // 데이터베이스 연결을 위한 db.js 임포트
 require('dotenv').config();
-const { OAuth2Client } = require('google-auth-library'); // Google Auth 라이브러리 import
 
 const app = express();
 app.use(bodyParser.json());
@@ -20,20 +17,19 @@ const coursesRouter = require('./routes/courses');
 const instructorsRouter = require('./routes/instructors');
 const textbooksRouter = require('./routes/textbooks');
 const authRouter = require('./routes/auth');
+const enrollsRouter = require('./routes/enrolls');
+const videosRouter = require('./routes/videos');
 
 app.use('/api/courses', coursesRouter);
 app.use('/api/instructors', instructorsRouter);
 app.use('/api/textbooks', textbooksRouter);
 app.use('/api/auth', authRouter);
+app.use('/api/enrolls', enrollsRouter);
+app.use('/api/videos', videosRouter);
 
 
 // 환경 변수
-const JWT_SECRET = process.env.JWT_SECRET || 'default_secret_key';
 const PORT = process.env.PORT || 5001;
-const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
-
-// Google OAuth 클라이언트 초기화
-const client = new OAuth2Client(GOOGLE_CLIENT_ID);
 
 // 테스트 API
 app.get('/api/test', async (req, res) => {

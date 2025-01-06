@@ -30,6 +30,18 @@ export const Header = ({ toggleSidebar }) => {
     navigate('/mypage');
   };
 
+  const handleLectureClick = async () => {
+    navigate('/mypage-lecture');
+  };
+
+  const handleScheduleClick = async () => {
+    navigate('/mypage-schedule');
+  };
+
+  const handleNoteClick = async () => {
+    navigate('/mypage-notes');
+  };
+
   return (
     <div className="header">
       <div className="overlap-group">
@@ -44,7 +56,7 @@ export const Header = ({ toggleSidebar }) => {
             <p className="div" onClick={handleLoginClick}>로그인</p>
         )}
         {auth.isAuthenticated ? (
-          <p className="user-name" onClick={handleProfileClick}> user 님</p>
+          <p className="user-name" onClick={handleProfileClick}> {auth.user.name} 님</p>
         ) : (
           <p className="item-link" onClick={handleRegisterClick}>회원가입</p>
         )}
@@ -60,11 +72,11 @@ export const Header = ({ toggleSidebar }) => {
         <FaBars className="icon" />
       </div>
 
-      <div className="item-link-2">Lectures</div>
+      <div className="item-link-2" onClick={handleLectureClick}>Lectures</div>
 
-      <div className="item-link-3">Schedule</div>
+      <div className="item-link-3" onClick={handleScheduleClick}>Schedule</div>
 
-      <div className="item-link-4">Notes</div>
+      <div className="item-link-4" onClick={handleNoteClick}>Notes</div>
 
       <div className="item-link-5">Grades</div>
 
