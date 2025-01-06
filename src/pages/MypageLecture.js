@@ -1,11 +1,13 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import styles from "./MypageLecture.module.css";
 import { AuthContext } from '../components/AuthContext'; // AuthContext import
+import { toast } from 'react-toastify';
 
 const MypageLecture = () => {
-    const { id } = useParams(); // URL 파라미터에서 course ID 가져오기
+    const { auth } = useContext(AuthContext);
+    const userId = auth.user ? auth.user.id : null;
+
     const [lectures, setLectures] = useState([
         {course_id : 1, 
          course_title : '영어1', 
@@ -29,31 +31,36 @@ const MypageLecture = () => {
         { title: 'Lecture 3', video: 'lecture3.mp4', progress: 90, remaining: 1 }];
 
     useEffect(() => {
+        console.log('userId : ', userId);
+        console.log('user');
+        if (!userId) return; // 사용자 ID가 없으면 요청하지 않음
+
         // 신청한 강좌 목록 요청
         const fetchCourseDetail = async () => {
             try {
-                const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/enrolls/user/${id}`);
+                const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/enrolls/user/${userId}`);
                 setLectures(response.data);
             } catch (err) {
                 console.error('신청 과목 정보 요청 실패:', err);
+                //toast.error('신청한 강의 정보를 불러오지 못했습니다.');
             }
         };
 
         fetchCourseDetail();
-    }, [id]);
+    }, [userId]);
 
     const handleCancelEnrollment = async (courseId) => {
         try {
             await axios.delete(`${process.env.REACT_APP_BACKEND_URL}/api/enrolls/cancel`, {
-                data: { userId: id, courseId },
+                data: { userId: userId, courseId },
             });
 
             // 강의 목록에서 취소된 강의 제거
             setLectures(prevLectures => prevLectures.filter(lecture => lecture.course_id !== courseId));
-            alert('강의 신청이 취소되었습니다.');
+            toast.success('강의 신청이 취소되었습니다.');
         } catch (err) {
             console.error('강의 신청 취소 실패:', err);
-            alert('강의 신청을 취소하는 데 실패했습니다.');
+            toast.error('강의 신청을 취소하는 데 실패했습니다.');
         }
     };
 
@@ -100,6 +107,7 @@ const MypageLecture = () => {
             {/* Enrolled Teachers Section with Bounding Box */}
             <div className={styles.sectionFrame}>
                 <h2>내가 수강신청한 강의</h2>
+                {/* <span>접속 유저 : {userId}</span> */}
                 {lectures.length > 0 ? (
                     <div className={styles.enrolledLectures}>
                         {lectures.map((lecture) => (

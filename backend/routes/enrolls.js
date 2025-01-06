@@ -3,6 +3,35 @@ const express = require('express');
 const router = express.Router();
 const db = require('../db'); // 데이터베이스 연결 모듈
 
+// 강의 신청하기
+router.post('/', async (req, res) => {
+    const { userId, courseId } = req.body;
+
+    if (!userId || !courseId) {
+        return res.status(400).json({ message: 'userId와 courseId가 필요합니다.' });
+    }
+
+    try {
+        const [result] = await db.query(`
+            INSERT INTO enrolls (user_id, course_id, progress)
+            VALUES (?, ?, 0)
+            ON DUPLICATE KEY UPDATE progress = progress
+        `, [userId, courseId]);
+
+        if (result.affectedRows === 1) {
+            return res.status(201).json({ message: '강의 신청이 완료되었습니다.' });
+        } else if (result.affectedRows === 2) {
+            // ON DUPLICATE KEY UPDATE가 실행된 경우
+            return res.status(200).json({ message: '이미 신청된 강의입니다.' });
+        }
+
+        res.json({ message: '강의 신청이 완료되었습니다.' });
+    } catch (err) {
+        console.error('강의 신청 에러:', err);
+        res.status(500).json({ message: '서버 오류가 발생했습니다.' });
+    }
+});
+
 // 사용자가 신청한 강의 목록 가져오기
 router.get('/user/:userId', async (req, res) => {
     const userId = req.params.userId;
