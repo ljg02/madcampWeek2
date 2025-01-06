@@ -106,13 +106,13 @@ const MypageSchedule = () => {
                             <input
                                 type="color"
                                 value={selectedColor}
-                                style={{ width: '30px', height: '30px', border: 'none', padding: '0'}}
+                                style={{ width: '35px', height: '35px', border: 'none', padding: '0'}}
                                 onChange={(e) => handleColorChange(e.target.value)}
                             />
                             <input
                                 type="text"
                                 value={newSubject}
-                                style={{ height: '20px' }}
+                                style={{ height: '35px' }}
                                 onChange={(e) => setNewSubject(e.target.value)}
                                 placeholder="공부 내용을 입력하세요"
                             />
