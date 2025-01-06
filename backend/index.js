@@ -63,39 +63,6 @@ app.use((err, req, res, next) => {
   res.status(500).json({ message: '서버 에러' });
 });
 
-{/* 강의 목록 조회 엔드포인트 */}
-app.get('/api/courses', async (req, res) => {
-  try {
-    const [results] = await db.query('SELECT * FROM courses');
-    res.json(results);
-  } catch (err) {
-    console.error('강의 목록 조회 에러', err);
-    res.status(500).send({ success: false, message: '서버 오류.' });
-  }
-});
-
-{/* 선생님 목록 조회 엔드포인트 */}
-app.get('/api/instructors', async (req, res) => {
-  try {
-    const [results] = await db.query('SELECT * FROM teachers');
-    res.json(results);
-  } catch (err) {
-    console.error('선생님 목록 조회 에러', err);
-    res.status(500).send({ success: false, message: '서버 오류.' });
-  }
-});
-
-{/* 교재 목록 조회 엔드포인트 */}
-app.get('/api/textbooks', async (req, res) => {
-  try {
-    const [results] = await db.query('SELECT * FROM textbooks');
-    res.json(results);
-  } catch (err) {
-    console.error('교재 목록 조회 에러', err);
-    res.status(500).send({ success: false, message: '서버 오류.' });
-  }
-});
-
 // 서버 실행
 app.listen(PORT, () => {
   console.log(`서버가 실행 중: http://localhost:${PORT}`);
