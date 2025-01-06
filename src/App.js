@@ -15,7 +15,7 @@ import MypageLecture from './pages/MypageLecture';
 import MypageSchedule from './pages/MypageSchedule';
 import MypageNotes from './pages/MypageNotes';
 import PrivateRoute from './components/PrivateRoute'; // PrivateRoute 컴포넌트 생성 필요
-import Mypage from './pages/GPTMypage';
+import Mypage from './pages/Mypage/GPTMypage';
 import CourseDetail from './pages/CourseDetail/CourseDetail';
 import InstructorDetail from './pages/InstructorDetail/InstructorDetail';
 import TextbookDetail from './pages/TextbookDetail/TextbookDetail';
