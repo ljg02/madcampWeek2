@@ -64,56 +64,35 @@ app.use((err, req, res, next) => {
 });
 
 {/* 강의 목록 조회 엔드포인트 */}
-app.get('/api/availableCourses', async (req, res) => {
+app.get('/api/courses', async (req, res) => {
   try {
-    const checkQuery = 'SELECT * FROM courses';
-    db.query(checkQuery, (err, results) => {
-      if (err) {
-          console.error(err);
-          res.status(500).send('서버 오류');
-      } else {
-          res.json(results);
-      }
-  });
-  } catch (error) {
-    console.error('강좌 목록 조회 에러', error);
-    res.status(500).json({ success: false, message: '서버 오류.' });
+    const [results] = await db.query('SELECT * FROM courses');
+    res.json(results);
+  } catch (err) {
+    console.error('강의 목록 조회 에러', err);
+    res.status(500).send({ success: false, message: '서버 오류.' });
   }
 });
 
 {/* 선생님 목록 조회 엔드포인트 */}
-app.get(`/api/instructors`, async (req, res) => {
+app.get('/api/instructors', async (req, res) => {
   try {
-    const checkQuery = 'SELECT * FROM teachers';
-    db.query(checkQuery, (err, results) => {
-      if (err) {
-          console.error(err);
-          res.status(500).send('서버 오류');
-      } else {
-          res.json(results);
-      }
-  });
-  } catch (error) {
-    console.error('선생님 목록 조회 에러', error);
-    res.status(500).json({ success: false, message: '서버 오류.' });
+    const [results] = await db.query('SELECT * FROM teachers');
+    res.json(results);
+  } catch (err) {
+    console.error('선생님 목록 조회 에러', err);
+    res.status(500).send({ success: false, message: '서버 오류.' });
   }
 });
 
 {/* 교재 목록 조회 엔드포인트 */}
-app.get(`/api/textbooks`, async (req, res) => {
+app.get('/api/textbooks', async (req, res) => {
   try {
-    const checkQuery = 'SELECT * FROM textbooks';
-    db.query(checkQuery, (err, results) => {
-      if (err) {
-          console.error(err);
-          res.status(500).send('서버 오류');
-      } else {
-          res.json(results);
-      }
-  });
-  } catch (error) {
-    console.error('교재 목록 조회 에러', error);
-    res.status(500).json({ success: false, message: '서버 오류.' });
+    const [results] = await db.query('SELECT * FROM textbooks');
+    res.json(results);
+  } catch (err) {
+    console.error('교재 목록 조회 에러', err);
+    res.status(500).send({ success: false, message: '서버 오류.' });
   }
 });
 

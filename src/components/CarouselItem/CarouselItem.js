@@ -46,16 +46,15 @@ const CarouselItem = ({ item, type }) => {
             )}
             {type === 'instructor' && (
                 <>
-                    <img src={item.photo} alt={item.name} className="item-image" />
+                    <img src={item.image} alt={item.name} className="item-image" />
                     <h3 className="item-title">{item.name}</h3>
                     <p className="item-description">{item.subject}</p>
                 </>
             )}
             {type === 'textbook' && (
                 <>
-                    <img src={item.cover} alt={item.title} className="item-image" />
+                    <img src={item.image} alt={item.title} className="item-image" />
                     <h3 className="item-title">{item.title}</h3>
-                    <p className="item-description">{item.author}</p>
                 </>
             )}
             {type === 'mockExam' && (

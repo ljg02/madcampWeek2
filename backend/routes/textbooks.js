@@ -25,7 +25,14 @@ router.get('/:id', async (req, res) => {
       return res.status(404).json({ message: '교재를 찾을 수 없습니다.' });
     }
 
-    res.json(results[0]);
+    const textbook = results[0];
+
+    // 담당 교사 정보 가져오기
+    const [teacherResults] = await db.query('SELECT * FROM teachers WHERE id = ?', [textbook.teacher_id]);
+
+    const teacher = teacherResults.length > 0 ? teacherResults[0] : null;
+
+    res.json({ textbook, teacher });
   } catch (err) {
     console.error('교재 상세 정보 요청 에러:', err);
     res.status(500).json({ message: '서버 오류가 발생했습니다.' });

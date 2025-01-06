@@ -17,7 +17,7 @@ router.get('/:id', async (req, res) => {
 
     const instructor = instructorResults[0];
 
-    // 강사가 담당하는 과목들 가져오기
+    // 강사가 담당하는 강좌들 가져오기
     const [coursesResults] = await db.query('SELECT * FROM courses WHERE teacher_id = ?', [instructorId]);
 
     res.json({ instructor, courses: coursesResults });

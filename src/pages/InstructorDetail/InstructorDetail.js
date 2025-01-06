@@ -42,17 +42,29 @@ const InstructorDetail = () => {
 
   return (
     <div className="instructor-detail-container">
-      <h1 className="instructor-name">{instructor.name}</h1>
-      <img src={instructor.photo} alt={instructor.name} className="instructor-photo" />
-      <p className="instructor-subject">담당 과목: {instructor.subject}</p>
+      {/* 상단 섹션: 강사 사진 및 기본 정보 */}
+      <div className="instructor-header">
+        <img src={instructor.image} alt={instructor.name} className="instructor-image" />
+        <div className="instructor-info">
+          <h1 className="instructor-name">{instructor.name}</h1>
+          <p className="instructor-subject">담당 과목: {instructor.subject}</p>
+        </div>
+      </div>
 
+      {/* 중간 섹션: 강사가 담당하는 과목들 */}
       <div className="instructor-courses">
-        <h2>담당 과목들</h2>
-        <ul>
+        <h2>강좌 목록</h2>
+        <div className="courses-grid">
           {courses.map(course => (
-            <li key={course.id}>{course.course_name}</li>
+            <div key={course.id} className="course-card">
+              <img src={course.image} alt={course.title} className="course-image" />
+              <div className="course-content">
+                <h3 className="course-title">{course.title}</h3>
+                <p className="course-description">{course.description}</p>
+              </div>
+            </div>
           ))}
-        </ul>
+        </div>
       </div>
     </div>
   );

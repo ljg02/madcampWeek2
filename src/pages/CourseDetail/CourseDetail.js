@@ -50,9 +50,11 @@ const CourseDetail = () => {
       {teacher && (
         <div className="teacher-info">
           <h2>담당 선생님</h2>
-          <img src={teacher.photo} alt={teacher.name} className="teacher-photo" />
-          <p className="teacher-name">{teacher.name}</p>
-          <p className="teacher-subject">담당 과목: {teacher.subject}</p>
+          <img src={teacher.image} alt={teacher.name} className="teacher-image" />
+          <div className="info-container">
+            <p className="teacher-name">{teacher.name}</p>
+            <p className="teacher-subject">담당 과목: {teacher.subject}</p>
+          </div>
         </div>
       )}
 
