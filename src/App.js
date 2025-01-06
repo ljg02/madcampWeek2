@@ -10,13 +10,16 @@ import Footer from "./components/Footer";
 import Home from './pages/Home';
 import VideoPlayer from './pages/VideoPlayer';
 import Login from './pages/Login';
-import Calendar from './pages/Calendar';
 import Lecture from './pages/Lecture';
 import MypageLecture from './pages/MypageLecture';
 import MypageSchedule from './pages/MypageSchedule';
 import MypageNotes from './pages/MypageNotes';
 import PrivateRoute from './components/PrivateRoute'; // PrivateRoute 컴포넌트 생성 필요
 import Mypage from './pages/GPTMypage';
+import CourseDetail from './pages/CourseDetail/CourseDetail';
+import InstructorDetail from './pages/InstructorDetail/InstructorDetail';
+import TextbookDetail from './pages/TextbookDetail/TextbookDetail';
+import MockExamDetail from './pages/MockExamDetail/MockExamDetail';
 
 const App = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false); // 사이드바 상태 관리
@@ -53,7 +56,6 @@ const App = () => {
                 </PrivateRoute>
               }
             />
-            <Route path="/calendar" element={<Calendar />} />
             <Route path="/mypage-lecture" element={<MypageLecture />} />
             <Route path="/mypage-schedule" element={<MypageSchedule />} />
             <Route path="/mypage-notes" element={<MypageNotes />} />
@@ -66,6 +68,10 @@ const App = () => {
                 </PrivateRoute>
               }
             />
+            <Route path="/course/:id" element={<CourseDetail />} />
+            <Route path="/instructor/:id" element={<InstructorDetail />} />
+            <Route path="/textbook/:id" element={<TextbookDetail />} />
+            <Route path="/mockExam/:id" element={<MockExamDetail />} />
             {/* 추가적인 라우트 */}
           </Routes>
         </div>
