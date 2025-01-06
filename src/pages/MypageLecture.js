@@ -3,37 +3,51 @@ import axios from 'axios';
 import styles from "./MypageLecture.module.css";
 import { AuthContext } from '../components/AuthContext'; // AuthContext import
 import { toast } from 'react-toastify';
+import ReactPlayer from 'react-player';
 
 const MypageLecture = () => {
     const { auth } = useContext(AuthContext);
     const userId = auth.user ? auth.user.id : null;
 
     const [lectures, setLectures] = useState([
-        {course_id : 1, 
-         course_title : '영어1', 
-         course_image : 'https://via.placeholder.com/220x130.png?text=ENG',
-         progress : 30,
-         teacher_name : '이명학',
-         teacher_subject : '영어',
-         teacher_profile_image : 'https://via.placeholder.com/220x130.png?text=이명학'},
-         {course_id : 2, 
-            course_title : '수학1', 
-            course_image : 'https://via.placeholder.com/220x130.png?text=MATH',
-            progress : 80,
-            teacher_name : '현우진',
-            teacher_subject : '수학',
-            teacher_profile_image : 'https://via.placeholder.com/220x130.png?text=현우진'}
+        {
+            course_id: 1,
+            course_title: '영어1',
+            course_image: 'https://via.placeholder.com/220x130.png?text=ENG',
+            progress: 30,
+            teacher_name: '이명학',
+            teacher_subject: '영어',
+            teacher_profile_image: 'https://via.placeholder.com/220x130.png?text=이명학'
+        },
+        {
+            course_id: 2,
+            course_title: '수학1',
+            course_image: 'https://via.placeholder.com/220x130.png?text=MATH',
+            progress: 80,
+            teacher_name: '현우진',
+            teacher_subject: '수학',
+            teacher_profile_image: 'https://via.placeholder.com/220x130.png?text=현우진'
+        }
     ]);
+    const [videos, setVideos] = useState([{ title: 'Lecture 1', video: 'lecture1.mp4', progress: 70, remaining: 3 },
+    { title: 'Lecture 2', video: 'lecture2.mp4', progress: 40, remaining: 5 },
+    { title: 'Lecture 3', video: 'lecture3.mp4', progress: 90, remaining: 1 }]);
     const [currentLecture, setCurrentLecture] = useState(0);
-
-    const exampleLectures = [{ title: 'Lecture 1', video: 'lecture1.mp4', progress: 70, remaining: 3 },
-        { title: 'Lecture 2', video: 'lecture2.mp4', progress: 40, remaining: 5 },
-        { title: 'Lecture 3', video: 'lecture3.mp4', progress: 90, remaining: 1 }];
 
     useEffect(() => {
         console.log('userId : ', userId);
         console.log('user');
         if (!userId) return; // 사용자 ID가 없으면 요청하지 않음
+
+        const fetchUserVideos = async () => {
+            try {
+                const response = await axios.get(`/api/videos/${userId}`);
+                console.log('User Videos:', response.data.videos);
+                setVideos(response.data.videos);
+            } catch (error) {
+                console.error('API Error:', error);
+            }
+        };
 
         // 신청한 강좌 목록 요청
         const fetchCourseDetail = async () => {
@@ -46,6 +60,7 @@ const MypageLecture = () => {
             }
         };
 
+        fetchUserVideos();
         fetchCourseDetail();
     }, [userId]);
 
@@ -74,13 +89,19 @@ const MypageLecture = () => {
                 <h1>매일 한 걸음, 꾸준한 배움의 시작</h1>
                 <button className={styles.todayButton}>Today's Lectures</button>
                 <div className={styles.lectureCardContainer}>
-                    {exampleLectures.map((lecture, index) => (
+                    {videos.slice(0, 3).map((video, index) => (
                         <div key={index} className={styles.lectureCard}>
-                            <video className={styles.videoPlayer} controls>
-                                <source src={lecture.video} type="video/mp4" />
-                                Your browser does not support the video tag.
-                            </video>
-                            <h3>{lecture.title}</h3>
+                            <ReactPlayer
+                                url={video.youtube_id}
+                                controls
+                                style={{ maxWidth: '800px' }} // 원하는 최대 너비 설정
+                                config={{
+                                    youtube: {
+                                        playerVars: { showinfo: 1 }
+                                    }
+                                }}
+                            />
+                            <h3>{video.progress}</h3>
                         </div>
                     ))}
                 </div>
@@ -91,14 +112,14 @@ const MypageLecture = () => {
                         <div className={styles.statBox}>강의 진행률</div>
                         <div className={styles.progressBarContainer}>
                             <div className={styles.progressBar}>
-                                <div className={styles.progress} style={{ width: `${exampleLectures[currentLecture].progress}%` }}></div>
+                                <div className={styles.progress} style={{ width: `${videos[currentLecture].progress}%` }}></div>
                             </div>
                         </div>
                     </div>
                     <div className={styles.progressRow}>
                         <div className={styles.statBox}>남은 강의</div>
                         <div className={styles.notificationBox}>
-                            오늘의 강의 remaining개 중 {exampleLectures[currentLecture].remaining}개 남았습니다.
+                            오늘의 강의 remaining개 중 {videos[currentLecture].remaining}개 남았습니다.
                         </div>
                     </div>
                 </div>

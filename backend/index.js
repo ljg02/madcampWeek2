@@ -18,12 +18,14 @@ const instructorsRouter = require('./routes/instructors');
 const textbooksRouter = require('./routes/textbooks');
 const authRouter = require('./routes/auth');
 const enrollsRouter = require('./routes/enrolls');
+const videosRouter = require('./routes/videos');
 
 app.use('/api/courses', coursesRouter);
 app.use('/api/instructors', instructorsRouter);
 app.use('/api/textbooks', textbooksRouter);
 app.use('/api/auth', authRouter);
 app.use('/api/enrolls', enrollsRouter);
+app.use('/api/videos', videosRouter);
 
 
 // 환경 변수
