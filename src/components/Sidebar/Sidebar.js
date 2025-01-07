@@ -19,9 +19,6 @@ const Sidebar = ({ isSidebarOpen, toggleSidebar }) => {
           <li className={location.pathname === '/videoPlayer' ? 'active' : ''}>
             <Link to="/videoPlayer" onClick={toggleSidebar}>VideoPlayer</Link>
           </li>
-          <li className={location.pathname === '/lecture-all-frame' ? 'active' : ''}>
-            <Link to="/lecture" onClick={toggleSidebar}>Lecture</Link>
-          </li>
           <li className={location.pathname === '/mypage' ? 'active' : ''}>
             <Link to="/mypage" onClick={toggleSidebar}>Mypage</Link>
             </li>

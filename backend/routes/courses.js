@@ -40,4 +40,16 @@ router.get('/:id', async (req, res, next) => {
   }
 });
 
+// 특정 강의에 속한 비디오 목록 가져오기
+router.get('/:id/videos', async (req, res) => {
+  const courseId = req.params.id;
+  try {
+    const [videos] = await db.execute('SELECT * FROM videos WHERE course_id = ?', [courseId]);
+    res.json({ success: true, videos });
+  } catch (error) {
+    console.error('비디오 목록 요청 실패:', error);
+    res.status(500).json({ success: false, message: '비디오 목록을 불러오는 데 실패했습니다.' });
+  }
+});
+
 module.exports = router;
