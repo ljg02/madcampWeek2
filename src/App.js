@@ -77,8 +77,10 @@ const App = () => {
             <Route path="/course/:id" element={<CourseDetail />} />
             <Route path="/instructor/:id" element={<InstructorDetail />} />
             <Route path="/textbook/:id" element={<TextbookDetail />} />
-            <Route path="/mockExam/:id" element={<MockExamDetail />} />
+            {/* <Route path="/mockExam/:id" element={<MockExamDetail />} /> */}
             <Route path="/video/:id" element={<VideoDetail />} />
+            <Route path="/" element={<Home />} />
+            <Route path="/mockexam/:examDate" element={<MockExamDetail />} />
             {/* 추가적인 라우트 */}
           </Routes>
         </div>

@@ -3,12 +3,23 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './Home.css';
 import Carousel from '../../components/Carousel';
+import MockExamDetail from '../MockExamDetail/MockExamDetail'; // 상세 페이지 컴포넌트
+import { Link } from 'react-router-dom';  // Link import 추가
+
+
 
 const Home = () => {
   const [courses, setCourses] = useState([]);
   const [instructors, setInstructors] = useState([]);
   const [textbooks, setTextbooks] = useState([]);
-  const [mockExams, setMockExams] = useState([]);
+  const [uniqueMockExamDates, setUniqueMockExamDates] = useState([]); // 고유한 날짜 목록 상태
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1;
+    const day = date.getDate();
+    return `${year}년 ${month}월 ${day}일`;
+};
 
   useEffect(() => {
     // 신청 가능한 강좌 목록 요청
@@ -102,7 +113,7 @@ const Home = () => {
       });
 
     // 교재 목록 요청
-    axios.get(`${process.env.REACT_APP_BACKEND_URL}/textbooks`)
+    axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/textbooks`)
       .then(response => setTextbooks(response.data))
       .catch(error => {
         console.error('교재 데이터 요청 실패:', error);
@@ -138,34 +149,21 @@ const Home = () => {
       });
 
     // 모의고사 일정 및 등급컷 요청
-    axios.get(`${process.env.REACT_APP_BACKEND_URL}/mockExams`)
-      .then(response => setMockExams(response.data))
-      .catch(error => {
-        console.error('모의고사 데이터 요청 실패:', error);
-        // 예시 데이터 설정 (오류 시)
-        const exampleMockExams = [
-          {
-            id: 1,
-            title: '1차 모의고사',
-            schedule: '2025-03-15',
-            cutoff: 'A: 90, B: 80, C: 70',
-          },
-          {
-            id: 2,
-            title: '2차 모의고사',
-            schedule: '2025-04-20',
-            cutoff: 'A: 85, B: 75, C: 65',
-          },
-          {
-            id: 3,
-            title: '3차 모의고사',
-            schedule: '2025-05-25',
-            cutoff: 'A: 88, B: 78, C: 68',
-          },
-          // 추가적인 모의고사 데이터...
-        ];
-        setMockExams(exampleMockExams);
-      });
+    axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/mockexam`)
+        .then(response => {
+
+          // setUniqueMockExamDates(response.data.exam_date)
+            if (response.data.length > 0) {
+                // 중복 제거를 위해 Set 사용
+                const uniqueDates = [...new Set(response.data.map(item => item.exam_date))];
+                setUniqueMockExamDates(uniqueDates);
+            }
+        })
+        .catch(error => {
+            console.error('모의고사 날짜 데이터 요청 실패:', error);
+            // 오류 발생 시 예제 데이터 사용
+            setUniqueMockExamDates(['2025-03-15', '2025-04-20', '2025-05-25']);
+        });
   }, []);
 
   return (
@@ -192,16 +190,26 @@ const Home = () => {
       />
 
       {/* 모의고사 일정 및 등급컷 */}
+      <div className="main-container">
+      {/* 모의고사 일정 */}
       <div className="mock-exam-section">
-        <h2 className="section-title">모의고사 일정 및 등급컷</h2>
-        <div className="mock-exam-cards">
-          {mockExams.map(exam => (
-            <div key={exam.id} className="mock-exam-card">
-              <h3>{exam.title}</h3>
-              <p>일정: {exam.schedule}</p>
-              <p>등급컷: {exam.cutoff}</p>
-            </div>
-          ))}
+          <h2 className="section-title">모의고사 일정</h2>
+          <div className="mock-exam-cards">
+              {/* 고유한 날짜를 모두 표시하고, 날짜를 포맷하여 보여줌 */}
+              {uniqueMockExamDates.map((date, index) => (
+                <Link
+                to={`/mockexam/${date}`} 
+                key={index}
+                style={{ textDecoration: 'none', color: 'inherit' }}
+            >
+                <div className="mock-exam-card">
+                    {/* 날짜를 포맷하여 표시 */}
+                    <h3>{`${formatDate(date)} 모의고사`}</h3>
+                    <p>일정: {formatDate(date)}</p>
+                </div>
+            </Link>
+              ))}
+          </div>
         </div>
       </div>
     </div>

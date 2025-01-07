@@ -17,8 +17,8 @@ const CarouselItem = ({ item, type }) => {
             case 'textbook':
                 navigate(`/textbook/${item.id}`);
                 break;
-            case 'mockExam':
-                navigate(`/mockExam/${item.id}`);
+            case 'mock_exam_cutoffs':
+                navigate(`/mock_exam_cutoffs/${item.id}`);
                 break;
             default:
                 break;
