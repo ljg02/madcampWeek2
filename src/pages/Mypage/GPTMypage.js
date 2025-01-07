@@ -113,6 +113,10 @@ function Mypage() {
     return sum / arr.length;
   };
 
+  const countColoredCells = () => {
+    return timeTable.filter(cell => cell !== '').length;
+  };
+
   return (
     <div className={styles.home_container}>
       <section className={styles.all_section}>
@@ -161,7 +165,7 @@ function Mypage() {
             </div>
             <div className={styles.analytics_card}>
               <h3>공부 시간 분석</h3>
-              <p>하루 평균 3시간 공부했습니다.</p>
+              <p>오늘 공부 시간은 {countColoredCells()}시간입니다.</p>
             </div>
             <div className={styles.analytics_card}>
               <h3>피드백</h3>
@@ -203,7 +207,7 @@ function Mypage() {
                   disabled={true}
                 />
                 <span
-                  style={{ width: '15px', height: '15px' }}
+                  style={{ width: '300px', height: '35px', padding: '5px' }}
                 >{colorNotes[color]}</span>
               </div>
             ))}
