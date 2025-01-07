@@ -65,6 +65,9 @@ const MypageLecture = () => {
     }, [userId]);
 
     const handleCancelEnrollment = async (courseId) => {
+        const isConfirmed = window.confirm('정말 수강 신청을 취소하시겠습니까?');
+        if (!isConfirmed) return; // 사용자가 취소를 누르면 함수 종료
+        
         try {
             await axios.delete(`${process.env.REACT_APP_BACKEND_URL}/api/enrolls/cancel`, {
                 data: { userId: userId, courseId },

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import styles from './MypageSchedule.module.css';
+import { TbTextSize } from 'react-icons/tb';
 
 const MypageSchedule = () => {
     const [timeTable, setTimeTable] = useState(Array(24 * 6).fill(''));
@@ -152,24 +153,24 @@ const MypageSchedule = () => {
                 </div>
 
                 <div className={styles.notesSection}>
-                    <h2 className={styles.titleCenter}>Today's Time Table</h2>
+                    <h2 className={styles.titleCenterttt}>Today's Time Table</h2>
                     <div className={styles.addStudyTimeSection}>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '10px'}}>
                             <input
                                 type="color"
                                 value={selectedColor}
-                                style={{ width: '35px', height: '35px', border: 'none', padding: '0'}}
+                                style={{ width: '35px', height: '35px', border: 'none'}}
                                 onChange={(e) => handleColorChange(e.target.value)}
                             />
                             <input
                                 type="text"
                                 value={newSubject}
-                                style={{ height: '35px' }}
+                                style={{ height: '35px', padding: '10px'}}
                                 onChange={(e) => setNewSubject(e.target.value)}
                                 placeholder="공부 내용을 입력하세요"
                             />
                             <button
-                                className={styles.fillButton}
+                                className={styles.schedule_button}
                                 onClick={handleAddStudyTime}
                             >공부 시간 추가
                             </button>
@@ -195,11 +196,11 @@ const MypageSchedule = () => {
                                 />
                                 <button onClick={() => setCanFill(!canFill)}>{canFill ? '완료' : '채우기'}</button>
                                 {editMode[color] ? (
-                                    <button className={styles.saveButton} onClick={() => handleSaveUpdate(color)}>완료</button>
+                                    <button onClick={() => handleSaveUpdate(color)}>완료</button>
                                 ) : (
-                                    <button className={styles.modifyButton} onClick={() => handleUpdateStudyTime(color)}>수정</button>
+                                    <button onClick={() => handleUpdateStudyTime(color)}>수정</button>
                                 )}
-                                <button className={styles.deleteButton} onClick={() => handleDeleteStudyTime(color)}>삭제</button>
+                                <button onClick={() => handleDeleteStudyTime(color)}>삭제</button>
                             </div>
                         ))}
                     </div>
@@ -207,9 +208,9 @@ const MypageSchedule = () => {
                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%'}}>
                             <h2>오늘의 감정 일기</h2>
                             {diaryEditMode ? (
-                            <button className={styles.saveButton} onClick={handleDiarySave}>완료</button>
+                            <button onClick={handleDiarySave}>완료</button>
                         ) : (
-                            <button className={styles.modifyButton} onClick={toggleDiaryEditMode}>수정</button>
+                            <button onClick={toggleDiaryEditMode}>수정</button>
                         )}
                         </div>
                         <textarea
