@@ -120,11 +120,12 @@
     text-align: center;
     font-weight: bold;
     color: white;            /* 폰트 색상을 흰색으로 변경 */
-    width: 150px;
+    width: 200px;
 }
 
 .progressBarContainer {
     width:100%;
+    margin-bottom: 20px;
 }
 
 .notificationBox {
@@ -139,7 +140,7 @@
 
 .enrolledLectures {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    /* grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); */
     gap: 30px;
     margin-top: 10px;
 }
@@ -147,8 +148,7 @@
 .enrolledLectureCard {
     display: flex;
     align-items: center;   
-    gap: px;   
-    width: 100%;
+    width: 800px;
     background-color: #fafafa;
     border-radius: 10px;
     overflow: hidden;
@@ -216,7 +216,6 @@
 }
 
 .cancelButton {
-    width: 100%;
     background: #fc784f;      /* 배경색을 동일하게 */
     padding: 13px 20px;       /* 패딩을 동일하게 */
     border-radius: 10px;      /* 모서리를 둥글게 */
@@ -229,89 +228,3 @@
     transition: background 0.3s ease; /* 호버 시 부드러운 색상 전환 */
 }
 
-/* 반응형 디자인 */
-@media (max-width: 1600px) {
-    .lectureCardContainer,
-    .enrolledLectures {
-        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    }
-}
-
-@media (max-width: 1200px) {
-    .mypageContainer {
-        padding: 20px 40px;
-    }
-
-    .sectionFrame {
-        padding: 20px;
-    }
-
-    .lectureCard,
-    .enrolledLectureCard {
-        padding: 15px;
-    }
-
-    .videoPlayer {
-        height: 180px;
-    }
-
-    .lectureCard h3,
-    .lectureInfo p {
-        font-size: 1.3em;
-    }
-
-    .progressContainer {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .progressBar {
-        width: 100%;
-        margin-right: 0;
-        margin-bottom: 5px;
-    }
-
-    .cancelButton {
-        width: 100%;
-    }
-}
-
-@media (max-width: 768px) {
-    .mypageContainer {
-        padding: 10px 20px;
-    }
-
-    .lectureCardContainer,
-    .enrolledLectures {
-        grid-template-columns: 1fr;
-    }
-
-    .videoPlayer {
-        height: 150px;
-    }
-
-    .lectureCard h3,
-    .lectureInfo p {
-        font-size: 1.2em;
-    }
-
-    .progressContainer {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .progressBar {
-        width: 100%;
-        margin-right: 0;
-        margin-bottom: 5px;
-    }
-
-    .cancelButton {
-        width: 100%;
-    }
-
-    .teacherProfileImage {
-        width: 80px;
-        height: 80px;
-    }
-}

@@ -119,6 +119,10 @@ const CourseDetail = () => {
     navigate(`/video/${videoId}`);
   };
 
+  const handleTeacherProfileClick = (teacherId) => {
+    navigate(`/instructor/${teacherId}`);
+  };
+
   if (loading) {
     return <div className="loading">로딩 중...</div>;
   }
@@ -139,7 +143,7 @@ const CourseDetail = () => {
         <p className="course-description">{course.description}</p>
       </div>
       {teacher && (
-        <div className="teacher-info">
+        <div className="teacher-info" onClick={() => handleTeacherProfileClick(teacher.id)}>
           {/* <h2>담당 선생님</h2> */}
           <img src={teacher.image} alt={teacher.name} className="teacher-image" />
           <div className="info-container">
@@ -165,7 +169,7 @@ const CourseDetail = () => {
                   <ReactPlayer
                     url={video.youtube_id}
                     controls
-                    width="100%"
+                    width="630px"
                     height="360px"
                     config={{
                       youtube: {
