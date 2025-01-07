@@ -5,6 +5,7 @@ import axios from 'axios';
 import { toast } from 'react-toastify'; // toast import
 import './CourseDetail.css'; // 스타일링 파일 (필요 시 생성)
 import { AuthContext } from '../../components/AuthContext'; // AuthContext import
+import ReactPlayer from 'react-player'; // ReactPlayer import
 
 const CourseDetail = () => {
   const { id } = useParams(); // URL 파라미터에서 course ID 가져오기
@@ -13,6 +14,7 @@ const CourseDetail = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [isEnrolled, setIsEnrolled] = useState(false); // 강의 신청 상태
+  const [videos, setVideos] = useState([]); // 강의 영상 상태
 
   const { auth } = useContext(AuthContext); // AuthContext에서 로그인 정보 확인
   const navigate = useNavigate(); // 페이지 이동을 위한 훅
@@ -55,9 +57,20 @@ const CourseDetail = () => {
       }
     };
 
+    const fetchVideos = async () => {
+      try {
+        const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/courses/${id}/videos`);
+        setVideos(response.data.videos);
+      } catch (err) {
+        console.error('강의 영상 목록 요청 실패:', err);
+        toast.error('강의 영상목록을 불러오는 데 실패했습니다.');
+      }
+    }
+
     fetchCourseDetail();
     checkEnrollment();
-  }, [id]);
+    fetchVideos();
+  }, [id, auth.isAuthenticated, auth.user]);
 
   // 강의 신청 버튼 클릭 핸들러
   const handleEnroll = async () => {
@@ -117,9 +130,9 @@ const CourseDetail = () => {
   return (
     <div className="course-detail-container">
       <div className="course-book-content">
-          <h1 className="course-title-course">{course.title}</h1>
-          <img src={course.image} alt={course.title} className="course-image-coursedetail" />
-          <p className="course-description">{course.description}</p>
+        <h1 className="course-title-course">{course.title}</h1>
+        <img src={course.image} alt={course.title} className="course-image-coursedetail" />
+        <p className="course-description">{course.description}</p>
       </div>
       {teacher && (
         <div className="teacher-info">
@@ -136,6 +149,32 @@ const CourseDetail = () => {
       <button className={`enroll-button ${isEnrolled ? 'cancel' : 'enroll'}`} onClick={handleEnroll}>
         {isEnrolled ? '강의 취소' : '강의 신청'}
       </button>
+
+      {/* 강의 영상 목록 렌더링 */}
+      <div className="video-list">
+        <h2>강의 비디오 목록</h2>
+        {videos.length > 0 ? (
+          <ul>
+            {videos.map((video) => (
+              <li key={video.id} className="video-item">
+                <ReactPlayer
+                  url={video.youtube_id}
+                  controls
+                  width="100%"
+                  height="360px"
+                  config={{
+                    youtube: {
+                      playerVars: { showinfo: 1 }
+                    }
+                  }}
+                />
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p>강의에 포함된 영상이 없습니다.</p>
+        )}
+      </div>
 
       {/* 추가적인 세부 정보 표시 가능 */}
     </div>
