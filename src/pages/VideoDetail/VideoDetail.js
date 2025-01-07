@@ -116,18 +116,12 @@ const VideoDetail = () => {
                         id: response.data.comment.id,
                         content: newComment,
                         created_at: response.data.comment.created_at,
+                        sentiment_score: response.data.comment.sentiment_score,
                         user_id: auth.user.id,
                         user_name: auth.user.name,
                     };
                     setComments([newCommentData, ...comments]);
                     setNewComment('');
-
-                    // const total = positiveCount + negativeCount || 1; // 0으로 나누는 것을 방지
-                    // setSentiment({
-                    //     positive: Math.round((positiveCount / total) * 100),
-                    //     negative: Math.round((negativeCount / total) * 100),
-                    // });
-
                     toast.success('댓글이 성공적으로 작성되었습니다.');
                 } else {
                     console.error('댓글 작성 실패:', response.data.message);
@@ -139,6 +133,52 @@ const VideoDetail = () => {
             }
         }
     };
+
+    const handleDeleteComment = async (commentId) => {
+        if (!auth.isAuthenticated || !auth.user) {
+            toast.error('로그인이 필요합니다.');
+            return;
+        }
+
+        try {
+            const response = await axios.delete(`${process.env.REACT_APP_BACKEND_URL}/api/comments/${commentId}`);
+
+            if (response.data.success) {
+                setComments((prevComments) => prevComments.filter((comment) => comment.id !== commentId));
+                toast.success('댓글이 삭제되었습니다.');
+            } else {
+                toast.error('댓글 삭제에 실패했습니다.');
+            }
+        } catch (error) {
+            console.error('댓글 삭제 에러:', error);
+            toast.error('댓글 삭제 중 문제가 발생했습니다.');
+        }
+    };
+
+    //감정 비율 계산
+    useEffect(() => {
+        const calculateSentiment = () => {
+            let positive = 0;
+            let negative = 0;
+
+            comments.forEach(comment => {
+                if (comment.sentiment_score < 0) negative += (-comment.sentiment_score);
+                else positive += comment.sentiment_score;
+            });
+
+            const total = positive + negative;
+            setSentiment({
+                positive: total ? Math.round((positive / total) * 100) : 0,
+                negative: total ? Math.round((negative / total) * 100) : 0,
+            });
+        };
+
+        if (comments.length > 0) {
+            calculateSentiment();
+        } else {
+            setSentiment({ positive: 0, negative: 0 });
+        }
+    }, [comments]);
 
     const handleInstructorClick = (teacherId) => {
         navigate(`/instructor/${teacherId}`);
@@ -190,6 +230,7 @@ const VideoDetail = () => {
                         <div className={styles.sentimentBar}>
                             <div className={styles.positive} style={{ width: `${sentiment.positive}%` }}></div>
                             <div className={styles.negative} style={{ width: `${sentiment.negative}%` }}></div>
+                            <div className={styles.neutral} style={{ width: `${100 - sentiment.positive - sentiment.negative}%` }}></div>
                         </div>
                     </div>
 
@@ -214,9 +255,19 @@ const VideoDetail = () => {
                             <ul className={styles.commentList}>
                                 {comments.map((comment) => (
                                     <li key={comment.id} className={styles.commentItem}>
-                                        <p className={styles.commentUser}>{comment.user_name}:</p>
-                                        <p className={styles.commentContent}>{comment.content}</p>
-                                        <p className={styles.commentTime}>{new Date(comment.created_at).toLocaleString()}</p>
+                                        <div>
+                                            <p className={styles.commentUser}>{comment.user_name}:</p>
+                                            <p className={styles.commentContent}>{comment.content}</p>
+                                            <p className={styles.commentTime}>{new Date(comment.created_at).toLocaleString()}</p>
+                                        </div>
+                                        {auth.user && auth.user.id === comment.user_id && (
+                                            <span
+                                                className={styles.delete}
+                                                onClick={() => handleDeleteComment(comment.id)}
+                                            >
+                                                삭제
+                                            </span>
+                                        )}
                                     </li>
                                 ))}
                             </ul>

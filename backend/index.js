@@ -20,6 +20,7 @@ const authRouter = require('./routes/auth');
 const enrollsRouter = require('./routes/enrolls');
 const videosRouter = require('./routes/videos');
 const commentsRouter = require('./routes/comments');
+const tttRouter = require('./routes/ttt');
 
 app.use('/api/courses', coursesRouter);
 app.use('/api/instructors', instructorsRouter);
@@ -28,6 +29,7 @@ app.use('/api/auth', authRouter);
 app.use('/api/enrolls', enrollsRouter);
 app.use('/api/videos', videosRouter);
 app.use('/api/comments', commentsRouter);
+app.use('/api/ttt', tttRouter);
 
 
 // 환경 변수

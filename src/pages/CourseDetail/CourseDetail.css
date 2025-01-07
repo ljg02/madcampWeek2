@@ -63,7 +63,7 @@
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     width: 650px;
-
+    cursor: pointer;
   }
   
   /* 선생님 정보 제목 */
@@ -228,6 +228,7 @@
   max-width: 450px;
   margin-bottom: 20px;
   padding: 10px;
+  background-color: #f9f9f9;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
