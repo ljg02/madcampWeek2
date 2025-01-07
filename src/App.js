@@ -67,7 +67,6 @@ const App = () => {
             />
             <Route path="/mypage-schedule" element={<MypageSchedule />} />
             <Route path="/mypage-notes" element={<MypageNotes />} />
-            <Route path="/lecture" element={<Lecture />} />
             <Route
               path="/mypage"
               element={
