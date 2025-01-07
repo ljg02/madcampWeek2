@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import "./FigmaHeader.css";
 import { useNavigate } from "react-router-dom";
 import { FaBars } from "react-icons/fa";
@@ -8,6 +8,18 @@ import logo from "./studyMateLogo.png";
 export const Header = ({ toggleSidebar }) => {
   const { auth, logout } = useContext(AuthContext); // AuthContext 사용
   const navigate = useNavigate();
+  const SUNEUNG_DATE = new Date("2025-11-13");
+  const [dday, setDday] = useState(null);
+
+  useEffect(() => {
+    const today = new Date();
+    // 수능 날짜 - 오늘 날짜 (밀리초 차이)
+    const diff = SUNEUNG_DATE.getTime() - today.getTime();
+    // 일(day) 단위로 변환
+    const diffDays = Math.ceil(diff / (1000 * 60 * 60 * 24));
+
+    setDday(diffDays);
+  }, []);
 
   const handleLogoClick = async () => {
     navigate('/');
@@ -45,9 +57,11 @@ export const Header = ({ toggleSidebar }) => {
   return (
     <div className="header">
       <div className="overlap-group">
+        {/* dday가 null이 아닐 때만 렌더링하거나, 디폴트로 0을 줘도 됩니다 */}
         <p className="d">
           <span className="text-wrapper">수능 </span>
-          <span className="span">D-314</span>
+          {/* D-day 표시 */}
+          <span className="span">D-{dday ?? "..."}</span>
         </p>
 
         {auth.isAuthenticated ? (
