@@ -64,7 +64,14 @@ const App = () => {
                 </PrivateRoute>
               }
             />
-            <Route path="/mypage-schedule" element={<MypageSchedule />} />
+            <Route
+              path="/mypage-schedule"
+              element={
+                <PrivateRoute>
+                  <MypageSchedule />
+                </PrivateRoute>
+              }
+            />
             <Route path="/mypage-notes" element={<MypageNotes />} />
             <Route
               path="/mypage"

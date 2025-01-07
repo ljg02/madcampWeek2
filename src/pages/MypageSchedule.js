@@ -2,63 +2,61 @@ import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import styles from './MypageSchedule.module.css';
 import { AuthContext } from '../components/AuthContext'; // AuthContext import
+import { toast } from 'react-toastify'; // toast import
 
 // import { TbTextSize } from 'react-icons/tb';
 
 const MypageSchedule = () => {
     const [timeTable, setTimeTable] = useState(Array(24 * 6).fill(''));
+    //현재 시간표를 칠할 색깔
     const [selectedColor, setSelectedColor] = useState('#FFC0CB');
+    //{[color]: note, [color]: note, ...}
     const [colorNotes, setColorNotes] = useState({});
+    //사용자가 입력한 공부 내용(note)
     const [newSubject, setNewSubject] = useState('');
+    //드래그 중인지 상태 저장
     const [isDragging, setIsDragging] = useState(false);
+    //각 color마다 editmode가 켜졌는지 여부 저장
+    //{[color]: true, [color]: false, ...}
     const [editMode, setEditMode] = useState({});
-    const [canFill, setCanFill] = useState(false);
     const [diaryEntry, setDiaryEntry] = useState('');
     const [diaryEditMode, setDiaryEditMode] = useState(false);
     const [currentDateTime, setCurrentDateTime] = useState('');
-    const [lastSavedDate, setLastSavedDate] = useState(new Date().toLocaleDateString());
     const { auth } = useContext(AuthContext); // AuthContext에서 로그인 정보 확인
-    const userId = auth.user.id; // 실제 사용자 ID로 교체하거나 인증된 사용자 정보에서 가져오기
-    const API_KEY = process.env.REACT_APP_GOOGLE_API_KEY;
 
     useEffect(() => {
         const fetchTimeZone = async () => {
             try {
                 const timestamp = Math.floor(Date.now() / 1000);
                 const response = await axios.get(
-                    `https://maps.googleapis.com/maps/api/timezone/json?location=37.5665,126.9780&timestamp=${timestamp}&key=${API_KEY}`
+                    `https://maps.googleapis.com/maps/api/timezone/json?location=37.5665,126.9780&timestamp=${timestamp}&key=${process.env.REACT_APP_GOOGLE_API_KEY}`
                 );
-    
+
                 if (response.data.status === 'OK') {
                     const { rawOffset, dstOffset } = response.data;
-                    const totalOffset = rawOffset + dstOffset;  
-    
+                    const totalOffset = rawOffset + dstOffset;
+
                     const interval = setInterval(() => {
                         const utcTime = Date.now();
-                        const localTime = new Date(utcTime + totalOffset * 1000);
+                        const localTime = new Date(utcTime);
                         setCurrentDateTime(localTime.toLocaleString('ko-KR'));
-
-                        const today = localTime.toLocaleDateString();
-                        if (lastSavedDate !== today) {
-                            saveTimeTableToDB(); // DB에 저장
-                            setTimeTable(Array(24 * 6).fill('')); // 새로운 시간표 생성
-                            setLastSavedDate(today);
-                        }
                     }, 1000);
-    
+
                     return () => clearInterval(interval);  // ✅ 메모리 누수 방지
+                } else {
+                    console.error('Google Time Zone API 호출 중 오류: ', response.data);
                 }
             } catch (error) {
                 console.error('Google Time Zone API 호출 중 오류:', error);
             }
         };
-    
+
         fetchTimeZone();
-    }, [API_KEY]);
+    }, []);
 
-
+    //클릭한 셀을 selectedColor로 채우기
     const handleCellClick = (index) => {
-        if (canFill && colorNotes[selectedColor]) {
+        if (colorNotes[selectedColor]) {
             const updatedTimeTable = [...timeTable];
             updatedTimeTable[index] = updatedTimeTable[index] ? '' : selectedColor;
             setTimeTable(updatedTimeTable);
@@ -66,9 +64,9 @@ const MypageSchedule = () => {
     };
 
     const handleCellDrag = (index) => {
-        if (isDragging && canFill && colorNotes[selectedColor]) {
+        if (isDragging && colorNotes[selectedColor]) {
             const updatedTimeTable = [...timeTable];
-            updatedTimeTable[index] = selectedColor;
+            updatedTimeTable[index] = updatedTimeTable[index] ? '' : selectedColor;
             setTimeTable(updatedTimeTable);
         }
     };
@@ -77,17 +75,30 @@ const MypageSchedule = () => {
         setSelectedColor(color);
     };
 
+    const handleFillClick = (color) => {
+        if (color === selectedColor) {
+            setSelectedColor('');
+        }
+        else {
+            setSelectedColor(color);
+        }
+    }
+
     const handleNoteChange = (color, note) => {
         setColorNotes({ ...colorNotes, [color]: note });
     };
 
+    //color에 note 할당
     const handleAddStudyTime = () => {
         if (selectedColor && newSubject) {
             setColorNotes({ ...colorNotes, [selectedColor]: newSubject });
             setNewSubject('');
+        } else {
+            toast.error('색깔과 공부 내용을 모두 입력해주세요');
         }
     };
 
+    //color에 할당된 note 삭제
     const handleDeleteStudyTime = (color) => {
         if (window.confirm('정말 삭제하시겠습니까?')) {
             const updatedNotes = { ...colorNotes };
@@ -99,21 +110,14 @@ const MypageSchedule = () => {
         }
     };
 
+    //color색깔은 edit mode에 진입
     const handleUpdateStudyTime = (color) => {
         setEditMode({ ...editMode, [color]: true });
     };
 
+    //editmode에서 편집한 내용을 저장
     const handleSaveUpdate = (color) => {
         setEditMode({ ...editMode, [color]: false });
-        if (color !== selectedColor) {
-            const updatedTimeTable = timeTable.map(cell => cell === color ? selectedColor : cell);
-            const updatedNotes = { ...colorNotes };
-            updatedNotes[selectedColor] = colorNotes[color];
-            delete updatedNotes[color];
-
-            setTimeTable(updatedTimeTable);
-            setColorNotes(updatedNotes);
-        }
     };
 
 
@@ -131,6 +135,10 @@ const MypageSchedule = () => {
     };
 
     const saveTimeTableToDB = async () => {
+        if(!auth.user) {
+            return;
+        }
+        const userId = auth.user.id;
         try {
             // timeTable 배열을 백엔드에서 기대하는 형식으로 변환
             // [ {(1,1)칸의 hour, minute, color}, {}, ...]
@@ -138,16 +146,18 @@ const MypageSchedule = () => {
                 const hour = Math.floor(index / 6);
                 const minuteIndex = index % 6;
                 const minute = minuteIndex * 10; // 0분, 10분, 20분,...로 변환
-                return { hour, minute, color };
+                return { hour, minute, color, note: colorNotes[color] };
             });
+
+            const today = new Date(Date.now()).toLocaleDateString('ko-KR');
 
             const payload = {
                 userId,
                 timeTable: formattedTimeTable,
-                date: lastSavedDate
+                date: today
             };
 
-            await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/ttt`, {payload, });
+            await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/ttt`, { payload, });
             alert('시간표가 DB에 저장되었습니다!');
         } catch (error) {
             console.error('시간표 저장 실패:', error);
@@ -155,19 +165,36 @@ const MypageSchedule = () => {
     };
 
     const fetchTimeTableFromDB = async () => {
+        if(!auth.user) {
+            return;
+        }
+        const userId = auth.user.id;
         try {
+            const today = new Date(Date.now()).toLocaleDateString('ko-KR');
+            console.log('today: ', today);
+
             const response = await axios.get(
-            `${process.env.REACT_APP_BACKEND_URL}/api/ttt/${userId}/${lastSavedDate}`
+                `${process.env.REACT_APP_BACKEND_URL}/api/ttt/${userId}/${today}`
             );
-            if (response.data.success && response.data.timeTable) {
+
+            if (response.data.success && response.data.timeTables) {
                 // 응답받은 데이터를 timeTable 배열로 변환
-                const fetchedData = response.data.timeTable;
+                const fetchedData = response.data.timeTables;
                 // 데이터 구조에 따라 변환 로직 작성 (예: 색상만 추출)
                 const newTimeTable = Array(24 * 6).fill('');
-                fetchedData.forEach(({ hour, minute, color }) => {
+
+                // 임시 객체를 생성하여 색상 노트를 누적
+                const updatedColorNotes = { ...colorNotes };
+
+                fetchedData.forEach(({ hour, minute, color, note }) => {
                     const minuteIndex = minute / 10;
                     newTimeTable[hour * 6 + minuteIndex] = color;
+                    if (color !== '') {
+                        updatedColorNotes[color] = note; // 색상 노트를 누적
+                    }
                 });
+                // 상태를 한 번에 업데이트
+                setColorNotes(updatedColorNotes);
                 setTimeTable(newTimeTable);
             }
         } catch (error) {
@@ -188,9 +215,9 @@ const MypageSchedule = () => {
             </div>
             <div className={styles.timeTableContainer}>
                 <div className={styles.tableGrid}
-                     onMouseDown={() => setIsDragging(true)}
-                     onMouseUp={() => setIsDragging(false)}
-                     onMouseLeave={() => setIsDragging(false)}>
+                    onMouseDown={() => setIsDragging(true)}
+                    onMouseUp={() => setIsDragging(false)}
+                    onMouseLeave={() => setIsDragging(false)}>
                     <div className={styles.timeRow}>
                         <div className={styles.hourLabel}></div>
                         {['10', '20', '30', '40', '50', '60'].map((minute, index) => (
@@ -217,17 +244,17 @@ const MypageSchedule = () => {
                     <h2 className={styles.titleCenterttt}>Today's Time Table</h2>
                     <button onClick={saveTimeTableToDB}>시간표 저장</button>
                     <div className={styles.addStudyTimeSection}>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '10px'}}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                             <input
                                 type="color"
                                 value={selectedColor}
-                                style={{ width: '35px', height: '35px', border: 'none'}}
+                                style={{ width: '35px', height: '35px', border: 'none' }}
                                 onChange={(e) => handleColorChange(e.target.value)}
                             />
                             <input
                                 type="text"
                                 value={newSubject}
-                                style={{ height: '35px', padding: '10px'}}
+                                style={{ height: '35px', padding: '10px' }}
                                 onChange={(e) => setNewSubject(e.target.value)}
                                 placeholder="공부 내용을 입력하세요"
                             />
@@ -240,23 +267,24 @@ const MypageSchedule = () => {
                     </div>
 
                     <div className={styles.notesList}>
+                        {/* 할당된 note가 있는 color 리스트 출력 */}
                         {Object.keys(colorNotes).map((color) => (
                             <div key={color} className={styles.noteItem}>
                                 <input
                                     type="color"
                                     value={color}
-                                    style={{ width: '35px', height: '35px', border: 'none', padding: '0'}}
-                                    disabled={!editMode[color]}
+                                    style={{ width: '35px', height: '35px', border: 'none', padding: '0' }}
+                                    disabled={true}
                                     onChange={(e) => handleColorChange(e.target.value)}
                                 />
                                 <input
                                     type="text"
                                     value={colorNotes[color]}
                                     disabled={!editMode[color]}
-                                    style={{ width: '15px', height: '15px', padding: '15px'}}
+                                    style={{ width: '15px', height: '15px', padding: '15px' }}
                                     onChange={(e) => handleNoteChange(color, e.target.value)}
                                 />
-                                <button onClick={() => setCanFill(!canFill)}>{canFill ? '완료' : '채우기'}</button>
+                                <button onClick={() => handleFillClick(color)}>{selectedColor === color ? '완료' : '채우기'}</button>
                                 {editMode[color] ? (
                                     <button onClick={() => handleSaveUpdate(color)}>완료</button>
                                 ) : (
@@ -267,13 +295,13 @@ const MypageSchedule = () => {
                         ))}
                     </div>
                     <div className={styles.diarySection}>
-                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%'}}>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
                             <h2>오늘의 감정 일기</h2>
                             {diaryEditMode ? (
-                            <button onClick={handleDiarySave}>완료</button>
-                        ) : (
-                            <button onClick={toggleDiaryEditMode}>수정</button>
-                        )}
+                                <button onClick={handleDiarySave}>완료</button>
+                            ) : (
+                                <button onClick={toggleDiaryEditMode}>수정</button>
+                            )}
                         </div>
                         <textarea
                             value={diaryEntry}
@@ -282,7 +310,7 @@ const MypageSchedule = () => {
                             disabled={!diaryEditMode}
                             style={{ width: '100%', height: '100px' }}
                         />
-                        
+
                     </div>
                 </div>
             </div>
