@@ -57,7 +57,7 @@
     box-sizing: border-box;
     margin-bottom: 15px;
     gap: 10px;
-
+    cursor: pointer;
 }
 
 .progressBar {
@@ -144,6 +144,7 @@
     overflow: hidden;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     padding: 20px;
+    cursor: pointer;
 }
 
 .teacherProfileImage {

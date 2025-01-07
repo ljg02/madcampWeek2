@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext, useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import styles from "./MypageLecture.module.css";
 import { AuthContext } from '../components/AuthContext'; // AuthContext import
@@ -8,6 +9,8 @@ import ReactPlayer from 'react-player';
 const MypageLecture = () => {
     const { auth } = useContext(AuthContext);
     const userId = auth.user ? auth.user.id : null;
+
+    const navigate = useNavigate(); // 페이지 이동을 위한 훅
 
     const [lectures, setLectures] = useState([
         {
@@ -82,6 +85,14 @@ const MypageLecture = () => {
         }
     };
 
+    const handleVideoCardClick = (videoId) => {
+        navigate(`/video/${videoId}`);
+    };
+
+    const handleLectureCardClick = (courseId) => {
+        navigate(`/course/${courseId}`);
+    };
+
     // 진행도 평균 계산 함수
     const calculateAverage = (arr) => {
         if (arr.length === 0) return 0;
@@ -101,7 +112,7 @@ const MypageLecture = () => {
                 {videos.length > 0 ? (
                     <div className={styles.lectureCardContainer}>
                         {videos.slice(0, 3).map((video, index) => (
-                            <div key={index} className={styles.lectureCard}>
+                            <div key={index} className={styles.lectureCard} onClick={() => handleVideoCardClick(video.video_id)}>
                                 <ReactPlayer
                                     url={video.youtube_id}
                                     controls
@@ -146,7 +157,7 @@ const MypageLecture = () => {
                 {lectures.length > 0 ? (
                     <div className={styles.enrolledLectures}>
                         {lectures.map((lecture) => (
-                            <div key={lecture.course_id} className={styles.enrolledLectureCard}>
+                            <div key={lecture.course_id} className={styles.enrolledLectureCard} onClick={() => handleLectureCardClick(lecture.course_id)}>
                                 <img src={lecture.teacher_profile_image} alt={lecture.teacher_name} className={styles.teacherProfileImage} />
                                 <div className={styles.lectureInfo}>
                                     <p><strong>{lecture.course_title}</strong></p>

@@ -188,6 +188,10 @@
   margin-top: 30px;
 }
 
+.video-list-title {
+  margin-bottom: 10px;
+}
+
 .video-list ul {
   list-style-type: none;
   padding: 0;
@@ -199,6 +203,15 @@
 
 .video-item h3 {
   margin-bottom: 10px;
+}
+
+.video-card {
+  background-color: #f9f9f9;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  padding: 30px;
 }
 
 

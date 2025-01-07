@@ -115,6 +115,10 @@ const CourseDetail = () => {
     }
   };
 
+  const handleVideoCardClick = (videoId) => {
+    navigate(`/video/${videoId}`);
+  };
+
   if (loading) {
     return <div className="loading">로딩 중...</div>;
   }
@@ -152,22 +156,24 @@ const CourseDetail = () => {
 
       {/* 강의 영상 목록 렌더링 */}
       <div className="video-list">
-        <h2>강의 비디오 목록</h2>
+        <h2 className="video-list-title">강의 비디오 목록</h2>
         {videos.length > 0 ? (
           <ul>
             {videos.map((video) => (
               <li key={video.id} className="video-item">
-                <ReactPlayer
-                  url={video.youtube_id}
-                  controls
-                  width="100%"
-                  height="360px"
-                  config={{
-                    youtube: {
-                      playerVars: { showinfo: 1 }
-                    }
-                  }}
-                />
+                <div className="video-card" onClick={() => handleVideoCardClick(video.id)}>
+                  <ReactPlayer
+                    url={video.youtube_id}
+                    controls
+                    width="100%"
+                    height="360px"
+                    config={{
+                      youtube: {
+                        playerVars: { showinfo: 1 }
+                      }
+                    }}
+                  />
+                </div>
               </li>
             ))}
           </ul>
