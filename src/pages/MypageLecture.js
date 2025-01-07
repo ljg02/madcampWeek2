@@ -69,6 +69,12 @@ const MypageLecture = () => {
     }, [userId, fetchUserVideos, fetchCourseDetail]);
 
     const handleCancelEnrollment = async (courseId) => {
+        // 사용자에게 취소 여부를 확인하는 창 표시
+        const confirmCancel = window.confirm('정말로 강의 신청을 취소하시겠습니까?');
+
+        // 사용자가 취소를 승인하지 않으면 함수 종료
+        if (!confirmCancel) return;
+
         try {
             await axios.delete(`${process.env.REACT_APP_BACKEND_URL}/api/enrolls/cancel`, {
                 data: { userId: userId, courseId },
@@ -168,7 +174,8 @@ const MypageLecture = () => {
                                         </div>
                                         <span>{lecture.progress}% 완료</span>
                                     </div>
-                                    <button className={styles.cancelButton} onClick={() => handleCancelEnrollment(lecture.course_id)}>
+                                    <button className={styles.cancelButton} onClick={(e) => {e.stopPropagation(); // 이벤트 전파 중단
+                                    handleCancelEnrollment(lecture.course_id)}}>
                                         수강 취소
                                     </button>
                                 </div>

@@ -10,7 +10,6 @@ import Footer from "./components/Footer";
 import Home from './pages/Home/Home';
 import VideoPlayer from './pages/VideoPlayer';
 import Login from './pages/Login/Login';
-import Lecture from './pages/Lecture';
 import MypageLecture from './pages/MypageLecture';
 import MypageSchedule from './pages/MypageSchedule';
 import MypageNotes from './pages/MypageNotes';
