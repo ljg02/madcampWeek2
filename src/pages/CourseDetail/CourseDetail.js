@@ -166,17 +166,23 @@ const CourseDetail = () => {
             {videos.map((video) => (
               <li key={video.id} className="video-item">
                 <div className="video-card" onClick={() => handleVideoCardClick(video.id)}>
+                  <div className="video-content">
                   <ReactPlayer
                     url={video.youtube_id}
                     controls
-                    width="630px"
-                    height="360px"
+                    width="100%"
+                    height="150px"
+                    className="video-player"
                     config={{
                       youtube: {
                         playerVars: { showinfo: 1 }
                       }
                     }}
                   />
+                  <button className="lecture-detail-button" onClick={() => handleVideoCardClick(video.id)}>
+                  강의 페이지
+                </button>
+                </div>
                 </div>
               </li>
             ))}
