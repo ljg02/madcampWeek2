@@ -140,6 +140,10 @@ const VideoDetail = () => {
         }
     };
 
+    const handleInstructorClick = (teacherId) => {
+        navigate(`/instructor/${teacherId}`);
+    };
+
     return (
         <div className={styles.container}>
             {/* 로딩 상태 */}
@@ -172,7 +176,7 @@ const VideoDetail = () => {
                     </div>
 
                     {/* 강사 섹션 */}
-                    <div className={styles.instructorInfo}>
+                    <div className={styles.instructorInfo} onClick={() => handleInstructorClick(teacher.id)}>
                         <img src={teacher.image} alt={teacher.name} className={styles.profileImage} />
                         <div>
                             <p className={styles.subject}> {teacher.name}</p>

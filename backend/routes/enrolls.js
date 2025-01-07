@@ -66,6 +66,7 @@ router.get('/user/:userId', async (req, res) => {
                 c.title AS course_title, 
                 c.image AS course_image,
                 e.progress,
+                t.id AS teacher_id,
                 t.name AS teacher_name,
                 t.subject AS teacher_subject,
                 t.image AS teacher_profile_image

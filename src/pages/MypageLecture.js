@@ -99,6 +99,10 @@ const MypageLecture = () => {
         navigate(`/course/${courseId}`);
     };
 
+    const handleTeacherProfileClick = (teacherId) => {
+        navigate(`/instructor/${teacherId}`);
+    };
+
     // 진행도 평균 계산 함수
     const calculateAverage = (arr) => {
         if (arr.length === 0) return 0;
@@ -164,7 +168,10 @@ const MypageLecture = () => {
                     <div className={styles.enrolledLectures}>
                         {lectures.map((lecture) => (
                             <div key={lecture.course_id} className={styles.enrolledLectureCard} onClick={() => handleLectureCardClick(lecture.course_id)}>
-                                <img src={lecture.teacher_profile_image} alt={lecture.teacher_name} className={styles.teacherProfileImage} />
+                                <img src={lecture.teacher_profile_image} alt={lecture.teacher_name} className={styles.teacherProfileImage}
+                                onClick={(e) => 
+                                    {e.stopPropagation();
+                                    handleTeacherProfileClick(lecture.teacher_id);}} />
                                 <div className={styles.lectureInfo}>
                                     <p><strong>{lecture.course_title}</strong></p>
                                     <p>{lecture.teacher_subject} - {lecture.teacher_name}</p>
@@ -175,7 +182,7 @@ const MypageLecture = () => {
                                         <span>{lecture.progress}% 완료</span>
                                     </div>
                                     <button className={styles.cancelButton} onClick={(e) => {e.stopPropagation(); // 이벤트 전파 중단
-                                    handleCancelEnrollment(lecture.course_id)}}>
+                                    handleCancelEnrollment(lecture.course_id);}}>
                                         수강 취소
                                     </button>
                                 </div>
