@@ -119,7 +119,7 @@ router.get('/check/video', async (req, res) => {
     try {
         const [rows] = await db.query(`
             SELECT 
-                e.user_id,
+                e.user_id
             FROM 
                 enrolls e
             JOIN 

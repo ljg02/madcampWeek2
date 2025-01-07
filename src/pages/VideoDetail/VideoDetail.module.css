@@ -176,6 +176,12 @@
     color: white;
 }
 
+.commentsContainer {
+    margin-top: 30px;
+    width: 1260px;
+    margin-bottom: 30px;
+}
+
 .commentList {
     list-style-type: none;
     padding: 0;
@@ -184,4 +190,18 @@
 .commentItem {
     padding: 10px;
     border-bottom: 1px solid #ccc;
+}
+
+.commentUser {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.commentContent {
+    margin-bottom: 5px;
+}
+
+.commentTime {
+    font-size: 0.8rem;
+    color: #666;
 }

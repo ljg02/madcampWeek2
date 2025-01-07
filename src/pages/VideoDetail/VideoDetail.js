@@ -26,13 +26,7 @@ const VideoDetail = () => {
     const [comments, setComments] = useState([]);
     const [newComment, setNewComment] = useState('');
     const [sentiment, setSentiment] = useState({ positive: 70, negative: 30 });
-
-    const handleCommentSubmit = () => {
-        if (newComment.trim()) {
-            setComments([...comments, newComment]);
-            setNewComment('');
-        }
-    };
+    const [commentsLoading, setCommentsLoading] = useState(true); // 댓글 로딩 상태
 
     useEffect(() => {
         const fetchVideoDetail = async () => {
@@ -73,6 +67,78 @@ const VideoDetail = () => {
         fetchVideoDetail();
         checkEnrollment();
     }, [id, auth]);
+
+    // 댓글 불러오기
+    useEffect(() => {
+        const fetchComments = async () => {
+            try {
+                const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/comments/video/${id}`);
+                if (response.data.success) {
+                    setComments(response.data.comments);
+                } else {
+                    console.error('댓글 불러오기 실패:', response.data.message);
+                }
+                setCommentsLoading(false);
+            } catch (err) {
+                console.error('댓글 불러오기 에러:', err);
+                toast.error('댓글을 불러오는 데 실패했습니다.');
+                setCommentsLoading(false);
+            }
+        };
+
+        fetchComments();
+    }, [id]);
+
+    // 댓글 추가 핸들러
+    const handleCommentSubmit = async () => {
+        if (newComment.trim()) {
+            if (!auth.isAuthenticated || !auth.user) {
+                toast.error('댓글을 작성하려면 로그인이 필요합니다.');
+                return;
+            }
+
+            if (!isEnrolled) {
+                toast.error('댓글을 작성하려면 이 강의를 신청해야 합니다.');
+                setNewComment('');
+                return;
+            }
+
+            try {
+                const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/comments`, {
+                    video_id: id,
+                    content: newComment,
+                    user_id: auth.user.id
+                });
+
+                if (response.data.success) {
+                    // 새로운 댓글을 상태에 추가
+                    const newCommentData = {
+                        id: response.data.comment.id,
+                        content: newComment,
+                        created_at: response.data.comment.created_at,
+                        user_id: auth.user.id,
+                        user_name: auth.user.name,
+                    };
+                    setComments([newCommentData, ...comments]);
+                    setNewComment('');
+
+                    // const total = positiveCount + negativeCount || 1; // 0으로 나누는 것을 방지
+                    // setSentiment({
+                    //     positive: Math.round((positiveCount / total) * 100),
+                    //     negative: Math.round((negativeCount / total) * 100),
+                    // });
+
+                    toast.success('댓글이 성공적으로 작성되었습니다.');
+                } else {
+                    console.error('댓글 작성 실패:', response.data.message);
+                    toast.error('댓글 작성에 실패했습니다.');
+                }
+            } catch (err) {
+                console.error('댓글 작성 에러:', err);
+                toast.error('댓글 작성에 실패했습니다. 다시 시도해주세요.');
+            }
+        }
+    };
 
     return (
         <div className={styles.container}>
@@ -136,11 +202,24 @@ const VideoDetail = () => {
                     </div>
 
                     {/* 댓글 목록 */}
-                    <ul className={styles.commentList}>
-                        {comments.map((comment, index) => (
-                            <li key={index} className={styles.commentItem}>{comment}</li>
-                        ))}
-                    </ul>
+                    <div className={styles.commentsContainer}>
+                        <h3>댓글 목록</h3>
+                        {commentsLoading ? (
+                            <p>댓글을 불러오는 중...</p>
+                        ) : comments.length > 0 ? (
+                            <ul className={styles.commentList}>
+                                {comments.map((comment) => (
+                                    <li key={comment.id} className={styles.commentItem}>
+                                        <p className={styles.commentUser}>{comment.user_name}:</p>
+                                        <p className={styles.commentContent}>{comment.content}</p>
+                                        <p className={styles.commentTime}>{new Date(comment.created_at).toLocaleString()}</p>
+                                    </li>
+                                ))}
+                            </ul>
+                        ) : (
+                            <p>작성된 댓글이 없습니다.</p>
+                        )}
+                    </div>
                 </>
             )}
         </div>
