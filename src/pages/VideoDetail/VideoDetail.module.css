@@ -115,6 +115,10 @@
     background-color: #f44336;
 }
 
+.neutral {
+    background-color: #FFFF00;
+}
+
 .enroll-button {
     padding: 10px 20px;
     font-size: 1rem;
@@ -189,6 +193,9 @@
 }
 
 .commentItem {
+    display: flex; /* 플렉스 컨테이너로 설정 */
+    justify-content: space-between; /* 양쪽 끝에 요소 배치 */
+    align-items: center; /* 수직 가운데 정렬 */
     padding: 10px;
     border-bottom: 1px solid #ccc;
 }
@@ -205,4 +212,13 @@
 .commentTime {
     font-size: 0.8rem;
     color: #666;
+    margin-bottom: 5px;
+}
+
+.delete {
+    color: #f44336; /* 삭제 버튼의 색상 */
+    cursor: pointer; /* 커서를 포인터로 설정 */
+    margin-left: 10px; /* 여백 추가 */
+    font-weight: bold;
+    text-decoration: underline;
 }

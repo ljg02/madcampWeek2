@@ -60,8 +60,14 @@ const MypageLecture = () => {
 
 
     useEffect(() => {
-        console.log('userId : ', userId);
-        console.log('user');
+        const courseIds = lectures.map(lecture => lecture.course_id);
+        const uniqueCourseIds = new Set(courseIds);
+
+        if (courseIds.length !== uniqueCourseIds.size) {
+            console.warn('중복된 course_id가 존재합니다:', courseIds.filter((id, index) => courseIds.indexOf(id) !== index));
+        } else {
+            console.log('모든 course_id가 고유합니다.');
+        }
         if (!userId) return; // 사용자 ID가 없으면 요청하지 않음
 
         fetchUserVideos();
@@ -71,7 +77,7 @@ const MypageLecture = () => {
     const handleCancelEnrollment = async (courseId) => {
         const isConfirmed = window.confirm('정말 수강 신청을 취소하시겠습니까?');
         if (!isConfirmed) return; // 사용자가 취소를 누르면 함수 종료
-        
+
         try {
             await axios.delete(`${process.env.REACT_APP_BACKEND_URL}/api/enrolls/cancel`, {
                 data: { userId: userId, courseId },
@@ -166,9 +172,10 @@ const MypageLecture = () => {
                         {lectures.map((lecture) => (
                             <div key={lecture.course_id} className={styles.enrolledLectureCard} onClick={() => handleLectureCardClick(lecture.course_id)}>
                                 <img src={lecture.teacher_profile_image} alt={lecture.teacher_name} className={styles.teacherProfileImage}
-                                onClick={(e) => 
-                                    {e.stopPropagation();
-                                    handleTeacherProfileClick(lecture.teacher_id);}} />
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        handleTeacherProfileClick(lecture.teacher_id);
+                                    }} />
                                 <div className={styles.lectureInfo}>
                                     <p><strong>{lecture.course_title}</strong></p>
                                     <p>{lecture.teacher_subject} - {lecture.teacher_name}</p>
@@ -178,8 +185,10 @@ const MypageLecture = () => {
                                         </div>
                                         <span>{lecture.progress}% 완료</span>
                                     </div>
-                                    <button className={styles.cancelButton} onClick={(e) => {e.stopPropagation(); // 이벤트 전파 중단
-                                    handleCancelEnrollment(lecture.course_id);}}>
+                                    <button className={styles.cancelButton} onClick={(e) => {
+                                        e.stopPropagation(); // 이벤트 전파 중단
+                                        handleCancelEnrollment(lecture.course_id);
+                                    }}>
                                         수강 취소
                                     </button>
                                 </div>
