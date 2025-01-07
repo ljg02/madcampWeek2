@@ -129,7 +129,7 @@ const MypageNotes = () => {
     return (
         <div className={styles.container}>
             <div className={styles.mainBoundingBox}>
-                <h1 className={styles.header}>My Notes</h1>
+                <h1 className={styles.header}>PDF 혹은 이미지를 업로드하세요 !</h1>
                 <label className={styles.uploadButtonLabel}>
                     파일 선택
                     <input type="file" accept="image/*,application/pdf" onChange={handleFileUpload} className={styles.uploadButton} />
@@ -139,7 +139,7 @@ const MypageNotes = () => {
                 <div className={styles.boundingBox}>
                     <div className={styles.section} style={{ marginTop: '30px' }}>
                         <h2>텍스트 변환기</h2>
-                        <button className={styles.actionButton} onClick={handleTextConversion}>텍스트 변환</button>
+                        <button className={styles.notes_button} onClick={handleTextConversion}>텍스트 변환</button>
                         {text && (
                             <div className={styles.textOutputContainer}>
                                 <textarea value={text} readOnly className={styles.textArea}></textarea>
@@ -149,7 +149,7 @@ const MypageNotes = () => {
                     </div>
                     <div className={styles.section} style={{ marginTop: '30px' }}>
                         <h2>AI 노트 정리</h2>
-                        <button className={styles.actionButton} onClick={handleGeneratePdf}>AI 노트 정리</button>
+                        <button className={styles.notes_button} onClick={handleGeneratePdf}>AI 노트 정리</button>
                         {convertedPdf && (
                             <div className={styles.downloadContainer}>
                                 <a className={styles.downloadButton} href={convertedPdf} download="AI_Notes.pdf">정리된 노트 PDF 다운로드</a>

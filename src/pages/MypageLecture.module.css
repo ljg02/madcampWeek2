@@ -32,6 +32,11 @@
     box-sizing: border-box;
 }
 
+.sectionFrame h1{
+    font-size: 1.5em;
+    margin-bottom: 25px;
+}
+
 .lectureCardContainer {
     display: flex;
     flex-wrap: wrap;
@@ -89,6 +94,7 @@
     font-weight: bold;
     cursor: pointer;
     margin-bottom: 20px;
+    font-size: 1.2em;
 }
 
 .statsContainerRow {
@@ -108,11 +114,12 @@
 }
 
 .statBox {
-    background: #C0E8D5;
-    padding: 10px;
-    border-radius: 20px;
+    background: #1bb783;
+    padding: 13px 30px;    
+    border-radius: 30px;
     text-align: center;
     font-weight: bold;
+    color: white;            /* 폰트 색상을 흰색으로 변경 */
     width: 150px;
 }
 
@@ -121,8 +128,9 @@
 }
 
 .notificationBox {
+    max-width: 800px;
     background: #EDEDED;
-    padding: 10px;
+    padding: 13px 30px;
     border-radius: 20px;
     text-align: center;
     font-weight: bold;
@@ -138,7 +146,9 @@
 
 .enrolledLectureCard {
     display: flex;
-    width: 600px;
+    align-items: center;   
+    gap: px;   
+    width: 100%;
     background-color: #fafafa;
     border-radius: 10px;
     overflow: hidden;
@@ -148,11 +158,11 @@
 }
 
 .teacherProfileImage {
-    width: 100px;
-    height: 100px;
+    width: 150px;
+    height: 150px;
     object-fit: cover;
     border-radius: 50%;
-    margin-right: 20px;
+    margin-right: 30px;
 }
 
 .lectureInfo {
@@ -174,6 +184,12 @@
 
 .enrolledLectureCard .progressContainer {
     margin: 10px 0;
+    display: flex;                   /* Flexbox 적용 */
+    flex-direction: row;          /* 수직 방향 정렬 */
+    justify-content: center;         /* 세로 방향 중앙 정렬 */
+    align-items: center;             /* 가로 방향 중앙 정렬 */
+    text-align: center;              /* 텍스트 중앙 정렬 */
+    gap: 8px;   
 }
 
 .enrolledLectureCard .progressBar {
@@ -182,12 +198,13 @@
     background-color: #e0e0e0;
     border-radius: 5px;
     margin-right: 10px;
+    margin-bottom: 10px;
     overflow: hidden;
 }
 
 .enrolledLectureCard .progress {
     height: 100%;
-    background-color: #4CAF50;
+    background-color: rgb(69, 228, 101);
     border-radius: 5px 0 0 5px;
 }
 
@@ -196,6 +213,20 @@
     font-size: 1.5em;
     color: #555555;
     margin-top: 50px;
+}
+
+.cancelButton {
+    width: 100%;
+    background: #fc784f;      /* 배경색을 동일하게 */
+    padding: 13px 20px;       /* 패딩을 동일하게 */
+    border-radius: 10px;      /* 모서리를 둥글게 */
+    text-align: center;       /* 텍스트 중앙 정렬 */
+    font-weight: bold;        /* 볼드체 */
+    color: white;             /* 폰트 색상을 흰색으로 */
+    border: none;             /* 테두리 제거 */
+    cursor: pointer;          /* 클릭 가능한 버튼 스타일 */
+    width: 100%;              /* 전체 너비 사용 */
+    transition: background 0.3s ease; /* 호버 시 부드러운 색상 전환 */
 }
 
 /* 반응형 디자인 */

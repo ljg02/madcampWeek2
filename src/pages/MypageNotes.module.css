@@ -47,11 +47,11 @@
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
 }
 
-button {
+.notes_button {
     padding: 20px 40px;
     margin: 20px 0;
     border: none;
-    border-radius: 30px;
+    border-radius: 20px;
     cursor: pointer;
     background-color: #A0C4FF;
     color: white;
@@ -61,7 +61,7 @@ button {
     white-space: nowrap;
 }
 
-button:hover {
+.notes_button:hover {
     background-color: #89B4FF;
 }
 

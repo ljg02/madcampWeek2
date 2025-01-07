@@ -47,7 +47,6 @@ function Mypage() {
                     ))}
                 </div>
             </section>
-              <button className="video-button" onClick={goToVideoPlayer}>비디오 플레이어로 이동</button>
           </div>
           </section>
           <section className="analytics-section2">
