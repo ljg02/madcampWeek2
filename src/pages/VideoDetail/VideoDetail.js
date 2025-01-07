@@ -82,10 +82,14 @@ const VideoDetail = () => {
             {/* 에러 상태 */}
             {error && <div className={styles.error}>{error}</div>}
 
-            {/* 비디오 및 상세 정보 */}
+            {/* 영상 및 상세 정보 */}
             {!loading && !error && course && (
                 <>
-                    {/* 비디오 섹션 */}
+                    {/* 영상 제목 */}
+                    <div className={styles.videoTitle}>
+                        <span className={styles.videoTitleText}>{'<'}{course.title}{'>'} 강의 영상</span>
+                    </div>
+                    {/* 영상 섹션 */}
                     <div className={styles.videoContainer}>
                         <ReactPlayer
                             url={video.youtube_id}
@@ -112,7 +116,7 @@ const VideoDetail = () => {
 
                     {/* 감정 분석 섹션 */}
                     <div className={styles.sentimentAnalysis}>
-                        <p>댓글 감정 분석</p>
+                        <p className={styles.sentimentTitle}>민심</p>
                         <div className={styles.sentimentBar}>
                             <div className={styles.positive} style={{ width: `${sentiment.positive}%` }}></div>
                             <div className={styles.negative} style={{ width: `${sentiment.negative}%` }}></div>

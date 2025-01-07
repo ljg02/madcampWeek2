@@ -24,6 +24,17 @@
     margin-top: 50px;
 }
 
+.videoTitle {
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.videoTitleText {
+    font-weight: bold;
+    font-size: 2rem;
+}
+
 .videoContainer {
     position: relative;
     margin-bottom: 20px;
@@ -81,9 +92,15 @@
     margin-bottom: 20px;
 }
 
+.sentimentTitle {
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
 .sentimentBar {
     display: flex;
     height: 20px;
+    width: 1260px;
     background-color: #e0e0e0;
     border-radius: 10px;
     overflow: hidden;
@@ -137,6 +154,7 @@
     display: flex;
     margin-top: 20px;
     margin-bottom: 20px;
+    width: 1260px;
 }
 
 .commentInput {
