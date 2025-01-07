@@ -242,7 +242,7 @@ const MypageSchedule = () => {
 
                 <div className={styles.notesSection}>
                     <h2 className={styles.titleCenterttt}>Today's Time Table</h2>
-                    <button onClick={saveTimeTableToDB}>시간표 저장</button>
+                    <button className={styles.schedule_save_button} onClick={saveTimeTableToDB}>시간표 저장</button>
                     <div className={styles.addStudyTimeSection}>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                             <input
@@ -254,7 +254,7 @@ const MypageSchedule = () => {
                             <input
                                 type="text"
                                 value={newSubject}
-                                style={{ height: '35px', padding: '10px' }}
+                                style={{ width: '240px', height: '35px', padding: '10px' }}
                                 onChange={(e) => setNewSubject(e.target.value)}
                                 placeholder="공부 내용을 입력하세요"
                             />
