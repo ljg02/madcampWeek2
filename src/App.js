@@ -20,6 +20,7 @@ import CourseDetail from './pages/CourseDetail/CourseDetail';
 import InstructorDetail from './pages/InstructorDetail/InstructorDetail';
 import TextbookDetail from './pages/TextbookDetail/TextbookDetail';
 import MockExamDetail from './pages/MockExamDetail/MockExamDetail';
+import VideoDetail from './pages/VideoDetail/VideoDetail';
 
 const App = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false); // 사이드바 상태 관리
@@ -79,6 +80,7 @@ const App = () => {
             <Route path="/instructor/:id" element={<InstructorDetail />} />
             <Route path="/textbook/:id" element={<TextbookDetail />} />
             <Route path="/mockExam/:id" element={<MockExamDetail />} />
+            <Route path="/video/:id" element={<VideoDetail />} />
             {/* 추가적인 라우트 */}
           </Routes>
         </div>

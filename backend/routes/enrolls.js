@@ -108,4 +108,38 @@ router.delete('/cancel', async (req, res) => {
     }
 });
 
+// 특정 비디오에 대해 사용자의 신청 여부 확인
+router.get('/check/video', async (req, res) => {
+    const { userId, videoId } = req.query;
+
+    if (!userId || !videoId) {
+        return res.status(400).json({ success: false, message: 'userId와 videoId가 필요합니다.' });
+    }
+
+    try {
+        const [rows] = await db.query(`
+            SELECT 
+                e.user_id,
+            FROM 
+                enrolls e
+            JOIN 
+                courses c ON e.course_id = c.id
+            JOIN 
+                videos v ON c.id = v.course_id
+            WHERE 
+                e.user_id = ? AND
+                v.id = ?
+        `, [userId, videoId]);
+
+        if (rows.length > 0) {
+            return res.status(200).json({ success: true, isEnrolled: true });
+        } else {
+            return res.status(200).json({ success: true, isEnrolled: false });
+        }
+    } catch (error) {
+        console.error('강의 신청 여부 확인 에러:', error);
+        return res.status(500).json({ success: false, message: '서버 오류가 발생했습니다.' });
+    }
+});
+
 module.exports = router;

@@ -35,7 +35,7 @@ const MypageLecture = () => {
 
     const fetchUserVideos = useCallback(async () => {
         try {
-            const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/videos/${userId}`);
+            const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/videos/user/${userId}`);
             console.log('User Videos:', response.data.videos);
             setVideos(response.data.videos);
         } catch (error) {

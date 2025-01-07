@@ -1,0 +1,169 @@
+/* src/pages/VideoDetail.module.css */
+
+.container {
+    width: 1500px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: 'Poppins', sans-serif;
+    background-color: #f9f9f9;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.loading,
+.error,
+.no-data {
+    text-align: center;
+    font-size: 1.5rem;
+    margin-top: 50px;
+}
+
+.videoContainer {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.videoPlayer {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.videoInfo {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.thumbnail {
+    width: 120px;
+    height: 90px;
+    margin-right: 20px;
+    object-fit: cover;
+}
+
+.videoTitle {
+    font-size: 1.5rem;
+}
+
+.instructorInfo {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    margin-right: 1061px;
+}
+
+.profileImage {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 20px;
+}
+
+.subject {
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.message {
+    font-size: 1rem;
+    font-style: italic;
+}
+
+.sentimentAnalysis {
+    margin-bottom: 20px;
+}
+
+.sentimentBar {
+    display: flex;
+    height: 20px;
+    background-color: #e0e0e0;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.positive {
+    background-color: #4caf50;
+}
+
+.negative {
+    background-color: #f44336;
+}
+
+.enroll-button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-bottom: 20px;
+    border: none;
+    border-radius: 5px;
+}
+
+.enroll-button.enroll {
+    background-color: #4caf50;
+    color: white;
+}
+
+.enroll-button.cancel {
+    background-color: #f44336;
+    color: white;
+}
+
+.videoList {
+    margin-top: 30px;
+}
+
+.videoList ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.videoItem {
+    margin-bottom: 30px;
+}
+
+.videoItem h3 {
+    margin-bottom: 10px;
+}
+
+.commentSection {
+    display: flex;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.commentInput {
+    flex: 1;
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.submitButton {
+    padding: 10px 20px;
+    font-size: 1rem;
+    margin-left: 10px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    background-color: #2196f3;
+    color: white;
+}
+
+.commentList {
+    list-style-type: none;
+    padding: 0;
+}
+
+.commentItem {
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+}
