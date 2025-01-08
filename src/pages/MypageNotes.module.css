@@ -53,7 +53,7 @@
     border: none;
     border-radius: 20px;
     cursor: pointer;
-    background-color: #A0C4FF;
+    background-color: #6ca4ff;
     color: white;
     font-weight: bold;
     font-size: 1.2rem;
@@ -114,6 +114,24 @@ textarea {
     padding: 15px 30px;
     border-radius: 10px;
     background-color: #A0C4FF;
+    color: white;
+    font-weight: bold;
+    font-size: 1.2rem;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin-top: 30px;
+    margin-bottom: 20px;
+    margin-left: 20px;
+    white-space: nowrap;
+}
+
+.refreshButton {
+    border: none;
+    transition: background 0.3s ease;
+    display: inline-block;
+    padding: 15px 30px;
+    border-radius: 10px;
+    background-color: #8195fa;
     color: white;
     font-weight: bold;
     font-size: 1.2rem;
