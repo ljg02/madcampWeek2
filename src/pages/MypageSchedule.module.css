@@ -50,6 +50,7 @@
     margin-left: 160px;
     height: 50px;
     width: 150px;
+    font-weight: bold;
 }
 
 .schedule_save_button:hover {
@@ -141,6 +142,8 @@ input[type="text"] {
     cursor: pointer;
     transition: background 0.3s ease;
     width: 175px;
+    font-weight: bold;
+
 }
 
 .schedule_button:hover {
@@ -156,6 +159,8 @@ input[type="text"] {
     color: white;
     cursor: pointer;
     transition: background 0.3s ease;
+    font-weight: bold;
+
 }
 
 .noteItem button:hover {
@@ -169,6 +174,8 @@ input[type="text"] {
     color: white;
     cursor: pointer;
     transition: background 0.3s ease;
+    font-weight: bold;
+
 }
 
 .fillButton:hover {
@@ -183,6 +190,8 @@ input[type="text"] {
     color: white;
     cursor: pointer;
     transition: background 0.3s ease;
+    font-weight: bold;
+
 }
 
 .modifyButton:hover {
@@ -310,6 +319,8 @@ input[type="text"] {
     color: white;
     cursor: pointer;
     transition: background 0.3s ease;
+    font-weight: bold;
+
 }
 
 .diarySaveButton:hover {
@@ -375,6 +386,6 @@ input[type="text"] {
     color: #535353;
 }
 
-.timeBox h1 {
-    font-size: 1.5rem; /* 또는 px 단위로 16px, 18px 등 원하는 크기를 지정하세요 */
+.timeBox .h1 {
+    font-size: 1.3rem; /* 또는 px 단위로 16px, 18px 등 원하는 크기를 지정하세요 */
 }
