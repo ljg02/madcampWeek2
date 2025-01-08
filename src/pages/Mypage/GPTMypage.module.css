@@ -245,6 +245,7 @@ body {
 
 /* Analytics Section */
 .all_section {
+    min-width: 600px;
     display: flex;
     flex-direction: row;
     justify-content: center;

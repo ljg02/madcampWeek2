@@ -126,8 +126,11 @@ function Mypage() {
             <div className={styles.courses}>
               <section className={styles.all_section}>
                 <div className={styles.lectureCardContainer}>
-                  {lectures.map((lecture) => (
-                    <div key={lecture.course_id} className={styles.enrolledLectureCard} onClick={() => handleLectureCardClick(lecture.course_id)}>
+                {lectures.length === 0 ? (
+                    <p>강의를 신청해 주세요</p>
+                  ) : (
+                    lectures.map((lecture) => (
+                      <div key={lecture.course_id} className={styles.enrolledLectureCard} onClick={() => handleLectureCardClick(lecture.course_id)}>
                       <img src={lecture.teacher_profile_image} alt={lecture.teacher_name} className={styles.teacherProfileImage}
                         onClick={(e) => {
                           e.stopPropagation();
@@ -150,7 +153,7 @@ function Mypage() {
                         </button>
                       </div>
                     </div>
-                  ))}
+                  )))}
                 </div>
               </section>
             </div>
