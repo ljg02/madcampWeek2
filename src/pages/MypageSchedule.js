@@ -280,6 +280,18 @@ const MypageSchedule = () => {
         }
     };
 
+    const getEmoji = (sentiment_score) => {
+        if(sentiment_score > 0) {
+            return '😊'; // 웃는 얼굴
+        }
+        else if(sentiment_score < 0) {
+            return '😞'; // 슬퍼하는 얼굴
+        }
+        else {
+            return '😐'; // 중립 얼굴
+        }
+    };
+
     return (
         <div className={styles.scheduleContainer}>
             <div className={styles.timeBox}>
@@ -387,6 +399,7 @@ const MypageSchedule = () => {
                                             <span className={styles.diaryDate}>{new Date(diary.date).toLocaleDateString('ko-KR', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
                                             <p>{diary.entry}</p>
                                         </div>
+                                        <span className={styles.sentimentEmoji}>{getEmoji(diary.sentiment_score)}</span>
                                         <button className={styles.deleteDiaryButton} onClick={() => handleDeleteDiary(diary.id)}>
                                             삭제
                                         </button>

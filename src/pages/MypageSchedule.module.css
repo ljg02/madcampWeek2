@@ -335,8 +335,8 @@ input[type="text"] {
 .diaryContent {
     display: flex;
     flex-direction: column;
-    width: 330px;
     text-align: left;
+    flex: 1;
 }
 
 .diaryDate {
@@ -358,6 +358,11 @@ input[type="text"] {
 
 .deleteDiaryButton:hover {
     background: #e63946;
+}
+
+.sentimentEmoji {
+    font-size: 1.5rem;
+    margin-right: 10px;
 }
 
 .timeBox {
