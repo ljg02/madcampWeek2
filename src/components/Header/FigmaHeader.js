@@ -42,6 +42,12 @@ export const Header = ({ toggleSidebar }) => {
     navigate('/mypage');
   };
 
+  
+  const handleHomeClick = async () => {
+    navigate('/');
+  };
+
+
   const handleLectureClick = async () => {
     navigate('/mypage-lecture');
   };
@@ -86,13 +92,14 @@ export const Header = ({ toggleSidebar }) => {
         <FaBars className="icon" />
       </div>
 
-      <div className="item-link-2" onClick={handleLectureClick}>Lectures</div>
+      <div className="item-link-2" onClick={handleHomeClick}>Home</div>
 
-      <div className="item-link-3" onClick={handleScheduleClick}>Schedule</div>
+      <div className="item-link-3" onClick={handleLectureClick}>Lectures</div>
 
-      <div className="item-link-4" onClick={handleNoteClick}>Notes</div>
+      <div className="item-link-4" onClick={handleScheduleClick}>Schedule</div>
 
-      {/* <div className="item-link-5">Grades</div> */}
+      <div className="item-link-5" onClick={handleNoteClick}>Notes</div>
+
 
       {/* <div className="rectangle" /> */}
 

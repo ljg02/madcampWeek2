@@ -129,7 +129,7 @@ const MypageLecture = () => {
                                 <ReactPlayer
                                     url={video.youtube_id}
                                     controls
-                                    style={{ maxWidth: '800px' }} // 원하는 최대 너비 설정
+                                    style={{ maxWidth: '800px',marginBottom: '25px'}} // 원하는 최대 너비 설정
                                     config={{
                                         youtube: {
                                             playerVars: { showinfo: 1 }
