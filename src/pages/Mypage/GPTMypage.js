@@ -9,7 +9,7 @@ import styles from "./GPTMypage.module.css";
 function Mypage() {
   const { auth } = useContext(AuthContext);
   const userId = auth.user ? auth.user.id : null;
-
+  const [feedback, setFeedback] = useState("로딩 중...");
   const [users, setUsers] = useState([]);
   const navigate = useNavigate();
   const [lectures, setLectures] = useState([
@@ -67,6 +67,77 @@ function Mypage() {
     }
   }, [userId, colorNotes]);
 
+  const fetchFeedback = useCallback(async () => {
+    try {
+      // 오늘 날짜 형식 지정 (예: YYYY-MM-DD)
+      const today = new Date().toISOString().split('T')[0];
+
+      // diaries 테이블에서 userId와 date에 해당하는 데이터 요청
+      const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/diaries`, {
+        params: { userId, date: today }
+      });
+
+      if (response.data && response.data.diaries && response.data.diaries.length > 0) {
+        const diaries = response.data.diaries;
+        // sentiment_score 평균 계산
+        const sumScores = diaries.reduce((sum, diary) => sum + diary.sentiment_score, 0);
+        const avgScore = sumScores / diaries.length;
+
+        // 감정 점수에 따른 피드백 문구 설정
+        let message = "";
+        if (avgScore >= 0.9) {
+          message = "너 요즘 정말 빛나고 있어! 모든 게 잘 풀리는 느낌이야.";
+        } else if (avgScore >= 0.8) {
+          message = "정말 대단해! 네가 이룬 성장이 자랑스러워.";
+        } else if (avgScore >= 0.7) {
+          message = "좋아, 네 노력이 보여. 계속 이렇게 가면 더 멋진 일이 생길 거야.";
+        } else if (avgScore >= 0.6) {
+          message = "잘하고 있어. 작은 발걸음이라도 계속 내딛는 게 중요해.";
+        } else if (avgScore >= 0.5) {
+          message = "괜찮아, 지금 이 순간에도 충분히 노력하고 있어. 조금만 더 힘내자.";
+        } else if (avgScore >= 0.4) {
+          message = "힘들겠지만, 네가 하고 있는 노력은 분명히 빛을 볼 거야.";
+        } else if (avgScore >= 0.3) {
+          message = "어려운 날이지만, 네 안에 있는 힘을 믿어봐. 넌 혼자가 아니야.";
+        } else if (avgScore >= 0.2) {
+          message = "조금 지치고 힘들겠지만, 작은 성공 하나하나가 모여 큰 변화를 만들어.";
+        } else if (avgScore >= 0.1) {
+          message = "지금 많이 힘들어 보이는데, 네 마음도 소중하다는 걸 기억해.";
+        } else if (avgScore >= 0.0) {
+          message = "어떻게든 하루를 견뎌내고 있구나. 네 존재 자체가 큰 의미야.";
+        } else if (avgScore >= -0.1) {
+          message = "마음이 흔들리는 것 같아 보여. 그래도 여기까지 온 너 자신을 칭찬해.";
+        } else if (avgScore >= -0.2) {
+          message = "불안하고 힘들겠지만, 나와 네 주변 사람들은 항상 네 편이야.";
+        } else if (avgScore >= -0.3) {
+          message = "어려운 감정들이 밀려와도, 그 속에서도 너는 빛나고 있어.";
+        } else if (avgScore >= -0.4) {
+          message = "정말 고통스럽겠지만, 작은 위로가 네게 닿기를 바라.";
+        } else if (avgScore >= -0.5) {
+          message = "마음이 많이 아프겠지만, 한 걸음씩 천천히 나아가 보자.";
+        } else if (avgScore >= -0.6) {
+          message = "네 아픔을 이해해. 때로는 천천히 쉬어가는 것도 괜찮아.";
+        } else if (avgScore >= -0.7) {
+          message = "너무 힘든 날이지만, 네가 여기까지 온 것만으로도 대단해.";
+        } else if (avgScore >= -0.8) {
+          message = "정말 견디기 힘든 순간일 거야. 그래도 네 안엔 살아가는 힘이 있어.";
+        } else if (avgScore >= -0.9) {
+          message = "너무 아프고 외롭겠지만, 내 마음은 너와 함께해.";
+        } else {
+          message = "정말 힘든 시간을 보내고 있구나. 누군가에게 털어놓고 싶을 때, 내가 들어줄게.";
+        }
+ 
+        setFeedback(message);
+      } else {
+        setFeedback("오늘의 기록이 없습니다. 일기를 작성해 보세요!");
+      }
+    } catch (error) {
+      console.error("피드백 불러오기 실패:", error);
+      setFeedback("피드백을 불러오는 데 실패했습니다.");
+    }
+  }, [userId]);
+
+
   useEffect(() => {
     axios.get(`${process.env.REACT_APP_BACKEND_URL}/testUsers`)
       .then((response) => {
@@ -79,6 +150,13 @@ function Mypage() {
     fetchCourseDetail();
     fetchTimeTableFromDB();
   }, [fetchCourseDetail, fetchTimeTableFromDB]);
+
+  useEffect(() => {
+    if (userId) {
+      fetchFeedback();
+    }
+  }, [userId, fetchFeedback]);
+
 
   const handleCancelEnrollment = async (courseId) => {
     const isConfirmed = window.confirm('정말 수강 신청을 취소하시겠습니까?');
@@ -167,12 +245,12 @@ function Mypage() {
               <p>{calculateAverage(lectures)}% 완료</p>
             </div>
             <div className={styles.analytics_card}>
-              <h3>공부 시간 분석</h3>
-              <p>오늘 공부 시간은 {Math.floor(countColoredCells()*10/60)}시간 {countColoredCells()*10%60}분입니다.</p>
+              <h3>오늘의 공부 시간은 ?</h3>
+              <p>{Math.floor(countColoredCells()*10/60)}시간 {countColoredCells()*10%60}분동안 공부했습니다.</p>
             </div>
             <div className={styles.analytics_card}>
-              <h3>피드백</h3>
-              <p>잘 하고 있어요! 조금 더 분발해봐요!</p>
+              <h3>너에게 하고 싶은 한 마디</h3>
+              <p>{feedback}</p>
             </div>
           </section>
         </section>

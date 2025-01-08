@@ -135,6 +135,7 @@ const MypageNotes = () => {
                     <input type="file" accept="image/*,application/pdf" onChange={handleFileUpload} className={styles.uploadButton} />
                 </label>
                 <button className={styles.pasteButton} onClick={handlePasteButtonClick}>붙여넣기</button>
+                <button className={styles.refreshButton} onClick={() => window.location.reload()}> 다시 업로드 </button>
                 {fileName && <p className={styles.fileName} style={{ marginTop: '20px' }}>업로드된 파일: {fileName}</p>}
                 <div className={styles.boundingBox}>
                     <div className={styles.section} style={{ marginTop: '30px' }}>

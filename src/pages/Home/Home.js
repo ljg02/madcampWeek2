@@ -205,18 +205,25 @@ const Home = () => {
         <div className="mock-exam-section">
           <h2 className="section-title">모의고사 일정</h2>
           <div className="mock-exam-cards">
-            {uniqueMockExamDates.map((date, index) => (
+            
+          {uniqueMockExamDates.map((date, index) => {
+            const examDate = new Date(date);
+            const today = new Date();
+            today.setHours(0, 0, 0, 0); // 시간을 자정으로 설정해서 날짜만 비교
+            const isPast = examDate < today;
+            return (
               <Link
                 to={`/mockexam/${encodeURIComponent(formatDate_link(date))}`} 
                 key={index}
                 style={{ textDecoration: 'none', color: 'inherit' }}
               >
-                <div className="mock-exam-card">
+                <div className={`mock-exam-card ${isPast ? 'past' : ''}`}>
                   <h3>{`${monthdata(date)} 모의고사`}</h3>
                   <p>{formatDate(date)}</p>
                 </div>
               </Link>
-            ))}
+            );
+          })}
           </div>
         </div>
       </div>
