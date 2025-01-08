@@ -202,7 +202,7 @@
     border-color: #bdbdbd;
     border-radius: 30px;
     height: 60px;
-    left: 1320px;
+    left: 1350px;
     position: absolute;
     top: 83px;
     width: 60px;
@@ -223,7 +223,6 @@
     width: 300px;
     display: flex;
     align-items: center; /* 수직 정렬 */
-    cursor: pointer;
   }
 
   .profile-image {
