@@ -3,12 +3,36 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './Home.css';
 import Carousel from '../../components/Carousel';
+import MockExamDetail from '../MockExamDetail/MockExamDetail'; // 상세 페이지 컴포넌트
+import { Link } from 'react-router-dom';  // Link import 추가
+
+
 
 const Home = () => {
   const [courses, setCourses] = useState([]);
   const [instructors, setInstructors] = useState([]);
   const [textbooks, setTextbooks] = useState([]);
-  const [mockExams, setMockExams] = useState([]);
+  const [uniqueMockExamDates, setUniqueMockExamDates] = useState([]); // 고유한 날짜 목록 상태
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1;
+    const day = date.getDate();
+    return `${year}년 ${month}월 ${day}일`;
+  };
+  const formatDate_link = (dateString) => {
+    const date = new Date(dateString);
+    const year = date.getFullYear();
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');  // 두 자리 포맷
+    const day = date.getDate().toString().padStart(2, '0');  // 두 자리 포맷
+    return `${year}-${month}-${day}`; // 'YYYY-MM-DD' 포맷
+  };
+  const monthdata = (dataString) => {
+    const date = new Date(dataString);
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1;
+    return `${year}년 ${month}월`;
+  };
 
   useEffect(() => {
     // 신청 가능한 강좌 목록 요청
@@ -102,70 +126,55 @@ const Home = () => {
       });
 
     // 교재 목록 요청
-    axios.get(`${process.env.REACT_APP_BACKEND_URL}/textbooks`)
-      .then(response => setTextbooks(response.data))
-      .catch(error => {
-        console.error('교재 데이터 요청 실패:', error);
-        // 예시 데이터 설정 (오류 시)
-        const exampleTextbooks = [
-          {
-            id: 1,
-            title: '프로그래밍 입문',
-            author: '홍길동',
-            image: 'https://via.placeholder.com/220x130.png?text=프로그래밍+입문',
-          },
-          {
-            id: 2,
-            title: '데이터베이스 설계',
-            author: '이순신',
-            image: 'https://via.placeholder.com/220x130.png?text=데이터베이스+설계',
-          },
-          {
-            id: 3,
-            title: '모던 웹 개발',
-            author: '박지성',
-            image: 'https://via.placeholder.com/220x130.png?text=모던+웹+개발',
-          },
-          {
-            id: 4,
-            title: '안드로이드 앱 개발',
-            author: '최민지',
-            image: 'https://via.placeholder.com/220x130.png?text=안드로이드+앱+개발',
-          },
-          // 추가적인 교재 데이터...
-        ];
-        setTextbooks(exampleTextbooks);
-      });
+    // axios.get(`${process.env.REACT_APP_BACKEND_URL}/textbooks`)
+    //   .then(response => setTextbooks(response.data))
+    //   .catch(error => {
+    //     console.error('교재 데이터 요청 실패:', error);
+    //     // 예시 데이터 설정 (오류 시)
+    //     const exampleTextbooks = [
+    //       {
+    //         id: 1,
+    //         title: '프로그래밍 입문',
+    //         author: '홍길동',
+    //         image: 'https://via.placeholder.com/220x130.png?text=프로그래밍+입문',
+    //       },
+    //       {
+    //         id: 2,
+    //         title: '데이터베이스 설계',
+    //         author: '이순신',
+    //         image: 'https://via.placeholder.com/220x130.png?text=데이터베이스+설계',
+    //       },
+    //       {
+    //         id: 3,
+    //         title: '모던 웹 개발',
+    //         author: '박지성',
+    //         image: 'https://via.placeholder.com/220x130.png?text=모던+웹+개발',
+    //       },
+    //       {
+    //         id: 4,
+    //         title: '안드로이드 앱 개발',
+    //         author: '최민지',
+    //         image: 'https://via.placeholder.com/220x130.png?text=안드로이드+앱+개발',
+    //       },
+    //       // 추가적인 교재 데이터...
+    //     ];
+    //     setTextbooks(exampleTextbooks);
+    //   });
 
     // 모의고사 일정 및 등급컷 요청
-    axios.get(`${process.env.REACT_APP_BACKEND_URL}/mockExams`)
-      .then(response => setMockExams(response.data))
-      .catch(error => {
-        console.error('모의고사 데이터 요청 실패:', error);
-        // 예시 데이터 설정 (오류 시)
-        const exampleMockExams = [
-          {
-            id: 1,
-            title: '1차 모의고사',
-            schedule: '2025-03-15',
-            cutoff: 'A: 90, B: 80, C: 70',
-          },
-          {
-            id: 2,
-            title: '2차 모의고사',
-            schedule: '2025-04-20',
-            cutoff: 'A: 85, B: 75, C: 65',
-          },
-          {
-            id: 3,
-            title: '3차 모의고사',
-            schedule: '2025-05-25',
-            cutoff: 'A: 88, B: 78, C: 68',
-          },
-          // 추가적인 모의고사 데이터...
-        ];
-        setMockExams(exampleMockExams);
-      });
+    axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/mockexam`)
+        .then(response => {
+          if (response.data.length > 0) {
+            const uniqueDates = [...new Set(response.data.map(item => item.exam_date))]
+              .sort((a, b) => new Date(a) - new Date(b));
+            setUniqueMockExamDates(uniqueDates);
+          }
+        })
+        .catch(error => {
+            console.error('모의고사 날짜 데이터 요청 실패:', error);
+            // 오류 발생 시 예제 데이터 사용
+            setUniqueMockExamDates(['2025-03-15', '2025-04-20', '2025-05-25']);
+        });
   }, []);
 
   return (
@@ -184,24 +193,31 @@ const Home = () => {
         title="선생님 목록"
       />
 
-      {/* 교재 목록 */}
+      {/* 교재 목록
       <Carousel
         items={textbooks}
         type="textbook"
         title="교재 목록"
-      />
+      /> */}
 
       {/* 모의고사 일정 및 등급컷 */}
-      <div className="mock-exam-section">
-        <h2 className="section-title">모의고사 일정 및 등급컷</h2>
-        <div className="mock-exam-cards">
-          {mockExams.map(exam => (
-            <div key={exam.id} className="mock-exam-card">
-              <h3>{exam.title}</h3>
-              <p>일정: {exam.schedule}</p>
-              <p>등급컷: {exam.cutoff}</p>
-            </div>
-          ))}
+      <div className="main-container">
+        <div className="mock-exam-section">
+          <h2 className="section-title">모의고사 일정</h2>
+          <div className="mock-exam-cards">
+            {uniqueMockExamDates.map((date, index) => (
+              <Link
+                to={`/mockexam/${encodeURIComponent(formatDate_link(date))}`} 
+                key={index}
+                style={{ textDecoration: 'none', color: 'inherit' }}
+              >
+                <div className="mock-exam-card">
+                  <h3>{`${monthdata(date)} 모의고사`}</h3>
+                  <p>{formatDate(date)}</p>
+                </div>
+              </Link>
+            ))}
+          </div>
         </div>
       </div>
     </div>
