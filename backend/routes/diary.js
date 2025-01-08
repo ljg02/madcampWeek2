@@ -2,6 +2,7 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../db'); // 데이터베이스 연결 모듈
+const { analyzeSentiment } = require('../utils/sentimentAnalysis'); //감정분석 함수
 
 // 날짜 형식 변환 함수
 const formatDate = (dateString) => {
@@ -39,12 +40,23 @@ router.post('/', async (req, res) => {
     const formattedDate = formatDate(date);
 
     try {
-        const [result] = await db.query('INSERT INTO diaries (user_id, entry, date) VALUES (?, ?, ?)', [userId, entry, formattedDate]);
+        // 감정 분석 수행
+        const sentimentResult = await analyzeSentiment(entry);
+        console.log('Sentiment Result:', sentimentResult); // 반환값 확인
+        if (!sentimentResult) {
+            return res.status(500).json({ success: false, message: '감정 분석 실패' });
+        }
+
+        const [result] = await db.query(
+            'INSERT INTO diaries (user_id, entry, date, sentiment_score) VALUES (?, ?, ?, ?)', 
+            [userId, entry, formattedDate, sentimentResult.score]
+        );
         const newDiary = {
             id: result.insertId,
             user_id: userId,
             entry,
-            date
+            date, 
+            sentiment_score: sentimentResult.score,
         };
         res.status(201).json({ success: true, diary: newDiary });
     } catch (error) {
