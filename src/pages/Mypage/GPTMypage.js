@@ -165,7 +165,7 @@ function Mypage() {
             </div>
             <div className={styles.analytics_card}>
               <h3>공부 시간 분석</h3>
-              <p>오늘 공부 시간은 {countColoredCells()}시간입니다.</p>
+              <p>오늘 공부 시간은 {Math.floor(countColoredCells()*10/60)}시간 {countColoredCells()*10%60}분입니다.</p>
             </div>
             <div className={styles.analytics_card}>
               <h3>피드백</h3>

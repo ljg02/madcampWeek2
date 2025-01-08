@@ -196,6 +196,7 @@ const MypageSchedule = () => {
     // 컴포넌트 처음 로드 시 시간표 불러오기
     useEffect(() => {
         fetchTimeTableFromDB();
+        fetchDiaryFromDB(); // 일기 목록 불러오기
     }, []);
 
     const fetchDiaryFromDB = async () => {
@@ -224,21 +225,21 @@ const MypageSchedule = () => {
         }
         const userId = auth.user.id;
         const today = new Date().toLocaleDateString('ko-KR');
-    
+
         if (!diaryEntry.trim()) {
             toast.error('일기 내용을 입력해주세요.');
             return;
         }
-    
+
         try {
             const payload = {
                 userId,
                 entry: diaryEntry,
                 date: today
             };
-    
+
             const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/diary`, payload);
-    
+
             if (response.data.success) {
                 toast.success('일기가 저장되었습니다!');
                 setDiaryList(prevList => [...prevList, response.data.diary]);
@@ -251,22 +252,22 @@ const MypageSchedule = () => {
             toast.error('일기 저장 중 오류가 발생했습니다.');
         }
     };
-    
+
     const handleDeleteDiary = async (entryId) => {
         if (!auth.user) {
             toast.error('로그인이 필요합니다.');
             return;
         }
         const userId = auth.user.id;
-    
+
         const isConfirmed = window.confirm('정말 이 일기를 삭제하시겠습니까?');
         if (!isConfirmed) return;
-    
+
         try {
             const response = await axios.delete(`${process.env.REACT_APP_BACKEND_URL}/api/diary/${entryId}`, {
                 data: { userId }
             });
-    
+
             if (response.data.success) {
                 toast.success('일기가 삭제되었습니다!');
                 setDiaryList(prevList => prevList.filter(diary => diary.id !== entryId));
@@ -277,7 +278,19 @@ const MypageSchedule = () => {
             console.error('일기 삭제 실패:', error);
             toast.error('일기 삭제 중 오류가 발생했습니다.');
         }
-    };    
+    };
+
+    const getEmoji = (sentiment_score) => {
+        if(sentiment_score > 0) {
+            return '😊'; // 웃는 얼굴
+        }
+        else if(sentiment_score < 0) {
+            return '😞'; // 슬퍼하는 얼굴
+        }
+        else {
+            return '😐'; // 중립 얼굴
+        }
+    };
 
     return (
         <div className={styles.scheduleContainer}>
@@ -368,7 +381,9 @@ const MypageSchedule = () => {
                     <div className={styles.diarySection}>
                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
                             <h2>오늘의 감정 일기</h2>
-                            <button onClick={handleDiarySave}>완료</button>
+                            <button className={styles.diarySaveButton} onClick={handleDiarySave}>
+                                저장
+                            </button>
                         </div>
                         <textarea
                             value={diaryEntry}
@@ -376,7 +391,24 @@ const MypageSchedule = () => {
                             placeholder="오늘의 감정을 적어보세요..."
                             style={{ width: '100%', height: '100px' }}
                         />
-
+                        <div className={styles.diaryList}>
+                            {diaryList.length > 0 ? (
+                                diaryList.map((diary) => (
+                                    <div key={diary.id} className={styles.diaryItem}>
+                                        <div className={styles.diaryContent}>
+                                            <span className={styles.diaryDate}>{new Date(diary.date).toLocaleDateString('ko-KR', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
+                                            <p>{diary.entry}</p>
+                                        </div>
+                                        <span className={styles.sentimentEmoji}>{getEmoji(diary.sentiment_score)}</span>
+                                        <button className={styles.deleteDiaryButton} onClick={() => handleDeleteDiary(diary.id)}>
+                                            삭제
+                                        </button>
+                                    </div>
+                                ))
+                            ) : (
+                                <p>작성된 일기가 없습니다.</p>
+                            )}
+                        </div>
                     </div>
                 </div>
             </div>

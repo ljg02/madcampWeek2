@@ -2,6 +2,19 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../db'); // 데이터베이스 연결 모듈
+const { analyzeSentiment } = require('../utils/sentimentAnalysis'); //감정분석 함수
+
+// 날짜 형식 변환 함수
+const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    if (isNaN(date)) {
+        return null; // 유효하지 않은 날짜 처리
+    }
+    const year = date.getFullYear();
+    const month = (`0${date.getMonth() + 1}`).slice(-2);
+    const day = (`0${date.getDate()}`).slice(-2);
+    return `${year}-${month}-${day}`;
+};
 
 // 일기 목록 불러오기
 router.get('/:userId', async (req, res) => {
@@ -18,19 +31,32 @@ router.get('/:userId', async (req, res) => {
 
 // 일기 추가하기
 router.post('/', async (req, res) => {
-    const { userId, entry, date } = req.body.payload;
+    //console.log(req.body);
+    const { userId, entry, date } = req.body;
 
     if (!userId || !entry || !date) {
         return res.status(400).json({ success: false, message: 'userId, entry, date는 필수입니다.' });
     }
+    const formattedDate = formatDate(date);
 
     try {
-        const [result] = await db.query('INSERT INTO diaries (user_id, entry, date) VALUES (?, ?, ?)', [userId, entry, date]);
+        // 감정 분석 수행
+        const sentimentResult = await analyzeSentiment(entry);
+        console.log('Sentiment Result:', sentimentResult); // 반환값 확인
+        if (!sentimentResult) {
+            return res.status(500).json({ success: false, message: '감정 분석 실패' });
+        }
+
+        const [result] = await db.query(
+            'INSERT INTO diaries (user_id, entry, date, sentiment_score) VALUES (?, ?, ?, ?)', 
+            [userId, entry, formattedDate, sentimentResult.score]
+        );
         const newDiary = {
             id: result.insertId,
             user_id: userId,
             entry,
-            date
+            date, 
+            sentiment_score: sentimentResult.score,
         };
         res.status(201).json({ success: true, diary: newDiary });
     } catch (error) {
