@@ -14,3 +14,24 @@ router.get('/', async (req, res) => {
   });
 
 module.exports = router;
+
+
+// exam_date가 같은 모든 데이터 조회 라우터
+router.get('/:examDate', async (req, res) => {
+    const { examDate } = req.params;
+    try {
+        const query = `SELECT * FROM mock_exam_cutoffs WHERE exam_date = ?`;
+        const [results] = await db.query(query, [examDate]);
+        
+        if (results.length > 0) {
+            res.json(results);
+        } else {
+            res.status(404).send({ message: "해당 날짜의 데이터가 존재하지 않습니다." });
+        }
+    } catch (error) {
+        console.error('데이터 불러오기 오류:', error);
+        res.status(500).send({ message: '서버 오류 발생' });
+    }
+});
+
+module.exports = router;
