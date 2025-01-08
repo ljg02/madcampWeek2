@@ -8,7 +8,6 @@ import Sidebar from './components/Sidebar';
 import Header from './components/Header'; // Header 컴포넌트 import
 import Footer from "./components/Footer";
 import Home from './pages/Home/Home';
-import VideoPlayer from './pages/VideoPlayer';
 import Login from './pages/Login/Login';
 import MypageLecture from './pages/MypageLecture';
 import MypageSchedule from './pages/MypageSchedule';
@@ -49,14 +48,6 @@ const App = () => {
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route
-              path="/videoPlayer"
-              element={
-                <PrivateRoute>
-                  <VideoPlayer />
-                </PrivateRoute>
-              }
-            />
-            <Route
               path="/mypage-lecture"
               element={
                 <PrivateRoute>
@@ -64,7 +55,14 @@ const App = () => {
                 </PrivateRoute>
               }
             />
-            <Route path="/mypage-schedule" element={<MypageSchedule />} />
+            <Route
+              path="/mypage-schedule"
+              element={
+                <PrivateRoute>
+                  <MypageSchedule />
+                </PrivateRoute>
+              }
+            />
             <Route path="/mypage-notes" element={<MypageNotes />} />
             <Route
               path="/mypage"

@@ -21,6 +21,7 @@ const enrollsRouter = require('./routes/enrolls');
 const videosRouter = require('./routes/videos');
 const commentsRouter = require('./routes/comments');
 const tttRouter = require('./routes/ttt');
+const diaryRouter = require('./routes/diary');
 
 app.use('/api/courses', coursesRouter);
 app.use('/api/instructors', instructorsRouter);
@@ -30,6 +31,7 @@ app.use('/api/enrolls', enrollsRouter);
 app.use('/api/videos', videosRouter);
 app.use('/api/comments', commentsRouter);
 app.use('/api/ttt', tttRouter);
+app.use('/api/diary', diaryRouter);
 
 
 // 환경 변수
