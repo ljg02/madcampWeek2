@@ -126,7 +126,7 @@ function Mypage() {
         } else {
           message = "정말 힘든 시간을 보내고 있구나. 누군가에게 털어놓고 싶을 때, 내가 들어줄게.";
         }
-
+ 
         setFeedback(message);
       } else {
         setFeedback("오늘의 기록이 없습니다. 일기를 작성해 보세요!");
@@ -245,11 +245,11 @@ function Mypage() {
               <p>{calculateAverage(lectures)}% 완료</p>
             </div>
             <div className={styles.analytics_card}>
-              <h3>공부 시간 분석</h3>
-              <p>오늘 공부 시간은 {Math.floor(countColoredCells()*10/60)}시간 {countColoredCells()*10%60}분입니다.</p>
+              <h3>오늘의 공부 시간은 ?</h3>
+              <p>{Math.floor(countColoredCells()*10/60)}시간 {countColoredCells()*10%60}분동안 공부했습니다.</p>
             </div>
             <div className={styles.analytics_card}>
-              <h3>피드백</h3>
+              <h3>너에게 하고 싶은 한 마디</h3>
               <p>{feedback}</p>
             </div>
           </section>
