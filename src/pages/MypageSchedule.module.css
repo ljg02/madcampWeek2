@@ -35,9 +35,25 @@
     align-self: center;
     text-align: center;
     width: 100%;
-    padding-right: 30px;
     margin-bottom: 30px;
+}
 
+.schedule_save_button {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 8px;
+    background: #f9a0a9;
+    color: white;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    margin-bottom: 10px;
+    margin-left: 160px;
+    height: 50px;
+    width: 150px;
+}
+
+.schedule_save_button:hover {
+    background: #e63946;
 }
 
 .timeRow {
@@ -85,7 +101,6 @@
     flex-direction: column;
     align-items: center;
     text-align: center;
-    align-items: flex-start;
 }
 
 .colorPickerSection {
@@ -110,13 +125,6 @@
 
 }
 
-.colorBox {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    border: 1px solid #ddd;
-}
-
 input[type="text"] {
     /* padding: 5px; */
     border: 1px solid #ddd;
@@ -132,6 +140,7 @@ input[type="text"] {
     color: white;
     cursor: pointer;
     transition: background 0.3s ease;
+    width: 175px;
 }
 
 .schedule_button:hover {

@@ -18,6 +18,9 @@ function Mypage() {
     { title: 'Lecture 3', video: 'lecture3.mp4', progress: 90 }
   ]);
 
+  const [timeTable, setTimeTable] = useState(Array(24 * 6).fill(''));
+  const [colorNotes, setColorNotes] = useState({});
+
   // 신청한 강좌 목록 요청
   const fetchCourseDetail = useCallback(async () => {
     try {
@@ -29,6 +32,41 @@ function Mypage() {
     }
   }, [userId]); // userId를 의존성으로 추가
 
+  const fetchTimeTableFromDB = useCallback(async () => {
+    try {
+      const today = new Date(Date.now()).toLocaleDateString('ko-KR');
+      console.log('today: ', today);
+
+      const response = await axios.get(
+        `${process.env.REACT_APP_BACKEND_URL}/api/ttt/${userId}/${today}`
+      );
+
+      if (response.data.success && response.data.timeTables) {
+        // 응답받은 데이터를 timeTable 배열로 변환
+        const fetchedData = response.data.timeTables;
+        // 데이터 구조에 따라 변환 로직 작성 (예: 색상만 추출)
+        const newTimeTable = Array(24 * 6).fill('');
+
+        // 임시 객체를 생성하여 색상 노트를 누적
+        const updatedColorNotes = { ...colorNotes };
+
+        fetchedData.forEach(({ hour, minute, color, note }) => {
+          const minuteIndex = minute / 10;
+          newTimeTable[hour * 6 + minuteIndex] = color;
+          if (color !== '') {
+            updatedColorNotes[color] = note; // 색상 노트를 누적
+          }
+        });
+        // 상태를 한 번에 업데이트
+        setColorNotes(updatedColorNotes);
+        setTimeTable(newTimeTable);
+        //console.log('fetchedData: ', fetchedData);
+      }
+    } catch (error) {
+      console.error('시간표 불러오기 실패:', error);
+    }
+  }, [userId, colorNotes]);
+
   useEffect(() => {
     axios.get(`${process.env.REACT_APP_BACKEND_URL}/testUsers`)
       .then((response) => {
@@ -39,7 +77,8 @@ function Mypage() {
       });
 
     fetchCourseDetail();
-  }, [fetchCourseDetail]);
+    fetchTimeTableFromDB();
+  }, [fetchCourseDetail, fetchTimeTableFromDB]);
 
   const handleCancelEnrollment = async (courseId) => {
     const isConfirmed = window.confirm('정말 수강 신청을 취소하시겠습니까?');
@@ -72,6 +111,10 @@ function Mypage() {
     if (arr.length === 0) return 0;
     const sum = arr.reduce((acc, element) => acc + element.progress, 0);
     return sum / arr.length;
+  };
+
+  const countColoredCells = () => {
+    return timeTable.filter(cell => cell !== '').length;
   };
 
   return (
@@ -122,7 +165,7 @@ function Mypage() {
             </div>
             <div className={styles.analytics_card}>
               <h3>공부 시간 분석</h3>
-              <p>하루 평균 3시간 공부했습니다.</p>
+              <p>오늘 공부 시간은 {countColoredCells()}시간입니다.</p>
             </div>
             <div className={styles.analytics_card}>
               <h3>피드백</h3>
@@ -133,9 +176,41 @@ function Mypage() {
 
         <section className={styles.timetable_section}>
           <h2>오늘의 시간표 </h2>
-          <div className={styles.timetable}>
-            {/* 시간표 내용을 여기에 추가 */}
-            <p>시간표 내용이 여기에 표시됩니다.</p>
+          <div className={styles.tableGrid}>
+            <div className={styles.timeRow}>
+              <div className={styles.hourLabel}></div>
+              {['10', '20', '30', '40', '50', '60'].map((minute, index) => (
+                <div key={index} className={styles.timeCellLabel}>{minute}</div>
+              ))}
+            </div>
+            {Array.from({ length: 24 }, (_, hour) => (
+              <div key={hour} className={styles.timeRow}>
+                <div className={styles.hourLabel}>{((hour + 8) % 24 || 24).toString().padStart(2, '0')}</div>
+                {Array.from({ length: 6 }, (_, minuteIndex) => (
+                  <div
+                    key={minuteIndex}
+                    className={styles.timeCell}
+                    style={{ backgroundColor: timeTable[hour * 6 + minuteIndex] }}
+                  />
+                ))}
+              </div>
+            ))}
+          </div>
+          <div className={styles.notesList}>
+            {/* 할당된 note가 있는 color 리스트 출력 */}
+            {Object.keys(colorNotes).map((color) => (
+              <div key={color} className={styles.noteItem}>
+                <input
+                  type="color"
+                  value={color}
+                  style={{ width: '35px', height: '35px', border: 'none', padding: '0' }}
+                  disabled={true}
+                />
+                <span
+                  style={{ width: '300px', height: '35px', padding: '5px' }}
+                >{colorNotes[color]}</span>
+              </div>
+            ))}
           </div>
         </section>
       </section>

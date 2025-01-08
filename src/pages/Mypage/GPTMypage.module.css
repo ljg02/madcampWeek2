@@ -186,17 +186,61 @@ body {
     color: #ff8c3a;
 }
 
-.timetable {
-    background-color: #e3f2fd;
-    padding: 15px;
-    border-radius: 10px;
-    min-height: 150px;
+.tableGrid {
+    display: grid;
+    grid-template-columns: 50px repeat(6, 1fr);
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    padding: 10px;
+    background: white;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.timeRow {
+    display: contents;
+}
+
+.hourLabel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    font-weight: bold;
+    border-right: 1px solid #ddd;
+}
+
+.timeCellLabel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    font-weight: bold;
+    border-bottom: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+}
+
+.timeCell {
+    width: 60px;
+    height: 40px;
+    border: 1px solid #ddd;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.timeCell:hover {
+    border: 1px solid #aaa;
+}
+
+.notesList {
+    width: 100%;
+}
+
+.noteItem {
     display: flex;
     align-items: center;
-    justify-content: center;
-    color: #1565c0;
-    font-size: 1.1rem;
-    width: 500px;
+    gap: 10px;
+    margin-top: 20px;
+
 }
 
 /* Analytics Section */
