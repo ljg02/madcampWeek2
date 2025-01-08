@@ -12,9 +12,10 @@
   .header .overlap-group {
     display: flex;
     height: 61px;
-    left: 1150px;
+    /* left: 1150px; */
+    right: 500px;
     position: absolute;
-    top: 39px;
+    top: 35px;
     width: 280px;
   }
   
@@ -198,15 +199,42 @@
   }
   
   .header .overlap {
-    border: 1px solid;
-    border-color: #757575;
+    border-color: #bdbdbd;
     border-radius: 30px;
     height: 60px;
-    left: 1445px;
+    left: 1320px;
     position: absolute;
-    top: 30px;
+    top: 83px;
     width: 60px;
     cursor: pointer;
+    display: flex;
+    align-items: center; /* 수직 정렬 */
+    cursor: pointer;
+  }
+
+  .mypage-text {
+    left: 1090px;
+    font-size: 16px;   /* 글자 크기 조정 */
+    color: #838383;       /* 글자 색상 조정 */
+    /* 추가적인 텍스트 스타일링 */
+    height: 60px;
+    position: absolute;
+    top: 85px;
+    width: 300px;
+    display: flex;
+    align-items: center; /* 수직 정렬 */
+    cursor: pointer;
+  }
+
+  .profile-image {
+    width: 60px;            /* 원하는 이미지 크기로 설정 */
+    height: 60px;           /* 원하는 이미지 크기로 설정 */
+    border-radius: 50%;     /* 원형으로 만듦 */
+    object-fit: cover;      /* 이미지가 비율 유지한 채 영역을 채우도록 함 */
+    /* 필요에 따라 추가 스타일 적용 */
+    border: 2px solid;
+    border-color: #d2d2d2;
+    border-radius: 50px;
   }
   
   .header .material-symbols {
@@ -226,3 +254,4 @@
     width: 372px;
     cursor: pointer;
   }
+

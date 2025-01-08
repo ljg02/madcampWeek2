@@ -6,7 +6,7 @@
   background-color: #333;
   overflow-x: hidden;
   overflow-y: auto;
-  position: absolute;
+  position: fixed;      /* 고정 위치 */
   transition: 0.3s;
   color: white;
   left: -200px;
