@@ -133,7 +133,7 @@
     text-align: center;
     top: 112px;
     white-space: nowrap;
-    width: 69px;
+    margin-top: 2px;
     cursor: pointer;
   }
   
@@ -150,7 +150,7 @@
     text-align: center;
     top: 112px;
     white-space: nowrap;
-    width: 87px;
+    margin-top: 2px;
     cursor: pointer;
   }
   
@@ -167,7 +167,7 @@
     text-align: center;
     top: 112px;
     white-space: nowrap;
-    width: 59px;
+    margin-top: 2px;
     cursor: pointer;
   }
   
@@ -184,7 +184,8 @@
     text-align: center;
     top: 112px;
     white-space: nowrap;
-    width: 63px;
+    margin-top: 2px;
+    cursor: pointer;
   }
   
   .header .rectangle {
@@ -213,7 +214,7 @@
   }
 
   .mypage-text {
-    left: 1120px;
+    left: 1090px;
     font-size: 16px;   /* 글자 크기 조정 */
     color: #838383;       /* 글자 색상 조정 */
     /* 추가적인 텍스트 스타일링 */

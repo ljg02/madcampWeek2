@@ -258,7 +258,7 @@ const VideoDetail = () => {
                                         <div>
                                             <p className={styles.commentUser}>{comment.user_name}:</p>
                                             <p className={styles.commentContent}>{comment.content}</p>
-                                            <p className={styles.commentTime}>{new Date(comment.created_at).toLocaleString()}</p>
+                                            <p className={styles.commentTime}>{new Date(comment.created_at).toLocaleString('ko-KR')}</p>
                                         </div>
                                         {auth.user && auth.user.id === comment.user_id && (
                                             <span
