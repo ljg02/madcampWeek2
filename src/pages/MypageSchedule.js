@@ -20,7 +20,7 @@ const MypageSchedule = () => {
     //{[color]: true, [color]: false, ...}
     const [editMode, setEditMode] = useState({});
     const [diaryEntry, setDiaryEntry] = useState('');
-    const [diaryEditMode, setDiaryEditMode] = useState(false);
+    const [diaryList, setDiaryList] = useState([]);
     const [currentDateTime, setCurrentDateTime] = useState('');
     const { auth } = useContext(AuthContext); // AuthContext에서 로그인 정보 확인
 
@@ -125,17 +125,8 @@ const MypageSchedule = () => {
         setDiaryEntry(event.target.value);
     };
 
-
-    const toggleDiaryEditMode = () => {
-        setDiaryEditMode((prev) => !prev);
-    };
-
-    const handleDiarySave = () => {
-        setDiaryEditMode(false);
-    };
-
     const saveTimeTableToDB = async () => {
-        if(!auth.user) {
+        if (!auth.user) {
             return;
         }
         const userId = auth.user.id;
@@ -165,7 +156,7 @@ const MypageSchedule = () => {
     };
 
     const fetchTimeTableFromDB = async () => {
-        if(!auth.user) {
+        if (!auth.user) {
             return;
         }
         const userId = auth.user.id;
@@ -207,6 +198,86 @@ const MypageSchedule = () => {
         fetchTimeTableFromDB();
     }, []);
 
+    const fetchDiaryFromDB = async () => {
+        if (!auth.user) {
+            return;
+        }
+        const userId = auth.user.id;
+        try {
+            const response = await axios.get(
+                `${process.env.REACT_APP_BACKEND_URL}/api/diary/${userId}`
+            );
+
+            if (response.data.success && response.data.diaries) {
+                setDiaryList(response.data.diaries);
+            }
+        } catch (error) {
+            console.error('일기 불러오기 실패:', error);
+            toast.error('일기 목록을 불러오는 데 실패했습니다.');
+        }
+    };
+
+    const handleDiarySave = async () => {
+        if (!auth.user) {
+            toast.error('로그인이 필요합니다.');
+            return;
+        }
+        const userId = auth.user.id;
+        const today = new Date().toLocaleDateString('ko-KR');
+    
+        if (!diaryEntry.trim()) {
+            toast.error('일기 내용을 입력해주세요.');
+            return;
+        }
+    
+        try {
+            const payload = {
+                userId,
+                entry: diaryEntry,
+                date: today
+            };
+    
+            const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/diary`, payload);
+    
+            if (response.data.success) {
+                toast.success('일기가 저장되었습니다!');
+                setDiaryList(prevList => [...prevList, response.data.diary]);
+                setDiaryEntry('');
+            } else {
+                toast.error('일기 저장에 실패했습니다.');
+            }
+        } catch (error) {
+            console.error('일기 저장 실패:', error);
+            toast.error('일기 저장 중 오류가 발생했습니다.');
+        }
+    };
+    
+    const handleDeleteDiary = async (entryId) => {
+        if (!auth.user) {
+            toast.error('로그인이 필요합니다.');
+            return;
+        }
+        const userId = auth.user.id;
+    
+        const isConfirmed = window.confirm('정말 이 일기를 삭제하시겠습니까?');
+        if (!isConfirmed) return;
+    
+        try {
+            const response = await axios.delete(`${process.env.REACT_APP_BACKEND_URL}/api/diary/${entryId}`, {
+                data: { userId }
+            });
+    
+            if (response.data.success) {
+                toast.success('일기가 삭제되었습니다!');
+                setDiaryList(prevList => prevList.filter(diary => diary.id !== entryId));
+            } else {
+                toast.error('일기 삭제에 실패했습니다.');
+            }
+        } catch (error) {
+            console.error('일기 삭제 실패:', error);
+            toast.error('일기 삭제 중 오류가 발생했습니다.');
+        }
+    };    
 
     return (
         <div className={styles.scheduleContainer}>
@@ -297,17 +368,12 @@ const MypageSchedule = () => {
                     <div className={styles.diarySection}>
                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
                             <h2>오늘의 감정 일기</h2>
-                            {diaryEditMode ? (
-                                <button onClick={handleDiarySave}>완료</button>
-                            ) : (
-                                <button onClick={toggleDiaryEditMode}>수정</button>
-                            )}
+                            <button onClick={handleDiarySave}>완료</button>
                         </div>
                         <textarea
                             value={diaryEntry}
                             onChange={handleDiaryChange}
                             placeholder="오늘의 감정을 적어보세요..."
-                            disabled={!diaryEditMode}
                             style={{ width: '100%', height: '100px' }}
                         />
 

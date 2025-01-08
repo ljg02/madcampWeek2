@@ -22,7 +22,7 @@ router.post('/', async (req, res) => {
     try {
         await db.query('DELETE FROM ttt WHERE user_id = ? AND date = ?', [userId, formattedDate]);
         
-        console.log('timetable: ', timeTable)
+        //console.log('timetable: ', timeTable)
         const values = timeTable.map(({ hour, minute, color, note }) => [userId, hour, minute, color, formattedDate, note]);
 
         if (values.length > 0) {
@@ -45,7 +45,7 @@ router.get('/:userId/:date', async (req, res) => {
 
     try {
         const [results] = await db.query('SELECT * FROM ttt WHERE user_id = ? AND date = ?', [userId, formattedDate]);
-        console.log('loaded timeTable: ', results);
+        //console.log('loaded timeTable: ', results);
         res.json({ success: true, timeTables: results });
     } catch (error) {
         console.error('시간표 불러오기 오류:', error);
