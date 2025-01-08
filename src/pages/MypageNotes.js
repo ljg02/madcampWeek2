@@ -148,7 +148,7 @@ const MypageNotes = () => {
                             </div>
                         )}
                     </div>
-                    <div className={styles.section} style={{ marginTop: '30px' }}>
+                    {/* <div className={styles.section} style={{ marginTop: '30px' }}>
                         <h2>AI 노트 정리</h2>
                         <button className={styles.notes_button} onClick={handleGeneratePdf}>AI 노트 정리</button>
                         {convertedPdf && (
@@ -156,7 +156,7 @@ const MypageNotes = () => {
                                 <a className={styles.downloadButton} href={convertedPdf} download="AI_Notes.pdf">정리된 노트 PDF 다운로드</a>
                             </div>
                         )}
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </div>
