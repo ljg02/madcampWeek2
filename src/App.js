@@ -16,7 +16,6 @@ import PrivateRoute from './components/PrivateRoute'; // PrivateRoute 컴포넌�
 import Mypage from './pages/Mypage/GPTMypage';
 import CourseDetail from './pages/CourseDetail/CourseDetail';
 import InstructorDetail from './pages/InstructorDetail/InstructorDetail';
-import TextbookDetail from './pages/TextbookDetail/TextbookDetail';
 import MockExamDetail from './pages/MockExamDetail/MockExamDetail';
 import VideoDetail from './pages/VideoDetail/VideoDetail';
 
@@ -74,7 +73,6 @@ const App = () => {
             />
             <Route path="/course/:id" element={<CourseDetail />} />
             <Route path="/instructor/:id" element={<InstructorDetail />} />
-            <Route path="/textbook/:id" element={<TextbookDetail />} />
             {/* <Route path="/mockExam/:id" element={<MockExamDetail />} /> */}
             <Route path="/video/:id" element={<VideoDetail />} />
             <Route path="/" element={<Home />} />
