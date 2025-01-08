@@ -92,16 +92,26 @@ export const Header = ({ toggleSidebar }) => {
 
       <div className="item-link-4" onClick={handleNoteClick}>Notes</div>
 
-      <div className="item-link-5">Grades</div>
+      {/* <div className="item-link-5">Grades</div> */}
 
-      <div className="rectangle" />
+      {/* <div className="rectangle" /> */}
+
+      <div className="mypage-text">오늘도 STUDYMATE와 함께 해요 !</div>
+
 
       <div className="overlap" onClick={handleProfileClick} >
+      <img 
+          className="profile-image" 
+          // src="../../../assets/Lecture/mypage_ic.png"
+          src = 'https://storage.googleapis.com/coursessss/mypage_ic.png'
+          alt="mypage_ic" 
+        />
         {/* <img
           className="material-symbols"
           alt="Material symbols"
           src={materialSymbolsHomeRounded}
         /> */}
+        
       </div>
 
       <img className="logo" alt="Logo" src={logo} onClick={handleLogoClick}/>

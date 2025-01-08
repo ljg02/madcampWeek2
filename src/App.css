@@ -22,7 +22,8 @@ body {
 .overlay {
   position: absolute;
   width: 100%;
-  min-height: 100vh;
+  height: 100%;
+  /* min-height: 100vh; */
   background-color: rgba(0, 0, 0, 0.15); /* 반투명 검정색 */
   opacity: 0;
   visibility: hidden;
