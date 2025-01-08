@@ -27,7 +27,9 @@
 .videoTitle {
     align-items: center;
     justify-content: center;
-    margin-bottom: 10px;
+    margin-bottom: 30px;
+    margin-top: 20px;
+
 }
 
 .videoTitleText {
@@ -67,6 +69,7 @@
     display: flex;
     align-items: center;
     margin-bottom: 20px;
+    margin-top: 20px;
     margin-right: 1061px;
     cursor: pointer;
 }
@@ -95,6 +98,7 @@
 
 .sentimentTitle {
     margin-bottom: 10px;
+    margin-top: 20px;
     font-weight: bold;
 }
 
@@ -116,7 +120,7 @@
 }
 
 .neutral {
-    background-color: #FFFF00;
+    background-color: #dedede;
 }
 
 .enroll-button {
@@ -129,12 +133,12 @@
 }
 
 .enroll-button.enroll {
-    background-color: #4caf50;
+    background-color: #4cc150;
     color: white;
 }
 
 .enroll-button.cancel {
-    background-color: #f44336;
+    background-color: #e9574c;
     color: white;
 }
 
@@ -177,7 +181,7 @@
     cursor: pointer;
     border: none;
     border-radius: 5px;
-    background-color: #2196f3;
+    background-color: #61a5dd;
     color: white;
 }
 

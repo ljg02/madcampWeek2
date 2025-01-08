@@ -197,7 +197,7 @@ const VideoDetail = () => {
                 <>
                     {/* 영상 제목 */}
                     <div className={styles.videoTitle}>
-                        <span className={styles.videoTitleText}>{'<'}{course.title}{'>'} 강의 영상</span>
+                        <span className={styles.videoTitleText}>{course.title}</span>
                     </div>
                     {/* 영상 섹션 */}
                     <div className={styles.videoContainer}>
