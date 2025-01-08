@@ -195,6 +195,7 @@ const Login = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
+                autocomplete="off"
               />
             </div>
           </div>
@@ -211,6 +212,7 @@ const Login = () => {
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   required
+                  autocomplete="off"
                 />
               </div>
             </div>

@@ -30,7 +30,7 @@ router.post('/register', async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, 10);
 
     // 3. 새로운 사용자 삽입
-    const [insertResult] = await db.query('INSERT INTO users (email, password, name, googleId) VALUES (?, ?, ?, ?)', [email, hashedPassword, name, null]);
+    const [insertResult] = await db.query('INSERT INTO users (email, password, name, googleId) VALUES (?, ?, ?, ?)', [email, hashedPassword, name, 'NULL']);
 
     res.status(201).json({ success: true, message: '회원가입 성공!' });
   } catch (error) {
