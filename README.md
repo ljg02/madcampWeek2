@@ -147,8 +147,6 @@ easter egg
 
 https://dbdiagram.io/d/madcampWeek2-6777725b5406798ef72a71f0
 
-![madcampWeek2.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/f6cb388f-3934-47d6-9928-26d2e10eb0fc/4daec605-d03b-4140-abb9-1e2aec362958/madcampWeek2.png)
-
 # Team
 
 ---
@@ -179,6 +177,8 @@ https://dbdiagram.io/d/madcampWeek2-6777725b5406798ef72a71f0
 **IDE** : VSCode
 
 **배포**: GCP
+
+
 
 # Getting Started with Create React App
 
