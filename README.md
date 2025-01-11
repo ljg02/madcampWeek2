@@ -143,9 +143,42 @@ easter egg
 
 </aside>
 
-# 시연 영상
+# DB
 
-### 로그인
+https://dbdiagram.io/d/madcampWeek2-6777725b5406798ef72a71f0
+
+![madcampWeek2.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/f6cb388f-3934-47d6-9928-26d2e10eb0fc/4daec605-d03b-4140-abb9-1e2aec362958/madcampWeek2.png)
+
+# Team
+
+---
+
+**김나혜**
+
+- DGIST 컴퓨터공학 트랙 22
+- https://github.com/nanahyeya
+- knh8783@gmail.com
+- knh2222@dgist.ac.kr
+
+**이정규**
+
+- 한양대학교 컴퓨터소프트웨어학부 21
+- https://github.com/ljg02
+- gyu021211@gmail.com
+
+# Tech Stack
+
+---
+
+**Front-end** : React
+
+**Back-end** : Node.js
+
+**DB**: MySQL
+
+**IDE** : VSCode
+
+**배포**: GCP
 
 # Getting Started with Create React App
 
