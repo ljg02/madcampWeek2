@@ -18,7 +18,6 @@
 # Page 구성 및 기능
 
 <aside>
-<img src="/icons/sign-in_gray.svg" alt="/icons/sign-in_gray.svg" width="40px" />
 
 ## 로그인/ 로그아웃
 
@@ -27,7 +26,6 @@
 </aside>
 
 <aside>
-<img src="/icons/home_blue.svg" alt="/icons/home_blue.svg" width="40px" />
 
 ## Home
 
@@ -41,15 +39,10 @@ home page에서는 사이트에 등록된 모든 강좌, 선생님을 확인할 
 - 강의 영상, 선생님 정보
 - 강의 영상 페이지 연결
 
-![선택 강좌 정보 및 강의 페이지 연결](https://prod-files-secure.s3.us-west-2.amazonaws.com/f6cb388f-3934-47d6-9928-26d2e10eb0fc/522437cc-ba83-4d36-b751-5b2bce6adf98/image.png)
 
 선택 강좌 정보 및 강의 페이지 연결
 
-![강의 목록](https://prod-files-secure.s3.us-west-2.amazonaws.com/f6cb388f-3934-47d6-9928-26d2e10eb0fc/3e6ef202-59c8-40da-ba74-c2a82d71b900/image.png)
-
 강의 목록
-
-![강의 영상 시청 및 댓글창](https://prod-files-secure.s3.us-west-2.amazonaws.com/f6cb388f-3934-47d6-9928-26d2e10eb0fc/a4669aa1-35ad-4342-8400-317ac5ffdf69/image.png)
 
 강의 영상 시청 및 댓글창
 
@@ -62,8 +55,6 @@ home page에서는 사이트에 등록된 모든 강좌, 선생님을 확인할 
         
         → 혼자 공부하는 기분이 들지 않고 함께 공부하는 느낌
         
-        ![댓글창 감정분석](https://prod-files-secure.s3.us-west-2.amazonaws.com/f6cb388f-3934-47d6-9928-26d2e10eb0fc/53040421-242a-4674-8cc0-9e0e61725842/4830e0d1-0919-4b3a-9f6f-28b43d3c68bd.png)
-        
         댓글창 감정분석
         
 
@@ -73,27 +64,17 @@ home page에서는 사이트에 등록된 모든 강좌, 선생님을 확인할 
 - 강좌 목록
     
     → 강의 클릭시 강의 페이지로 이동
-    
-    ![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/f6cb388f-3934-47d6-9928-26d2e10eb0fc/d5219ffc-6883-4b2a-95ef-f67207fb0250/image.png)
-    
-    ![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/f6cb388f-3934-47d6-9928-26d2e10eb0fc/31028eac-01ad-493f-a091-5ea01fb15fd7/image.png)
-    
+
 
 ### 모의고사 일정 및 등급컷
 
 - 날짜순으로 모의고사 일정 정리
     
     → 클릭시 모의고사 과목별 등급컷 표 페이지
-    
-
-![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/f6cb388f-3934-47d6-9928-26d2e10eb0fc/df8645c9-a867-4f1c-97dc-dbb34fcb89fd/image.png)
-
-![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/f6cb388f-3934-47d6-9928-26d2e10eb0fc/f5aad950-bbaa-4477-b299-ccc142a39a7f/2a818472-d046-40a0-819b-6eb47d7324d4.png)
 
 </aside>
 
 <aside>
-<img src="/icons/document_blue.svg" alt="/icons/document_blue.svg" width="40px" />
 
 ## My page
 
@@ -111,33 +92,23 @@ my page에서는 하위 페이지의 정보를 정리하고 분석하여 한 화
         → 부정에 가까울수록 : 응원, 위로의 메세지
         
 - 타임테이블 ← 오늘의 타임테이블을 불러옴
-
-![스크린샷 2025-01-08 오후 7.40.47.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/f6cb388f-3934-47d6-9928-26d2e10eb0fc/4d518845-f1a0-4a0c-8b9e-911e6dda2a27/5e8fab02-988b-4ea1-b79a-c813a2cf0565.png)
-
+  
 ---
 
 강의, 일정 관리, 감정 관리, 노트 관리 서비스 제공
 
 <aside>
-<img src="/icons/headphones_blue.svg" alt="/icons/headphones_blue.svg" width="40px" />
 
 ## Lectures
 
 - 수강 신청한 강의 영상 리스트
 
-![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/f6cb388f-3934-47d6-9928-26d2e10eb0fc/7fdf7953-ae8d-40d4-a51e-eb5b0f76e278/image.png)
-
-![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/f6cb388f-3934-47d6-9928-26d2e10eb0fc/7893023d-82c6-4173-b420-6b8ea0afb51b/image.png)
-
 - 강의진행률 그래프
 - 남은 강의 개수 알림
-
-![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/f6cb388f-3934-47d6-9928-26d2e10eb0fc/19e1450d-2f91-464c-91e2-039e24268a59/image.png)
 
 </aside>
 
 <aside>
-<img src="/icons/calendar-month_blue.svg" alt="/icons/calendar-month_blue.svg" width="40px" />
 
 ## Schedule
 
@@ -156,12 +127,9 @@ my page에서는 하위 페이지의 정보를 정리하고 분석하여 한 화
         
     - 삭제 가능
 
-![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/f6cb388f-3934-47d6-9928-26d2e10eb0fc/ae9a1f99-120c-4301-afd9-7b1de23b8868/image.png)
-
 </aside>
 
 <aside>
-<img src="/icons/book-closed_blue.svg" alt="/icons/book-closed_blue.svg" width="40px" />
 
 ## Notes
 
@@ -170,8 +138,6 @@ my page에서는 하위 페이지의 정보를 정리하고 분석하여 한 화
     - ✅ Google Vision API 사용
 - ~~AI 노트 정리~~
 </aside>
-
-![easter egg](https://prod-files-secure.s3.us-west-2.amazonaws.com/f6cb388f-3934-47d6-9928-26d2e10eb0fc/53537654-e0b0-45b0-a911-5c410b3dadf5/image.png)
 
 easter egg
 
