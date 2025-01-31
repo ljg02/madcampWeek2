@@ -12,7 +12,12 @@
 </aside>
 
 # Gif
+-Login
+
+![Image](https://github.com/user-attachments/assets/b1771968-147d-4f48-b9cf-e4f9a7e610ea)
+
 -Main page / Course Enroll
+
 ![Image](https://github.com/user-attachments/assets/56d58cea-4f48-4696-b367-c78112671210)
 
 -Course Drop
