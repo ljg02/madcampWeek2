@@ -11,6 +11,17 @@
 
 </aside>
 
+# Gif
+-Mypage
+![Image](https://github.com/user-attachments/assets/7ff1d117-c464-4cb4-ace0-4d469b3d19cf)
+
+-Schedule
+![Image](https://github.com/user-attachments/assets/b9e60cbf-234c-43ff-8f8b-f71e3101589b)
+![Image](https://github.com/user-attachments/assets/28a4c413-b992-4d19-855f-8f294b2d28db)
+
+-Note
+![Image](https://github.com/user-attachments/assets/5347b9ee-a955-4325-915b-551e6c77ab4a)
+
 # Service
 
 ---
