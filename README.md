@@ -13,7 +13,8 @@
 
 # Gif
 -Comment
-![Image](https://github.com/user-attachments/assets/886d71fc-3bf3-447b-8aea-c39cd8f7ee57)
+
+![Image](https://github.com/user-attachments/assets/23b7b3f5-ced8-4261-ba96-a9e7a24c0d4c)
 
 -Mypage
 ![Image](https://github.com/user-attachments/assets/7ff1d117-c464-4cb4-ace0-4d469b3d19cf)
