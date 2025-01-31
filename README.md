@@ -12,6 +12,9 @@
 </aside>
 
 # Gif
+-Comment
+![Image](https://github.com/user-attachments/assets/78914c8c-29fa-4b0e-8d80-891889558c0c)
+
 -Mypage
 ![Image](https://github.com/user-attachments/assets/7ff1d117-c464-4cb4-ace0-4d469b3d19cf)
 
