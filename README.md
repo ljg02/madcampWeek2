@@ -41,10 +41,14 @@ home page에서는 사이트에 등록된 모든 강좌, 선생님을 확인할 
 
 
 선택 강좌 정보 및 강의 페이지 연결
+![Image](https://github.com/user-attachments/assets/ca709b63-48b9-4c6e-a79a-41805fa188e9)
 
 강의 목록
 
+![Image](https://github.com/user-attachments/assets/da01c4ab-e17c-4c1a-ba47-c7044bde88d9)
+
 강의 영상 시청 및 댓글창
+![Image](https://github.com/user-attachments/assets/0eca8d69-23da-4a51-8317-34f8a845372b)
 
 - 강의 **댓글** 입력 기능
     - **✅ 감정 분석 API**
@@ -56,6 +60,7 @@ home page에서는 사이트에 등록된 모든 강좌, 선생님을 확인할 
         → 혼자 공부하는 기분이 들지 않고 함께 공부하는 느낌
         
         댓글창 감정분석
+        ![Image](https://github.com/user-attachments/assets/b4c58b0a-4138-4f92-a19e-2c219883576e)
         
 
 ### 선생님
@@ -65,12 +70,18 @@ home page에서는 사이트에 등록된 모든 강좌, 선생님을 확인할 
     
     → 강의 클릭시 강의 페이지로 이동
 
+![Image](https://github.com/user-attachments/assets/1377d3c8-0f33-4d48-91cc-bf3b5fa5582e)
+![Image](https://github.com/user-attachments/assets/a2ffa7f8-260d-448d-a5e0-645f50ec0502)
+
 
 ### 모의고사 일정 및 등급컷
 
 - 날짜순으로 모의고사 일정 정리
     
     → 클릭시 모의고사 과목별 등급컷 표 페이지
+
+  ![Image](https://github.com/user-attachments/assets/e4b9c6e9-9f57-47ce-8a7c-8e156f6f6753)
+  ![Image](https://github.com/user-attachments/assets/95b4e96e-50d1-4b96-a958-5c60e5822aeb)
 
 </aside>
 
@@ -92,6 +103,7 @@ my page에서는 하위 페이지의 정보를 정리하고 분석하여 한 화
         → 부정에 가까울수록 : 응원, 위로의 메세지
         
 - 타임테이블 ← 오늘의 타임테이블을 불러옴
+![Image](https://github.com/user-attachments/assets/51d7f1c1-d83c-49d9-b351-83c5af660207)
   
 ---
 
@@ -102,9 +114,12 @@ my page에서는 하위 페이지의 정보를 정리하고 분석하여 한 화
 ## Lectures
 
 - 수강 신청한 강의 영상 리스트
+![Image](https://github.com/user-attachments/assets/63b337bd-7780-4b2c-982a-31a1de85c391)
+![Image](https://github.com/user-attachments/assets/4af1e66b-d8f2-4f6f-9c6d-026b2483e155)
 
 - 강의진행률 그래프
 - 남은 강의 개수 알림
+![Image](https://github.com/user-attachments/assets/8391b845-9c23-46f5-8bfc-54b1b67c4201)
 
 </aside>
 
@@ -126,6 +141,7 @@ my page에서는 하위 페이지의 정보를 정리하고 분석하여 한 화
         → 감정 분석 결과를 **이모티콘**으로 표시
         
     - 삭제 가능
+  ![Image](https://github.com/user-attachments/assets/2d14cc48-35dd-4e10-9397-2aece02539ef)
 
 </aside>
 
